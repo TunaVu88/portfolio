@@ -757,17 +757,15 @@ header {
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
+    perspective: 1000px; /* Thêm phối cảnh 3D cho ảnh */
 }
 
 .project-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: var(--transition-smooth);
-}
-
-.project-card:hover .project-img {
-    transform: scale(1.05);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); /* Chuyển động bám đuổi chuột mượt mà */
+    transform-style: preserve-3d;
 }
 
 .project-card[data-category="performance"]:hover {

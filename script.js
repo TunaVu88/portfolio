@@ -124,4 +124,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // Chạy lần đầu tiên để hiện các phần tử trong màn hình
+
+    // 5. Interactive Image Tilt & Parallax effect for Projects (Mục 3)
+    const projectContainers = document.querySelectorAll('.project-image-container, .project-music-ui, .digital-sub-bg');
+    
+    projectContainers.forEach(container => {
+        const img = container.querySelector('.project-img') || container.querySelector('.music-disc') || container.querySelector('.placeholder-icon');
+        
+        if (!img) return;
+        
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Xoay 3D nhẹ từ -8 đến 8 độ
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+            
+            // Parallax dịch chuyển nhẹ ảnh từ -6px đến 6px
+            const moveX = ((x - centerX) / centerX) * -6;
+            const moveY = ((y - centerY) / centerY) * -6;
+            
+            if (img.classList.contains('project-img')) {
+                img.style.transform = `scale(1.12) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${moveX}px, ${moveY}px)`;
+            } else {
+                img.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+            }
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            // Trả về trạng thái ban đầu một cách mượt mà
+            if (img.classList.contains('project-img')) {
+                img.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg) translate(0, 0)';
+            } else {
+                img.style.transform = 'translate(0, 0) scale(1)';
+            }
+        });
+    });
 });
