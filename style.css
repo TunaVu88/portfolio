@@ -728,6 +728,36 @@ header {
     color: var(--text-muted);
 }
 
+/* Container hiển thị hình ảnh thật dự án */
+.project-image-container {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.05);
+}
+
+.project-card[data-category="performance"]:hover {
+    border-color: rgba(255, 0, 127, 0.4);
+    box-shadow: 0 5px 20px rgba(255, 0, 127, 0.08);
+}
+
+.project-card[data-category="performance"]:hover .project-link {
+    color: var(--neon-pink);
+    text-shadow: var(--glow-pink);
+}
+
 /* Giao diện đặc trưng dự án Số Hóa */
 .digital-sub-bg {
     height: 200px;
