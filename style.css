@@ -691,6 +691,8 @@ header {
 
 .project-image-placeholder {
     height: 200px;
+    width: 100%;
+    flex-shrink: 0;
     background-color: rgba(255, 255, 255, 0.01);
     border-bottom: 1px solid var(--border-color);
     display: flex;
@@ -732,6 +734,7 @@ header {
 .project-image-container {
     height: 200px;
     width: 100%;
+    flex-shrink: 0;
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
@@ -761,6 +764,8 @@ header {
 /* Giao diện đặc trưng dự án Số Hóa */
 .digital-sub-bg {
     height: 200px;
+    width: 100%;
+    flex-shrink: 0;
     background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(10, 12, 16, 0.9) 100%);
     border-bottom: 1px solid var(--border-color);
     display: flex;
@@ -796,6 +801,8 @@ header {
 /* Giao diện đặc trưng Music Card */
 .project-music-ui {
     height: 200px;
+    width: 100%;
+    flex-shrink: 0;
     background: radial-gradient(circle, rgba(189, 0, 255, 0.15) 0%, rgba(10, 12, 16, 0.9) 100%);
     border-bottom: 1px solid var(--border-color);
     display: flex;
