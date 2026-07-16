@@ -853,6 +853,26 @@ td.cp, th.cp { color: var(--neon-purple); font-weight: 600; }
     </div></div>
 </div>
 
+<!-- SLIDE 9: TRUNG GIAN CHUYỂN SANG ROADMAP -->
+<div class="sl sl9" data-s="8">
+    <div class="slide-bg" style="background-image:url('assets/roadmap-scaling.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="cmp_s9_tag">➡️ Bước Tiếp Theo</div>
+        <div class="ttl" data-i18n="cmp_s9_title">Kế Hoạch &amp; Lộ Trình Chi Tiết</div>
+        <p class="sub" data-i18n="cmp_s9_sub">Để xem kế hoạch mua sắm trang thiết bị vật tư hiện tại và định hướng nhân rộng hệ thống, xin mời bạn chuyển tiếp sang phần Lộ trình.</p>
+        <div style="text-align:center;margin-top:2.2rem;">
+            <a href="roadmap.html" class="bk bk-roadmap" style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2.2rem;font-size:1.05rem;font-weight:700;font-family:var(--font-body);text-decoration:none;border-radius:30px;background:rgba(255,0,127,0.1);border:1px solid var(--neon-pink);color:#fff;box-shadow:0 0 20px rgba(255,0,127,0.35);transition:var(--transition);text-transform:uppercase;letter-spacing:1px;"
+               onmouseover="this.style.background='rgba(255,0,127,0.2)';this.style.boxShadow='0 0 32px rgba(255,0,127,0.6)';"
+               onmouseout="this.style.background='rgba(255,0,127,0.1)';this.style.boxShadow='0 0 20px rgba(255,0,127,0.35)';">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" style="vertical-align:middle;margin-right:4px;"><path d="M9 18l6-6-6-6"/></svg>
+                <span data-i18n="nav_roadmap">Hiện tại &amp; Tương lai</span>
+            </a>
+        </div>
+    </div></div>
+</div>
+
 </div><!-- /.sw -->
 
 <div class="ctrl-wrapper">
@@ -890,7 +910,7 @@ td.cp, th.cp { color: var(--neon-purple); font-weight: 600; }
         </button>
 
         <div class="dots-counter-group">
-            <span class="bottom-counter">slide <span id="sn">1</span>/8</span>
+            <span class="bottom-counter">slide <span id="sn">1</span>/9</span>
             <div class="cmp-dots" id="dots">
                 <div class="cmp-dot active" data-s="0"></div>
                 <div class="cmp-dot" data-s="1"></div>
@@ -900,6 +920,7 @@ td.cp, th.cp { color: var(--neon-purple); font-weight: 600; }
                 <div class="cmp-dot" data-s="5"></div>
                 <div class="cmp-dot" data-s="6"></div>
                 <div class="cmp-dot" data-s="7"></div>
+                <div class="cmp-dot" data-s="8"></div>
             </div>
         </div>
 
@@ -917,7 +938,7 @@ td.cp, th.cp { color: var(--neon-purple); font-weight: 600; }
             <span id="playBtnLabel">Trình chiếu</span>
         </button>
     </div>
-    <div class="hint-bar">Phím ← → | 1-8 để nhảy slide | Space: Chạy/Tạm dừng | ESC: Thoát</div>
+    <div class="hint-bar">Phím ← → | 1-9 để nhảy slide | Space: Chạy/Tạm dừng | ESC: Thoát</div>
 </div>
 
 <script>
@@ -1004,7 +1025,7 @@ function updateActiveMatrix() {
 }
 
 // ---- SLIDE NAVIGATION ----
-const TOTAL = 8;
+const TOTAL = 9;
 let cur = 0;
 const sls = document.querySelectorAll('.sl');
 const dots = document.querySelectorAll('.cmp-dot');
@@ -1027,7 +1048,15 @@ function goTo(n){
     updateActiveMatrix();
     if(cur === 4){ setTimeout(drawRadar, 80); }
     if(cur === 5){ setTimeout(animateBars, 120); }
-    if(presMode) resetPresTimer();
+    
+    if(presMode) {
+        if(cur === TOTAL - 1) {
+            if(presRAF){ cancelAnimationFrame(presRAF); presRAF = null; }
+            document.getElementById('ptfill').style.width = '100%';
+        } else {
+            resetPresTimer();
+        }
+    }
 }
 
 document.getElementById('pb').onclick = () => goTo(cur-1);
@@ -1039,7 +1068,7 @@ dots.forEach(function(d){
 document.addEventListener('keydown', function(e){
     if(e.code === 'ArrowRight' || e.code === 'ArrowDown'){ e.preventDefault(); goTo(cur+1); }
     else if(e.code === 'ArrowLeft' || e.code === 'ArrowUp'){ e.preventDefault(); goTo(cur-1); }
-    else if(e.key >= '1' && e.key <= '8') goTo(parseInt(e.key)-1);
+    else if(e.key >= '1' && e.key <= '9') goTo(parseInt(e.key)-1);
     else if(e.code === 'Space'){ e.preventDefault(); presMode ? togglePause() : startPres(); }
     else if(e.code === 'Escape'){ e.preventDefault(); if(presMode) stopPres(); }
 });

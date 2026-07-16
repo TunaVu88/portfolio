@@ -49,6 +49,11 @@
             "st5_title": "Tối ưu hệ thống",
             "st5_desc": "Phiên bản 1.0 đang được hoàn thiện dần với giao diện bắt mắt hơn, tính năng ổn định và cơ sở dữ liệu được đồng bộ hơn. Cùng với đó, nhóm đã thực hiện tích hợp các biện pháp bảo mật cơ bản cần thiết để tránh các rủi ro ngoài ý muốn, cũng như bảo toàn dữ liệu vận hành. Trong thời gian tới, nhóm sẽ thực hiện lên phương án triển khai scaling server trong trường hợp cần thiết.",
 
+            // Slide 7 (trung gian)
+            "st6_date": "Tiếp Theo",
+            "st6_title": "Đánh Giá & So Sánh Giải Pháp",
+            "st6_desc": "Để hiểu rõ hơn lý do lựa chọn hướng phát triển Web Platform tự vận hành thay vì các giải pháp khác, mời bạn tiếp tục xem phân tích chi tiết.<br><br><a href=\"compare.html\" class=\"btn btn-primary btn-neon-blue\" style=\"display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.8rem;font-size:0.95rem;text-decoration:none;margin-top:0.8rem;box-shadow:0 0 15px rgba(0,240,255,0.4);\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"16\" height=\"16\" style=\"vertical-align:middle;margin-right:4px;\"><path d=\"M18 20V10M12 20V4M6 20v-6\"/></svg> Chuyển sang trang So Sánh</a>",
+
             // Thumbs
             "thumb0_lbl": "Khởi điểm", "thumb0_desc": "Phát sinh",
             "thumb1_lbl": "Kế hoạch", "thumb1_desc": "Thiết kế",
@@ -181,6 +186,11 @@
             "cmp_s8_cp3_title": "Hiệu quả tài chính vượt trội cho vòng đời sản phẩm lâu dài:",
             "cmp_s8_cp3_desc": "Không phát sinh chi phí mua bản quyền hàng tháng trên đầu người như Power Platform. Hệ thống chạy ổn định lâu dài trên hạ tầng máy chủ Dell R260 sẵn có giúp giảm chi phí vận hành lâu dài về mức tối thiểu.",
 
+            // Slide 9 (trung gian)
+            "cmp_s9_tag": "➡️ Bước Tiếp Theo",
+            "cmp_s9_title": "Kế Hoạch & Lộ Trình Chi Tiết",
+            "cmp_s9_sub": "Để xem kế hoạch mua sắm trang thiết bị vật tư hiện tại và định hướng nhân rộng hệ thống, xin mời bạn chuyển tiếp sang phần Lộ trình.",
+
 
             // --- TRANG ROADMAP.HTML ---
             "rm_main_title": "Thuận Lợi & Hạ Tầng Có Sẵn",
@@ -304,6 +314,11 @@
             "st5_date": "Present",
             "st5_title": "System Stabilization",
             "st5_desc": "Version 1.0 is currently being polished with a sleek dashboard, stable network connections, and database sync. We implemented baseline cybersecurity policies to prevent data loss. The next step is drafting server scaling plans for expansion.",
+
+            // Slide 7 (Intermediate)
+            "st6_date": "Next Up",
+            "st6_title": "Evaluation & Comparison",
+            "st6_desc": "To better understand the reasons behind choosing a self-developed Web Platform over other solutions, please continue to our detailed comparison.<br><br><a href=\"compare.html\" class=\"btn btn-primary btn-neon-blue\" style=\"display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.8rem;font-size:0.95rem;text-decoration:none;margin-top:0.8rem;box-shadow:0 0 15px rgba(0,240,255,0.4);\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"16\" height=\"16\" style=\"vertical-align:middle;margin-right:4px;\"><path d=\"M18 20V10M12 20V4M6 20v-6\"/></svg> Go to Comparison</a>",
 
             // Thumbs
             "thumb0_lbl": "Start",       "thumb0_desc": "Ideation",
@@ -437,6 +452,11 @@
             "cmp_s8_cp3_title": "High financial return over product lifecycle:",
             "cmp_s8_cp3_desc": "No recurring monthly license fees per engineer. The system operates stably on existing server infrastructure, keeping operational overhead to an absolute minimum.",
 
+            // Slide 9 (Intermediate)
+            "cmp_s9_tag": "➡️ Next Step",
+            "cmp_s9_title": "Detailed Roadmap & Plans",
+            "cmp_s9_sub": "To view procurement plans for current equipment and future system expansion, please proceed to the Roadmap section.",
+
 
             // --- TRANG ROADMAP.HTML ---
             "rm_main_title": "Infrastructure Advantages",
@@ -560,6 +580,11 @@
             "st5_date": "現在",
             "st5_title": "システム最適化と安定化",
             "st5_desc": "バージョン1.0は現在、洗練されたダッシュボード、安定したネットワーク接続、データベースの同期機能の磨き上げを行っています。情報セキュリティ対策も適用し、データの安全を確保しています。次は、将来のサーバー増設計画を策定します。",
+
+            // Slide 7 (Intermediate)
+            "st6_date": "次へ",
+            "st6_title": "ソリューションの比較評価",
+            "st6_desc": "他システムではなく、なぜ自社開発Web Platformを採用したのか。その詳細な技術・コスト比較分析へ進みます。<br><br><a href=\"compare.html\" class=\"btn btn-primary btn-neon-blue\" style=\"display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.8rem;font-size:0.95rem;text-decoration:none;margin-top:0.8rem;box-shadow:0 0 15px rgba(0,240,255,0.4);\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"16\" height=\"16\" style=\"vertical-align:middle;margin-right:4px;\"><path d=\"M18 20V10M12 20V4M6 20v-6\"/></svg> 比較分析ページへ</a>",
 
             // Thumbs
             "thumb0_lbl": "起点",       "thumb0_desc": "課題抽出",
@@ -692,6 +717,11 @@
             "cmp_s8_cp2_desc": "Deep C2 110kV変電所の特殊な運用手順に合わせて入力ロジックを最適化。汎用パッケージで発生する「使いにくさ」を完全に排除しました。",
             "cmp_s8_cp3_title": "長期運用時における圧倒的な財務的メリット:",
             "cmp_s8_cp3_desc": "Power Platformのような恒久的な月額サブスクリプション費用が不要です。既設のDell R260サーバー上で長期間安定稼働させることで、運用コストを大幅に削減できます。",
+
+            // Slide 9 (Intermediate)
+            "cmp_s9_tag": "➡️ 次のステップ",
+            "cmp_s9_title": "詳細な導入計画とロードマップ",
+            "cmp_s9_sub": "現在の設備導入計画と将来のシステム拡張計画を確認するには、ロードマップセクションへ進んでください。",
 
 
             // --- TRANG ROADMAP.HTML ---
