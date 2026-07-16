@@ -1587,6 +1587,11 @@ document.addEventListener('webkitfullscreenchange', function() {
 
 window.addEventListener('DOMContentLoaded', () => {
     updateActiveMatrix();
+    // Đồng bộ gán modalData và gọi dịch ngay khi DOM sẵn sàng
+    window.modalData = modalData;
+    if (typeof window.translateModalData === 'function') {
+        window.translateModalData(localStorage.getItem('selected_lang') || 'vi');
+    }
 });
 </script>
 <script src="lang.js"></script>

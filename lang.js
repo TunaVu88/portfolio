@@ -49,11 +49,6 @@
             "st5_title": "Tối ưu hệ thống",
             "st5_desc": "Phiên bản 1.0 đang được hoàn thiện dần với giao diện bắt mắt hơn, tính năng ổn định và cơ sở dữ liệu được đồng bộ hơn. Cùng với đó, nhóm đã thực hiện tích hợp các biện pháp bảo mật cơ bản cần thiết để tránh các rủi ro ngoài ý muốn, cũng như bảo toàn dữ liệu vận hành. Trong thời gian tới, nhóm sẽ thực hiện lên phương án triển khai scaling server trong trường hợp cần thiết.",
 
-            // Slide 7 (trung gian)
-            "st6_date": "Tiếp Theo",
-            "st6_title": "Đánh Giá & So Sánh Giải Pháp",
-            "st6_desc": "Để hiểu rõ hơn lý do lựa chọn hướng phát triển Web Platform tự vận hành thay vì các giải pháp khác, mời bạn tiếp tục xem phân tích chi tiết.<br><br><a href=\"compare.html\" class=\"btn btn-primary btn-neon-blue\" style=\"display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.8rem;font-size:0.95rem;text-decoration:none;margin-top:0.8rem;box-shadow:0 0 15px rgba(0,240,255,0.4);\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"16\" height=\"16\" style=\"vertical-align:middle;margin-right:4px;\"><path d=\"M18 20V10M12 20V4M6 20v-6\"/></svg> Chuyển sang trang So Sánh</a>",
-
             // Thumbs
             "thumb0_lbl": "Khởi điểm", "thumb0_desc": "Phát sinh",
             "thumb1_lbl": "Kế hoạch", "thumb1_desc": "Thiết kế",
@@ -110,7 +105,7 @@
             "cmp_s3_con3": "Yêu cầu kết nối Internet liên tục 24/7, mạng chập chờn sẽ bị gián đoạn.",
             "cmp_s3_con4": "Tùy biến giao diện (UI) và logic nghiệp vụ phức tạp bị giới hạn bởi framework.",
             "cmp_s3_con5": "Cần quản trị viên IT cấu hình phân quyền và quản lý environment phức tạp.",
-            "cmp_s3_con6": "Quy trình phê duyệt mua license mất nhiều thời gian.",
+            "cmp_s3_con6": "Quy trình phê duyệt mua license mất nhiều thời gian trong khối nhà nước.",
             "cmp_s3_eval": "💡 <strong>Đánh giá nhanh:</strong> Phù hợp cho khối văn phòng tổng công ty đã mua sẵn Microsoft 365 doanh nghiệp, ngân sách dồi dào, cần tích hợp báo cáo nhiều phòng ban và kết nối Internet tốt.",
 
             // Slide 4: Web Platform detail
@@ -153,20 +148,25 @@
             "cmp_s6_sub": "So sánh định lượng thời gian xử lý công việc và tỷ lệ sai sót giữa phương pháp cũ và mới:",
             "cmp_s6_bar_title": "Thời gian hoàn thành tác vụ (Phút) &amp; Tỷ lệ sai số (%)",
             "cmp_s6_desc": "📊 Biểu đồ thể hiện thời gian lập báo cáo giảm từ <strong>120 phút xuống còn 5 phút</strong> (giảm 95.8%), tỷ lệ nhập liệu sai lệch logic giảm từ <strong>15% về mức 0%</strong> nhờ bộ cảnh báo logic tự động chặn số liệu vô lý.",
-            "cmp_s6_bar1": "1. Mức độ kiểm soát dữ liệu &amp; Bảo mật nội bộ (On-premises)",
-            "cmp_s6_bar2": "2. Khả năng tuỳ biến giao diện &amp; logic nghiệp vụ đặc thù",
-            "cmp_s6_bar3": "3. Khả năng phát triển, mở rộng tính năng độc lập",
-            "cmp_s6_bar4": "4. Hiệu quả chi phí vận hành lâu dài (Điểm cao = Tiết kiệm hơn)",
 
             // Slide 7: Compare Table
             "tbl_hdr_criteria": "Tiêu chí kỹ thuật",
             "tbl_hdr_discrete": "📋 Công cụ rời rạc",
             "tbl_hdr_power": "🔷 Power Platform",
             "tbl_hdr_web": "🌐 Web Platform",
-            "tbl_c1": "Kiểm soát &amp; sở hữu dữ liệu", "tbl_c1_d": "Cục bộ máy cá nhân", "tbl_c1_p": "Cloud MS (Nước ngoài)", "tbl_c1_w": "Server nội bộ trực tiếp",
-            "tbl_c2": "Bảo mật dữ liệu nội bộ", "tbl_c2_d": "Phụ thuộc máy cá nhân", "tbl_c2_p": "Cloud Microsoft", "tbl_c2_w": "Hoàn toàn trong LAN",
-            "tbl_c3": "Tuỳ biến giao diện &amp; logic", "tbl_c3_d": "Rất hạn chế", "tbl_c3_p": "Theo khung Power Apps", "tbl_c3_w": "100% theo nghiệp vụ",
-            "tbl_c4": "Phát triển &amp; mở rộng độc lập", "tbl_c4_d": "Không thể", "tbl_c4_p": "Phụ thuộc bản quyền MS", "tbl_c4_w": "Tự do nâng cấp",
+            "tbl_c1": "Chi phí ban đầu", "tbl_c1_d": "Rất thấp", "tbl_c1_p": "Cao (license)", "tbl_c1_w": "Trung bình",
+            "tbl_c2": "Chi phí vận hành / năm", "tbl_c2_d": "Gần như 0", "tbl_c2_p": "Cao (per user)", "tbl_c2_w": "Thấp",
+            "tbl_c3": "Tuỳ biến nghiệp vụ", "tbl_c3_d": "Hạn chế", "tbl_c3_p": "Có giới hạn", "tbl_c3_w": "100%",
+            "tbl_c4": "Dữ liệu lưu tại chỗ", "tbl_c4_d": "Có", "tbl_c4_p": "Cloud MS", "tbl_c4_w": "Server nội bộ",
+            "tbl_c5": "Báo cáo tự động", "tbl_c5_d": "Thủ công", "tbl_c5_p": "Power Automate", "tbl_c5_w": "Excel/PDF tự động",
+            "tbl_c6": "Hoạt động offline", "tbl_c6_d": "Hoàn toàn", "tbl_c6_p": "Cần internet", "tbl_c6_w": "LAN nội bộ",
+            "tbl_c7": "Thời gian triển khai", "tbl_c7_d": "Ngay lập tức", "tbl_c7_p": "1–3 tháng", "tbl_c7_w": "3–6 tháng",
+            "tbl_c8": "Phân quyền ca trực", "tbl_c8_d": "Không có", "tbl_c8_p": "Có sẵn", "tbl_c8_w": "Chi tiết (Role)",
+
+            // Slide 8: Conclusion
+            "cmp_s8_tag": "🏆 Kết luận",
+            "cmp_s8_title": "Lý Do Chọn Web Platform",
+            "cmp_s8_sub": "Tối ưu hóa quy trình ca trực và đảm bảo an toàn thông tin là ưu tiên hàng đầu tại trạm biến áp:",
             "tbl_c5": "Xuất báo cáo form mẫu", "tbl_c5_d": "Thủ công hoàn toàn", "tbl_c5_p": "Power BI (khác form mẫu)", "tbl_c5_w": "Tự động Excel/PDF 100%",
             "tbl_c6": "Tích hợp mail/Teams công ty", "tbl_c6_d": "Không có", "tbl_c6_p": "Sẵn có (Điểm mạnh lớn)", "tbl_c6_w": "Lập trình bổ sung được",
             "tbl_c7": "Hoạt động khi mất Internet", "tbl_c7_d": "Bình thường", "tbl_c7_p": "Không thể hoạt động", "tbl_c7_w": "Bình thường (LAN)",
@@ -186,18 +186,8 @@
             "cmp_s8_cp3_title": "Hiệu quả tài chính vượt trội cho vòng đời sản phẩm lâu dài:",
             "cmp_s8_cp3_desc": "Không phát sinh chi phí mua bản quyền hàng tháng trên đầu người như Power Platform. Hệ thống chạy ổn định lâu dài trên hạ tầng máy chủ Dell R260 sẵn có giúp giảm chi phí vận hành lâu dài về mức tối thiểu.",
 
-            // Slide 9 (trung gian)
-            "cmp_s9_tag": "➡️ Bước Tiếp Theo",
-            "cmp_s9_title": "Kế Hoạch & Lộ Trình Chi Tiết",
-            "cmp_s9_sub": "Để xem kế hoạch mua sắm trang thiết bị vật tư hiện tại và định hướng nhân rộng hệ thống, xin mời bạn chuyển tiếp sang phần Lộ trình.",
-
 
             // --- TRANG ROADMAP.HTML ---
-            "rm_main_title": "Thuận Lợi & Hạ Tầng Có Sẵn",
-            "rm_main_sub": "Quá trình khởi chạy bước đầu gặp nhiều thuận lợi nhờ tận dụng và tối ưu hoá tối đa tài nguyên sẵn có tại Trạm biến áp 110kV.",
-            "rm_panel_title": "Phân Tích Chi Tiết Các Lợi Thế Hạ Tầng Có Sẵn",
-            "rm_panel_intro": "Việc triển khai xây dựng hệ thống <strong>Web Platform</strong> tại Trạm biến áp 110kV Deep C2 đang sở hữu những điều kiện thuận lợi và lợi thế cốt lõi về hạ tầng phần cứng tại chỗ:",
-            
             // Road map bullets
             "rm_b1_title": "Tận dụng 01 máy chủ server vật lý cũ có sẵn:",
             "rm_b1_desc": "Trạm hiện đang có dư thừa 01 thiết bị máy chủ server không còn sử dụng nhưng cấu hình vẫn hoạt động ổn định và bền bỉ. Nhóm phát triển đã tận dụng ngay máy chủ này để cài đặt cơ sở dữ liệu và vận hành ứng dụng trực tiếp (On-premises). Việc này giúp hệ thống được vận hành thực tế ngay lập tức mà không cần tốn thời gian chờ đợi phê duyệt mua sắm phần cứng mới, đồng thời giảm thiểu chi phí đầu tư ban đầu về mức 0 đồng.",
@@ -217,6 +207,16 @@
             "rm_s2_i2_title": "Switch mạng chuyên dụng",
             "rm_s2_i2_desc": "Thiết lập phân đoạn mạng LAN riêng biệt, nâng cao độ bảo mật và độ trễ truyền dữ liệu vận hành.",
             "rm_s2_i3_title": "E-mail riêng cho nhóm phát triển",
+            "rm_s2_i3_desc": "Tự động hóa thông báo lỗi, gửi báo cáo và phê duyệt từ xa Lệnh Công Tác qua e-mail.",
+            "rm_s2_i4_title": "Địa chỉ Domain riêng chuyên nghiệp",
+            "rm_s2_i4_desc": "Tên miền chính thức dự kiến <strong>dcgeportal.vn</strong> để định danh và chuyên nghiệp hóa hệ thống.",
+            "rm_s2_slide_hdr": "VẬT TƯ ĐỀ XUẤT MUA SẮM",
+            "rm_s2_slide_hint": "Click các vật tư bên trái để xem lý do kỹ thuật chi tiết",
+
+            // Slide 3: scaling Server (Roadmap)
+            "rm_scale_tag": "// Định hướng tương lai · Hệ thống mở rộng",
+            "rm_scale_title": "Mở Rộng Mô Hình & Scaling Server/UPS",
+            "rm_scale_sub": "Thiết kế nâng cao sử dụng máy chủ chuyên dụng Dell R260 kết hợp cùng bộ lưu điện an toàn Santak C3K:",
             "rm_s2_i3_desc": "Tự động hóa thông báo lỗi, gửi báo cáo và phê duyệt từ xa Lệnh Công Tác qua e-mail.",
             "rm_s2_i4_title": "Địa chỉ Domain riêng chuyên nghiệp",
             "rm_s2_i4_desc": "Tên miền chính thức dự kiến <strong>dcgeportal.vn</strong> để định danh và chuyên nghiệp hóa hệ thống.",
@@ -267,19 +267,7 @@
             "rm_rep_tbl_total_gd2": "DỰ KIẾN NÂNG CẤP GIAI ĐOẠN 2",
             "rm_rep_tbl_desc": "* Ghi chú: Việc chia nhỏ lộ trình đầu tư máy chủ chuyên dụng Dell PowerEdge R260 làm 2 giai đoạn giúp tối ưu hóa ngân sách đầu tư ban đầu của trạm biến áp mới, đồng thời sẵn sàng mở rộng năng lực xử lý (High Availability hoặc phân tải dữ liệu) bất cứ lúc nào.",
             "rm_rep_slide_hdr": "HẠ TẦNG TRẠM BIẾN ÁP MỚI",
-            "rm_rep_slide_hint": "Click các dòng thiết bị bên trái để xem lý do kỹ thuật chi tiết",
-
-            // Giá tiền Roadmap
-            "rm_price_server_val": "~ 62.000.000đ / ~ 2.500 USD <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* Giá tham khảo, có thể thay đổi</span>",
-            "rm_price_ups_val": "~ 17.000.000đ / ~ 680 USD <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* Giá tham khảo, có thể thay đổi</span>",
-            "rm_price_total_val": "~ 79.000.000đ / ~ 3.180 USD",
-            "rm_rep_price_server_gd1": "~ 62.000.000đ / ~ 2.500 USD",
-            "rm_rep_price_server_gd2": "~ 62.000.000đ / ~ 2.500 USD/máy",
-            "rm_rep_price_switch": "~ 2.500.000đ / ~ 100 USD",
-            "rm_rep_price_ups": "~ 17.000.000đ / ~ 680 USD",
-            "rm_rep_price_cables": "~ 1.200.000đ / ~ 50 USD",
-            "rm_rep_price_total_gd1": "~ 82.700.000đ / ~ 3.310 USD",
-            "rm_rep_price_total_gd2": "+ từ ~ 62.000.000đ / ~ 2.500 USD"
+            "rm_rep_slide_hint": "Click các dòng thiết bị bên trái để xem lý do kỹ thuật chi tiết"
         },
         en: {
             // Header Links
@@ -290,35 +278,25 @@
 
             // --- TRANG STORY.HTML ---
             "story_main_title": "DIGITALIZATION JOURNEY 2026",
-            "story_main_sub": "The evolution of the operations management and optimization platform from scratch<br>At Deep C2 110kV Substation.",
-            "story_sec_tech": "Technical Criteria",
-            "story_sec_sol": "Proposed Solutions",
-            "story_sec_slides": "Analysis Slides",
-            "story_hint": "Press arrow keys or click dots to navigate | Toggle slideshow below",
-            "story_btn_compare": "Compare Solutions",
-            "story_btn_back": "Back to Home",
-            "story_slideshow_label": "Slideshow",
-            "story_slideshow_duration": "⏱ Slide Duration",
-            "story_slideshow_custom": "Custom:",
-            "story_slideshow_hint": "Arrow keys | 1-6 quick switch | Space: Play/Pause | ESC: Exit",
-
-            // Timeline details (Story.html)
-            "st0_date": "Starting Point • Late 2025",
-            "st0_title": "Issue Identification & Ideation",
-            "st0_desc": "During shifting operations at the Deep C2 Industrial Zone 110kV Substation, I noticed that recording production parameters manually with paper logs and Word/PDF reports caused several pain points: excessive time waste, high stationary costs, frequent data entry errors, and difficulty in retrieving historical trends. <br>The concept of digitalizing the substation operations began to take shape, motivating us to start.",
+            "st0_date": "Beginning • Late 2025",
+            "st0_title": "Issues & Ideas",
+            "st0_desc": "During shifts at Deep C2 110kV Substation, I noticed that manual records and Excel sheets caused issues: time-consuming, prone to errors, and difficult to query history. The idea of a digitalization portal emerged.",
             
             "st1_date": "Early 2026",
-            "st1_title": "Planning & System Design",
-            "st1_desc": "Decided to start the project. The development team (Mr. Quang and myself) initiated the roadmap, choosing web technologies as the base. From here, core functional modules were designed step by step: <br>from a secure login interface, an intuitive data entry form, to online Work Order management.",
-
+            "st1_title": "Planning & Design",
+            "st1_desc": "Decided to build the project. The dev team - Mr. Quang and me - planned the layout, choosing web technologies. Core modules (login, load logs, Work Orders) began taking shape.",
+            
             "st2_date": "May 2026",
             "st2_title": "Beta Version 0.1.0",
-            "st2_desc": "Following initial design and database coding, the web application was launched as version 0.1.0dev. The team carried out internal testing, resolving calculations and adding key operational features.",
-
+            "st2_desc": "The website was launched in version 0.1.0dev. We tested it internally, fixed calculation bugs, and added basic features.",
+            
             "st3_date": "June 2026",
-            "st3_title": "Live Operation - Version 0.2.0",
-            "st3_desc": "After successful internal tests, authorization was granted to deploy on the physical production server. Using an available spare machine at the substation, we configured the network, ran the site on a local domain, and officially <br>STARTED LIVE DEV RUN.",
-
+            "st3_title": "Go Live Version 0.2.0",
+            "st3_desc": "After internal testing, we got approval to deploy on a physical server at the station. We set up local LAN access and began real shifts operations.",
+            
+            "st4_date": "July 2026",
+            "st4_title": "Trial and Optimization",
+            "st4_desc": "Receiving valuable feedback from shifts, the team upgraded, resolved database bugs, and optimized layouts. We look forward to more suggestions to continue improvement.<br>Simultaneously, leveraging lessons from early runs, we planned the major 1.0.0 release to optimize UX/UI and include advanced calculations.",
             "st4_date": "July 2026",
             "st4_title": "Trial and Optimization",
             "st4_desc": "Receiving valuable feedback from shifts, the team upgraded, resolved database bugs, and optimized layouts. We look forward to more suggestions to continue improvement.<br>Simultaneously, leveraging lessons from early runs, we planned the major 1.0.0 release to optimize UX/UI and include advanced calculations.",
@@ -326,11 +304,6 @@
             "st5_date": "Present",
             "st5_title": "System Stabilization",
             "st5_desc": "Version 1.0 is currently being polished with a sleek dashboard, stable network connections, and database sync. We implemented baseline cybersecurity policies to prevent data loss. The next step is drafting server scaling plans for expansion.",
-
-            // Slide 7 (Intermediate)
-            "st6_date": "Next Up",
-            "st6_title": "Evaluation & Comparison",
-            "st6_desc": "To better understand the reasons behind choosing a self-developed Web Platform over other solutions, please continue to our detailed comparison.<br><br><a href=\"compare.html\" class=\"btn btn-primary btn-neon-blue\" style=\"display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.8rem;font-size:0.95rem;text-decoration:none;margin-top:0.8rem;box-shadow:0 0 15px rgba(0,240,255,0.4);\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"16\" height=\"16\" style=\"vertical-align:middle;margin-right:4px;\"><path d=\"M18 20V10M12 20V4M6 20v-6\"/></svg> Go to Comparison</a>",
 
             // Thumbs
             "thumb0_lbl": "Start",       "thumb0_desc": "Ideation",
@@ -388,7 +361,7 @@
             "cmp_s3_con3": "Requires persistent 24/7 internet connection; dropouts freeze operations.",
             "cmp_s3_con4": "Advanced user interface tweaks and complex math logic are constrained by the framework.",
             "cmp_s3_con5": "Needs designated IT admins to manage environments, access rights, and connectors.",
-            "cmp_s3_con6": "Procurement and licensing approvals take substantial time.",
+            "cmp_s3_con6": "Procurement and licensing approvals take substantial time in state-owned enterprises.",
             "cmp_s3_eval": "💡 <strong>Quick Evaluation:</strong> Best suited for corporate headquarters with pre-purchased M365 suites, large IT budgets, and stable internet, focusing on multi-department reports.",
 
             // Slide 4: Web Platform detail
@@ -431,14 +404,24 @@
             "cmp_s6_sub": "Quantitative comparison of task execution time and error rates between old and new methods:",
             "cmp_s6_bar_title": "Task Completion Time (Min) &amp; Error Rate (%)",
             "cmp_s6_desc": "📊 The chart illustrates that report preparation time dropped from <strong>120 mins to 5 mins</strong> (a 95.8% reduction), while logical data entry errors fell from <strong>15% to 0%</strong> due to automated validation rules.",
-            "cmp_s6_bar1": "1. Data Control &amp; Local Security (On-premises)",
-            "cmp_s6_bar2": "2. Custom UI &amp; Specific Business Logic",
-            "cmp_s6_bar3": "3. Independent Development &amp; Future Upgrades",
-            "cmp_s6_bar4": "4. Long-term Operating Cost (High Score = More Savings)",
 
             // Slide 7: Compare Table
             "tbl_hdr_criteria": "Technical Criteria",
             "tbl_hdr_discrete": "📋 Isolated Tools",
+            "tbl_hdr_power": "🔷 Power Platform",
+            "tbl_hdr_web": "🌐 Web Platform",
+            "tbl_c1": "Initial Cost", "tbl_c1_d": "Very Low", "tbl_c1_p": "High (licensing)", "tbl_c1_w": "Medium",
+            "tbl_c2": "Operating Cost / Year", "tbl_c2_d": "Near 0", "tbl_c2_p": "High (per user)", "tbl_c2_w": "Low",
+            "tbl_c3": "Workflow Customization", "tbl_c3_d": "Restricted", "tbl_c3_p": "Limited", "tbl_c3_w": "100%",
+            "tbl_c4": "On-premises Storage", "tbl_c4_d": "Yes", "tbl_c4_p": "Cloud MS", "tbl_c4_w": "Local Server",
+            "tbl_c5": "Automated Reports", "tbl_c5_d": "Manual", "tbl_c5_p": "Power Automate", "tbl_c5_w": "Auto Excel/PDF",
+            "tbl_c6": "Offline Capability", "tbl_c6_d": "Fully Offline", "tbl_c6_p": "Needs Internet", "tbl_c6_w": "Local LAN",
+            "tbl_c7": "Deployment Time", "tbl_c7_d": "Instant", "tbl_c7_p": "1-3 Months", "tbl_c7_w": "3-6 Months",
+            "tbl_c8": "Shift Access Rights", "tbl_c8_d": "None", "tbl_c8_p": "Standard", "tbl_c8_w": "Granular Roles",
+
+            // Slide 8: Conclusion
+            "cmp_s8_tag": "🏆 Conclusion",
+            "cmp_s8_title": "Why Choose Web Platform?",
             "tbl_hdr_power": "🔷 Power Platform",
             "tbl_hdr_web": "🌐 Web Platform",
             "tbl_c1": "Data Control &amp; Ownership", "tbl_c1_d": "Local client machine", "tbl_c1_p": "MS Cloud (Overseas)", "tbl_c1_w": "Direct local server",
@@ -464,34 +447,12 @@
             "cmp_s8_cp3_title": "High financial return over product lifecycle:",
             "cmp_s8_cp3_desc": "No recurring monthly license fees per engineer. The system operates stably on existing server infrastructure, keeping operational overhead to an absolute minimum.",
 
-            // Slide 9 (Intermediate)
-            "cmp_s9_tag": "➡️ Next Step",
-            "cmp_s9_title": "Detailed Roadmap & Plans",
-            "cmp_s9_sub": "To view procurement plans for current equipment and future system expansion, please proceed to the Roadmap section.",
-
 
             // --- TRANG ROADMAP.HTML ---
             "rm_main_title": "Infrastructure Advantages",
             "rm_main_sub": "Initial deployment succeeded by leveraging and optimizing existing resources at the 110kV Substation.",
             "rm_panel_title": "Detailed Analysis of Existing Infrastructure",
             "rm_panel_intro": "The deployment of the <strong>Web Platform</strong> at Deep C2 110kV Substation benefits from key on-site hardware advantages:",
-            
-            // Road map bullets
-            "rm_b1_title": "Leveraging 1 existing physical server:",
-            "rm_b1_desc": "The substation had a spare, unused rack server in good condition. The dev team set up the database and web host directly on this machine (On-premises). This enabled immediate production trials without waiting for procurement approval, keeping initial hardware cost at $0.",
-            
-            "rm_b2_title": "Existing LAN cable network:",
-            "rm_b2_desc": "The trial server is mounted in the central network rack. All workstation PCs can access the portal via high-speed Gigabit LAN, ensuring absolute stability without depending on external Internet connectivity.",
-            
-            "rm_b3_title": "Direct shift feedback loop:",
-            "rm_b3_desc": "Being situated in the main control room allows the dev team (Mr. Quang & developers) to gather direct, real-time feedback from shift engineers 24/7. This has accelerated form optimization, data validation, and custom calculations.",
-
-            // Slide 2: Equipment details (Roadmap)
-            "rm_s2_tag": "// Current Hardware Requirement",
-            "rm_s2_title": "Proposed Additional Equipment",
-            "rm_s2_sub": "<strong style=\"color:var(--neon-pink);\">Interactive View:</strong> Click each item below to view technical rationale and transparent 3D renders:",
-            "rm_s2_i1_title": "SSD Enterprise 1TB (x2 drives)",
-            "rm_s2_i1_desc": "Configuring RAID 1 mirroring guarantees 100% data safety against physical drive failures.",
             "rm_s2_i2_title": "Gigabit LAN Switch",
             "rm_s2_i2_desc": "Establishes a dedicated, secure subnet for operations data traffic, minimizing network lag.",
             "rm_s2_i3_title": "Dev Team Dedicated E-mail",
@@ -545,19 +506,7 @@
             "rm_rep_tbl_total_gd2": "PHASE 2 UPGRADE ESTIMATE",
             "rm_rep_tbl_desc": "* Note: Splitting the Dell PowerEdge R260 server procurement into two phases optimizes initial capital budgets for new substations, while remaining fully ready for High Availability clustering.",
             "rm_rep_slide_hdr": "NEW SUBSTATION INFRASTRUCTURE",
-            "rm_rep_slide_hint": "Click equipment items on the left to read detailed technical reasons",
-
-            // Roadmap pricing (USD)
-            "rm_price_server_val": "~ $2,500 <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* Reference price, subject to change</span>",
-            "rm_price_ups_val": "~ $680 <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* Reference price, subject to change</span>",
-            "rm_price_total_val": "~ $3,180",
-            "rm_rep_price_server_gd1": "~ $2,500",
-            "rm_rep_price_server_gd2": "~ $2,500 /unit",
-            "rm_rep_price_switch": "~ $100",
-            "rm_rep_price_ups": "~ $680",
-            "rm_rep_price_cables": "~ $50",
-            "rm_rep_price_total_gd1": "~ $3,330",
-            "rm_rep_price_total_gd2": "+ from ~ $2,500"
+            "rm_rep_slide_hint": "Click equipment items on the left to read detailed technical reasons"
         },
         ja: {
             // Header Links
@@ -573,25 +522,32 @@
             "story_sec_sol": "解決策の比較",
             "story_sec_slides": "分析スライド",
             "story_hint": "矢印キーまたはドットをクリックして移動 | 自動スライドショーの再生",
-            "story_btn_compare": "解決策の比較",
-            "story_btn_back": "トップページに戻る",
-            "story_slideshow_label": "プレゼン",
-            "story_slideshow_duration": "⏱ スライド表示時間",
-            "story_slideshow_custom": "カスタム:",
-            "story_slideshow_hint": "矢印キー | 1-6キーでジャンプ | Space: 再生/一時停止 | ESC: 閉じる",
+            "rm_rep_tbl_server_gd2_spec": "Phase 2: Add 1 or more servers to construct High Availability (HA, Active/Standby).",
+            "rm_rep_tbl_switch": "⚡ 01 Gigabit Switch",
+            "rm_rep_tbl_switch_spec": "Dedicated 16-Port rack-mounted Gigabit switch for local server cabinet communication.",
+            "rm_rep_tbl_ups": "⚡ 01 UPS Santak C3K (Dry Battery)",
+            "rm_rep_tbl_ups_spec": "3000VA / 2700W Online UPS with internal maintenance-free AGM battery modules.",
+            "rm_rep_tbl_cables": "⚡ Network Cabling & Installation",
+            "rm_rep_tbl_cables_spec": "Shielded CAT6 cabling, RJ45 connectors, protective conduits to prevent EMI.",
+            "rm_rep_tbl_total_gd1": "PHASE 1 TOTAL ESTIMATE",
+            "rm_rep_tbl_total_gd2": "PHASE 2 UPGRADE ESTIMATE",
+            "rm_rep_tbl_desc": "* Note: Splitting the Dell PowerEdge R260 server procurement into two phases optimizes initial capital budgets for new substations, while remaining fully ready for High Availability clustering.",
+            "rm_rep_slide_hdr": "NEW SUBSTATION INFRASTRUCTURE",
+            "rm_rep_slide_hint": "Click equipment items on the left to read detailed technical reasons"
+        },
+        ja: {
+            // Header Links
+            "nav_compare": "比較分析",
+            "nav_roadmap": "現在と未来",
+            "nav_story": "ストーリー",
+            "nav_home": "ホーム",
 
-            // Timeline details (Story.html)
-            "st0_date": "起点 • 2025年末",
-            "st0_title": "問題 của 顕在化とアイディア",
-            "st0_desc": "Deep C2工業団地の110kV変電所でのシフト運用中、手書きの紙ログや個別のWord/PDFによる情報管理に多くの課題があることに気づきました。時間の浪費、用紙コスト、データ入力ミス、過去のトレンド分析の難しさなどです。<br>変電所運用のデジタル化というコンセプトが芽生え、開発をスタートさせました。",
-            
-            "st1_date": "2026年初頭",
-            "st1_title": "計画とシステム設計",
-            "st1_desc": "プロジェクトの開始を決定。開発チーム（Quang氏と私）はロードマップを策定し、Web技術をベースに選択しました。ここから、セキュアなログインインターフェース、直感的なデータ入力フォーム、オンラインの作業命令管理など、コア機能モジュールを段階的に設計しました。",
-
-            "st2_date": "2026年5ch",
-            "st2_title": "ベータ版 0.1.0",
-            "st2_desc": "初期設計とデータベース設計を終え、Webアプリケーション「0.1.0dev」を立ち上げました。チーム内でテストを行い、数値計算ロジックの修正や主要機能の追加を行いました。",
+            // --- TRANG STORY.HTML ---
+            "story_main_title": "2026年デジタル化への道のり",
+            "story_main_sub": "ゼロからの運用管理および最適化プラットフォームの開発進化<br>Deep C2 110kV変電所にて。",
+            "story_sec_tech": "技術基準",
+            "story_sec_sol": "解決策の比較",
+            "story_sec_slides": "分析スライド",
 
             "st3_date": "2026年6ch",
             "st3_title": "現場実証 - バージョン 0.2.0",
@@ -604,11 +560,6 @@
             "st5_date": "現在",
             "st5_title": "システム最適化と安定化",
             "st5_desc": "バージョン1.0は現在、洗練されたダッシュボード、安定したネットワーク接続、データベースの同期機能の磨き上げを行っています。情報セキュリティ対策も適用し、データの安全を確保しています。次は、将来のサーバー増設計画を策定します。",
-
-            // Slide 7 (Intermediate)
-            "st6_date": "次へ",
-            "st6_title": "ソリューションの比較評価",
-            "st6_desc": "他システムではなく、なぜ自社開発Web Platformを採用したのか。その詳細な技術・コスト比較分析へ進みます。<br><br><a href=\"compare.html\" class=\"btn btn-primary btn-neon-blue\" style=\"display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.8rem;font-size:0.95rem;text-decoration:none;margin-top:0.8rem;box-shadow:0 0 15px rgba(0,240,255,0.4);\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"16\" height=\"16\" style=\"vertical-align:middle;margin-right:4px;\"><path d=\"M18 20V10M12 20V4M6 20v-6\"/></svg> 比較分析ページへ</a>",
 
             // Thumbs
             "thumb0_lbl": "起点",       "thumb0_desc": "課題抽出",
@@ -709,8 +660,23 @@
             "cmp_s6_sub": "従来方式と新プラットフォームでの業務処理時間およびエラー発生率の量的比較：",
             "cmp_s6_bar_title": "タスク処理時間（分） ＆ エラー発生率（％）",
             "cmp_s6_desc": "📊 グラフが示すように、レポート作成時間は<strong>120分から5分</strong>に短縮され（95.8%削減）、自動入力チェックによりデータの誤入力率は<strong>15%から0%</strong>へ低下しました。",
-            "cmp_s6_bar1": "1. データ制御力 ＆ 構内セキュリティ (オンプレミス)",
-            "cmp_s6_bar2": "2. 独自UI ＆ 特殊業務ロジックのカスタマイズ性",
+
+            // Slide 7: Compare Table
+            "tbl_hdr_criteria": "技術評価項目",
+            "tbl_hdr_discrete": "📋 個別ツール",
+            "tbl_hdr_power": "🔷 Power Platform",
+            "tbl_hdr_web": "🌐 Web Platform",
+            "tbl_c1": "初期コスト", "tbl_c1_d": "極めて低い", "tbl_c1_p": "高額", "tbl_c1_w": "中程度",
+            "tbl_c2": "年間維持費", "tbl_c2_d": "ほぼ0", "tbl_c2_p": "高額 (アカウント毎)", "tbl_c2_w": "少額",
+            "tbl_c3": "業務最適化度", "tbl_c3_d": "制限あり", "tbl_c3_p": "制限あり", "tbl_c3_w": "100%",
+            "tbl_c4": "構内データ蓄積", "tbl_c4_d": "可", "tbl_c4_p": "MSクラウド", "tbl_c4_w": "構内物理サーバー",
+            "tbl_c5": "自動帳票出力", "tbl_c5_d": "手動のみ", "tbl_c5_p": "Power Automate", "tbl_c5_w": "自動PDF/Excel出力",
+            "tbl_c6": "通信障害耐性", "tbl_c6_d": "完全動作", "tbl_c6_p": "要接続", "tbl_c6_w": "構内LAN動作",
+            "tbl_c7": "導入準備期間", "tbl_c7_d": "即時", "tbl_c7_p": "1〜3ヶ月", "tbl_c7_w": "3〜6ヶ月",
+            "tbl_c8": "ロール別権限管理", "tbl_c8_d": "なし", "tbl_c8_p": "標準機能", "tbl_c8_w": "詳細権限設定",
+
+            // Slide 8: Conclusion
+            "cmp_s8_tag": "🏆 結論のまとめ",
             "cmp_s6_bar3": "3. 独立した機能開発 ＆ 将来の拡張性",
             "cmp_s6_bar4": "4. 長期的な運用コスト効率 (点数が高いほど省コスト)",
 
@@ -741,11 +707,6 @@
             "cmp_s8_cp2_desc": "Deep C2 110kV変電所の特殊な運用手順に合わせて入力ロジックを最適化。汎用パッケージで発生する「使いにくさ」を完全に排除しました。",
             "cmp_s8_cp3_title": "長期運用時における圧倒的な財務的メリット:",
             "cmp_s8_cp3_desc": "Power Platformのような恒久的な月額サブスクリプション費用が不要です。既設のDell R260サーバー上で長期間安定稼働させることで、運用コストを大幅に削減できます。",
-
-            // Slide 9 (Intermediate)
-            "cmp_s9_tag": "➡️ 次のステップ",
-            "cmp_s9_title": "詳細な導入計画とロードマップ",
-            "cmp_s9_sub": "現在の設備導入計画と将来のシステム拡張計画を確認するには、ロードマップセクションへ進んでください。",
 
 
             // --- TRANG ROADMAP.HTML ---
@@ -787,30 +748,45 @@
             "rm_scale_i1_desc": "<strong>CPU Xeon E-2468 (8コア/16スレッド)</strong> と <strong>64GB DDR5 ECCメモリ</strong> の能力を活かし、SCADAデータや電力量データをシフト日程ごとに細分化管理し、検索処理を高速化します。",
             "rm_scale_i2_title": "独立サービス（モジュール）のコンテナ分離",
             "rm_scale_i2_desc": "SCADA自動収集、IoTセンサ中継、デジタル作業指示書の各機能をDocker等で分離独立させ、他機能の無停止アップデートを可能にします。",
-            "rm_scale_i3_title": "Web応答性能およびLAN帯域の最適化",
-            "rm_scale_i3_desc": "<strong>2 × 1TB NVMeエンタープライズSSD (RAID 1構成)</strong> と <strong>二重化ギガビットNIC</strong> により、ディスクI/Oボトルネックを排除し、同時クエリを遅延なく処理します。",
-            "rm_scale_i4_title": "安定した電源品質の確保 (UPS Santak C3K)",
-            "rm_scale_i4_desc": "内蔵密閉バッテリーを備えた <strong>3000VAオンラインUPS</strong> が、雷サージや瞬時電圧低下からDellサーバーを保護し、安定した純粋正弦波を出力します。",
-            "rm_scale_tbl_title": "推奨拡張システム機器構成",
-            "rm_scale_tbl_col1": "対象機器",
-            "rm_scale_tbl_col2": "推奨仕様スペック",
-            "rm_scale_tbl_server": "1. 専用サーバー",
-            "rm_scale_tbl_server_spec": "Dell PowerEdge R260 (CPU: Xeon E-2468, メモリ: 64GB DDR5 ECC, ディスク: 2x1TB SSD Enterprise, RAID PERC H355/H755, Dual 1GbE)",
-            "rm_scale_tbl_ups": "2. 無停電電源装置 (UPS)",
-            "rm_scale_tbl_ups_spec": "Santak Castle C3K (3000VA / 2700W, メンテナンスフリー密閉型VRLA AGMドライバッテリー内蔵)",
-            "rm_scale_tbl_server_price": "サーバー参考価格",
-            "rm_scale_tbl_ups_price": "UPS参考価格",
-            "rm_scale_tbl_total": "合計システム投資 (Server + UPS)",
-
-            // Slide 4: replication (Roadmap)
-            "rm_rep_tag": "// 他変電所への展開",
-            "rm_rep_title": "モデルの他変電所への水平展開",
-            "rm_rep_sub": "各ハードウェア行をクリックすると、詳細な技術的理由と透過3Dモデリング画像が表示されます：",
-            "rm_rep_tbl_col1": "専用ハードウェア機器 / 変電所",
-            "rm_rep_tbl_col2": "技術仕様スペック ＆ 段階的導入プラン",
-            "rm_rep_tbl_col3": "参考予算",
             "rm_rep_tbl_server_gd1": "⚡ 専用サーバー Dell R260 (第1段階)",
             "rm_rep_tbl_server_gd1_spec": "第1段階：システムコアとRAID 1データベースをホストする専用物理サーバー1台を構築。",
+            "rm_rep_tbl_server_gd2": "⚡ 専用サーバー Dell R260 (第2段階)",
+            "rm_rep_tbl_server_gd2_spec": "第2段階：高可用性（HA冗長化、Active/Standby）構成のため、もう1台の筐体を増設。",
+            "rm_rep_tbl_switch": "⚡ 01 ギガビットスイッチ",
+            "rm_rep_tbl_switch_spec": "専用ラックキャビネット内に搭載する16ポートの業務接続用スイッチ。",
+            "rm_rep_tbl_ups": "⚡ 01 オンラインUPS (バッテリー内蔵)",
+            "rm_rep_tbl_ups_spec": "メンテナンスフリーの鉛密閉バッテリー（AGM）を内蔵した3000VAオンラインUPS。",
+            "rm_rep_tbl_cables": "⚡ 配線用資材および工事費",
+            "rm_rep_tbl_cables_spec": "電磁シールド付CAT6ケーブル、RJ45コネクタ、保護用配管による耐ノイズ配線敷設。",
+            "rm_b3_title": "現場直結のフィードバックループ:",
+            "rm_b3_desc": "最大の利点は、システムが変電所の制御室に直接設置されていることです。開発チーム（Quang氏と私）は、24時間365日のシフト勤務中にエンジニアから直接フィードバックを受け取り、入力フォームや電力量計算ロジックを現場の運用手順に100%合わせることができました。",
+            
+            "rm_s2_tag": "// 現状の必要資材",
+            "rm_s2_title": "追加提案機器",
+            "rm_s2_sub": "<strong style=\"color:var(--neon-pink);\">インタラクティブ表示:</strong> 左側の機器をクリックすると、詳細な技術的理由 và 透過3D画像が表示されます：",
+            "rm_s2_i1_title": "エンタープライズSSD 1TB (2基)",
+            "rm_s2_i1_desc": "ミラーリング（RAID 1）構成により、物理ドライブ故障時のデータ消失リスクを完全に防ぎます。",
+            "rm_s2_i2_title": "ギガビットLANスイッチ",
+            "rm_s2_i2_desc": "業務データ通信用にセキュアなサブネットを物理的に分離し、通信遅延を最小限に抑えます。",
+            "rm_s2_i3_title": "開発者専用Eメールアカウント",
+            "rm_s2_i3_desc": "値の逸脱警告アラートの自動送信や、作業安全指示書のOTP承認通知処理の自動化。",
+            "rm_s2_i4_title": "変電所専用ドメイン名",
+            "rm_s2_i4_desc": "ドメイン <strong>dcgeportal.vn</strong> の導入により、シフト員のシステムへのアクセス性を向上します。",
+            "rm_s2_slide_hdr": "提案資材仕様スペック",
+            "rm_s2_slide_hint": "左側の項目をクリックして、導入理由の詳細をお読みください",
+            
+            "rm_scale_tag": "// 将来像 · サーバーの拡張",
+            "rm_scale_title": "モデル拡張とサーバー・UPSのスケーリング",
+            "rm_scale_sub": "Dell PowerEdge R260専用サーバーとSantak C3KオンラインUPSを組み合わせた高度なオンプレミス設計：",
+            "rm_scale_i1_title": "データベース分割構成（パーティショニング）",
+            "rm_scale_i1_desc": "<strong>CPU Xeon E-2468 (8コア/16スレッド)</strong> と <strong>64GB DDR5 ECCメモリ</strong> の能力を活かし、SCADAデータや電力量データをシフト日程ごとに細分化管理し、検索処理を高速化します。",
+            "rm_scale_i2_title": "独立サービス（モジュール）のコンテナ分離",
+            "rm_scale_i2_desc": "SCADA自動収集、IoTセンサ中継、デジタル作業指示書の各機能をDocker等で分離独立させ、他機能の無停止アップデートを可能にします。",
+            "rm_scale_i3_title": "Tối ưu hiệu năng Web & Băng thông LAN",
+            "rm_scale_i3_desc": "Sự kết hợp giữa 2 × 1TB Enterprise NVMe SSD (chạy RAID 1 cứng qua card PERC H355/H755) và băng thông Dual 1GbE LOM đảm bảo loại bỏ hoàn toàn hiện tượng nghẽn cổ chai đọc/ghi I/O, phản hồi giao diện web tức thì kể cả khi có hàng trăm yêu cầu cùng lúc.",
+            "rm_scale_i4_title": "Đảm bảo nguồn điện sạch liên tục (UPS Santak C3K)",
+            "rm_scale_i4_desc": "Tích hợp bộ lưu điện Online 3000VA có ắc quy khô kín khí trong thân máy bảo vệ server Dell R260 khỏi các sự cố sốc điện, sụt áp hoặc mất điện tự dùng đột ngột của trạm 110kV. Công nghệ chuyển đổi kép tạo ra dòng điện hình sin chuẩn sạch, kéo dài tuổi thọ phần cứng máy chủ.",
+            "rm_scale_tbl_title": "CẤU HÌNH GÓI THIẾT BỊ MỞ RỘNG",
             "rm_rep_tbl_server_gd2": "⚡ 専用サーバー Dell R260 (第2段階)",
             "rm_rep_tbl_server_gd2_spec": "第2段階：高可用性（HA冗長化、Active/Standby）構成のため、もう1台の筐体を増設。",
             "rm_rep_tbl_switch": "⚡ 01 ギガビットスイッチ",
@@ -823,22 +799,13 @@
             "rm_rep_tbl_total_gd2": "第2段階 アップグレード参考予算",
             "rm_rep_tbl_desc": "* 注記：Dell PowerEdge R260サーバーの導入を2つのフェーズに分けることで、新規変電所における初期設備投資の負担を抑えつつ、将来的な高可用性（Active/Standby）やデータベース冗長化への拡張性を完全に確保できます。",
             "rm_rep_slide_hdr": "新規変電所設備インフラ",
-            "rm_rep_slide_hint": "左側の項目をクリックして、導入理由の詳細をお読みください",
-
-            // Roadmap pricing (Yen)
-            "rm_price_server_val": "約38万円 <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* 参考価格、変更の可能性あり</span>",
-            "rm_price_ups_val": "約10万円 <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* 参考価格、変更の可能性あり</span>",
-            "rm_price_total_val": "約48万円",
-            "rm_rep_price_server_gd1": "約38万円",
-            "rm_rep_price_server_gd2": "約38万円 /台",
-            "rm_rep_price_switch": "約15,000円",
-            "rm_rep_price_ups": "約10万円",
-            "rm_rep_price_cables": "約7,500円",
-            "rm_rep_price_total_gd1": "約502,500円",
-            "rm_rep_price_total_gd2": "+ 約38万円から"
+            "rm_rep_slide_hint": "左側の項目をクリックして、導入理由の詳細をお読みください"
         }
     };
 
+    // ============================================================================
+    // CORE LOGIC i18n
+    // ============================================================================
     // ============================================================================
     // CORE LOGIC i18n
     // ============================================================================
@@ -870,187 +837,187 @@
         
         // --- TRANG SO SÁNH (compare.html) ---
         if (window.drawRadar && document.getElementById('radarSvg')) {
-            // Vẽ lại radar để dịch nhãn của Radar Chart
             window.drawRadar();
         }
 
         // --- POPUP TRONG ROADMAP.HTML ---
-        if (window.modalData) {
-            // Cập nhật lại data i18n động trong bộ nhớ modalData
-            if (currentLang === 'en') {
-                window.modalData.ssd.tag = 'Current Material · Storage';
-                window.modalData.ssd.title = 'SSD Enterprise 1TB (x2 Drives)';
-                window.modalData.ssd.desc = '<strong>Why buy?</strong><br>We propose 02 SSD Enterprise 1TB drives configured in <strong>RAID 1 (Mirroring)</strong>.<br><br>Operational parameters at a substation are highly critical and must be written continuously in real-time. Using a single standard drive poses a high risk of hardware failure, leading to total data loss.<br><br>RAID 1 writes data simultaneously to both drives; if one drive fails, the other immediately takes over with 100% data preservation.';
-                window.modalData.ssd.label = 'Quantity:';
-                window.modalData.ssd.val = '02 drives (RAID 1)';
-
-                window.modalData.switch.tag = 'Current Material · Network LAN';
-                window.modalData.switch.title = 'Gigabit Switch';
-                window.modalData.switch.desc = '<strong>Why buy?</strong><br>To isolate operations data traffic from administrative traffic, enhancing cybersecurity and lowering LAN latency for direct shift workstation access.';
-                window.modalData.switch.label = 'Quantity:';
-                window.modalData.switch.val = '01 unit (Gigabit)';
-
-                window.modalData.email.tag = 'Current Material · Notifications';
-                window.modalData.email.title = 'Dedicated Dev Team E-mail';
-                window.modalData.email.desc = '<strong>Why buy?</strong><br>Necessary for SMTP alerts when values exceed thresholds and for sending OTP / approval links for digital Work Orders.';
-                window.modalData.email.label = 'Feature:';
-                window.modalData.email.val = 'SMTP Alert & OTP';
-
-                window.modalData.domain.tag = 'Current Material · Identity';
-                window.modalData.domain.title = 'Dedicated Domain Name';
-                window.modalData.domain.desc = '<strong>Why buy?</strong><br>Domain <strong>dcgeportal.vn</strong> guarantees formal system identification and replaces raw, hard-to-remember IP addresses for operators.';
-                window.modalData.domain.label = 'Registered Domain:';
-                window.modalData.domain.val = 'dcgeportal.vn';
-
-                window.modalData.server_phase1.tag = 'Substation Replication · Phase 1';
-                window.modalData.server_phase1.title = '01 Server Dell PowerEdge R260 (Single)';
-                window.modalData.server_phase1.desc = '<strong>Why buy in Phase 1?</strong><br>For new substations, we start with 01 dedicated physical Dell R260 server hosting the core app & database.<br><br>Equipped with Xeon E-2468, 64GB DDR5 ECC RAM, and 2x1TB SSD Enterprise RAID 1. This minimizes the initial capital expenditure (~$2,500) while ensuring high reliability and on-premises security.';
-                window.modalData.server_phase1.label = 'Phase 1 Investment:';
-                window.modalData.server_phase1.val = '01 Dell R260 Server | ~$2,500';
-
-                window.modalData.server_phase2.tag = 'Substation Replication · Phase 2';
-                window.modalData.server_phase2.title = 'Upgrade Server Dell PowerEdge R260 (HA)';
-                window.modalData.server_phase2.desc = '<strong>Why buy in Phase 2?</strong><br>Depending on operational requirements and funding, Phase 2 adds another Dell R260 server to establish <strong>High Availability (HA, Active/Standby)</strong>.<br><br>If the primary server fails, the secondary server takes over within seconds. It also supports distributing heavy operational modules (SCADA, IoT logs) onto separate machines.';
-                window.modalData.server_phase2.label = 'Phase 2 Investment:';
-                window.modalData.server_phase2.val = 'Additional server(s) | ~$2,500/unit';
-
-                window.modalData.ups_other.tag = 'Other Substation · Power Reserve';
-                window.modalData.ups_other.title = 'UPS Santak Castle C3K (Dry Battery)';
-                window.modalData.ups_other.desc = '<strong>Why buy?</strong><br>Protects servers from voltage spikes and power outages common at high-voltage substations. Equipped with safe dry batteries, running dual-server load for 30-45 minutes to shut down safely.';
-                window.modalData.ups_other.label = 'Estimated Cost:';
-                window.modalData.ups_other.val = '~$680';
-
-                window.modalData.cables_other.tag = 'Other Substation · Installation';
-                window.modalData.cables_other.title = 'CAT6 Shielded Network Cables';
-                window.modalData.cables_other.desc = '<strong>Why buy?</strong><br>CAT6 shielded cabling prevents magnetic interference from high-voltage devices, ensuring reliable gigabit LAN communication.';
-                window.modalData.cables_other.label = 'Estimated Cost:';
-                window.modalData.cables_other.val = '~$50';
-
-                window.modalData.switch_other.tag = 'Other Substation · Network Switch';
-                window.modalData.switch_other.title = 'Gigabit 16-Port Network Switch';
-                window.modalData.switch_other.desc = 'Serves as the central LAN connection for the new station, linking physical Web/Database servers with shift computers, smart meters, and temperature sensors. High durability, runs 24/7 in high-voltage room electromagnetic environments without signal degradation.';
-                window.modalData.switch_other.label = 'Estimated Cost:';
-                window.modalData.switch_other.val = '~$100';
-            } 
-            else if (currentLang === 'ja') {
-                window.modalData.ssd.tag = '現場資材 · ストレージ';
-                window.modalData.ssd.title = 'エンタープライズSSD 1TB (2基)';
-                window.modalData.ssd.desc = '<strong>なぜ必要か？</strong><br>データ保全のため、<strong>RAID 1 (ミラーリング)</strong>構成として02台のエンタープライズSSDを導入します。<br><br>変電所の数値データは極めて重要であり、リアルタイムでの書込が求められます。単一HDD運用は故障時のデータ全損リスクが高いため、RAID 1で同時に2基に書込み、1基が故障しても無停止で稼働しデータを守ります。';
-                window.modalData.ssd.label = '数量:';
-                window.modalData.ssd.val = '02基 (RAID 1)';
-
-                window.modalData.switch.tag = '現場資材 · ネットワークLAN';
-                window.modalData.switch.title = 'ギガビットスイッチ';
-                window.modalData.switch.desc = '<strong>なぜ必要か？</strong><br>変電所内の業務通信を一般の事務通信から物理的に分離し、サイバーセキュリティを高め、シフトエンジニア端末との低レイテンシ通信を保証します。';
-                window.modalData.switch.label = '数量:';
-                window.modalData.switch.val = '01台 (ギガビット)';
-
-                window.modalData.email.tag = '現場資材 · 通知サービス';
-                window.modalData.email.title = '開発チーム専用Eメール';
-                window.modalData.email.desc = '<strong>なぜ必要か？</strong><br>警報閾値超過時の自動メール送信や、デジタル作業命令書の承認・OTP認証リンク của 送信用に使用します。';
-                window.modalData.email.label = '機能:';
-                window.modalData.email.val = 'SMTPアラート & OTP';
-
-                window.modalData.domain.tag = '現場資材 · ドメイン';
-                window.modalData.domain.title = '専用ドメイン';
-                window.modalData.domain.desc = '<strong>なぜ必要か？</strong><br>ドメイン <strong>dcgeportal.vn</strong> により、システムを識別し、覚えにくいIPアドレス入力を排除して操作性を高めます。';
-                window.modalData.domain.label = '登録ドメイン:';
-                window.modalData.domain.val = 'dcgeportal.vn';
-
-                window.modalData.server_phase1.tag = '他変電所展開 · 第1段階';
-                window.modalData.server_phase1.title = '01 専用サーバー Dell PowerEdge R260 (シングル)';
-                window.modalData.server_phase1.desc = '<strong>第1段階での導入意義</strong><br>新しい変電所向けに、まずはシステムコア và データベースをホストする01台 của 物理サーバーを設置します。<br><br>Xeon E-2468、64GB DDR5 ECCメモリ、2x1TB SSD (RAID 1)で構成され、オンプレミスの安全性と高い信頼性を保ちながら、初期投資予算を抑えます。';
-                window.modalData.server_phase1.label = '第1段階設備投資:';
-                window.modalData.server_phase1.val = 'Dell R260サーバー01台 | 約38万円';
-
-                window.modalData.server_phase2.tag = '他変電所展開 · 第2段階';
-                window.modalData.server_phase2.title = '専用サーバー Dell PowerEdge R260 増設 (HA)';
-                window.modalData.server_phase2.desc = '<strong>第2段階での増設意義</strong><br>要件や予算に応じて、もう1台のDell R260サーバーを増設し、<strong>高可用性（HA, Active/Standby）</strong>構成にします。<br><br>プライマリ機が故障しても、セカンダリ機が数秒で処理を引き継ぎます。また、SCADAやIoTなどの負荷の高い処理を別筐体に分散できます。';
-                window.modalData.server_phase2.label = '第2段階設備投資:';
-                window.modalData.server_phase2.val = 'サーバーの追加 | 約38万円/台';
-
-                window.modalData.ups_other.tag = '他変電所展開 · 非常用電源';
-                window.modalData.ups_other.title = 'UPS Santak Castle C3K (ドライバッテリー)';
-                window.modalData.ups_other.desc = '<strong>なぜ必要か？</strong><br>落雷や系統トラブルによる変電所内の瞬時電圧低下や停電から、サーバーを保護します。密閉型ドライバッテリーを内蔵し、約30〜45分間の無停電給電を行ってサーバーを安全にシャットダウンさせます。';
-                window.modalData.ups_other.label = '参考価格:';
-                window.modalData.ups_other.val = '約10万円';
-
-                window.modalData.cables_other.tag = '他変電所展開 · 配線工事';
-                window.modalData.cables_other.title = 'CAT6 シールド付LANケーブル';
-                window.modalData.cables_other.desc = '<strong>なぜ必要か？</strong><br>変電所の強磁界環境下でも外部ノイズを遮断し、安定したギガビットLAN通信品質を維持します。';
-                window.modalData.cables_other.label = '参考価格:';
-                window.modalData.cables_other.val = '約7,500円';
-
-                window.modalData.switch_other.tag = '他変電所展開 · ネットワークスイッチ';
-                window.modalData.switch_other.title = 'ギガビット 16ポート スイッチングハブ';
-                window.modalData.switch_other.desc = '新設変電所の構内LAN接続の中核として、物理Web/DBサーバー、シフト端末、スマートメーター、温度センサーを接続します。高電磁界環境でもノイズに強く、24時間安定稼働します。';
-                window.modalData.switch_other.label = '参考価格:';
-                window.modalData.switch_other.val = '約15,000円';
-            }
-            else {
-                // Tiếng Việt (mặc định)
-                window.modalData.ssd.tag = 'Vật tư hiện tại · Ổ cứng lưu trữ';
-                window.modalData.ssd.title = 'SSD Enterprise 1TB (x2 ổ đĩa)';
-                window.modalData.ssd.desc = '<strong>Tại sao cần mua?</strong><br>Nhóm đề xuất trang bị 02 ổ đĩa SSD Enterprise 1TB để cấu hình chạy <strong>RAID 1 (Gương dữ liệu)</strong>.<br><br>Khi vận hành thực tế tại trạm, dữ liệu ca trực và chỉ số thiết bị phụ tải cực kỳ nhạy cảm và cần được ghi chép liên tục theo thời gian thực. Nếu chỉ sử dụng 1 ổ đĩa thông thường, rủi ro hỏng hóc phần cứng đột xuất dẫn đến mất sạch dữ liệu ca trực là rất lớn.<br><br>Cấu hình RAID 1 sẽ ghi dữ liệu song song đồng thời lên cả 2 ổ; nếu 1 ổ gặp sự cố hỏng hóc vật lý đột xuất, ổ đĩa còn lại lập tức gánh tải và bảo toàn nguyên vẹn 100% dữ liệu vận hành.';
-                window.modalData.ssd.label = 'Số lượng mua:';
-                window.modalData.ssd.val = '02 ổ đĩa (Chạy RAID 1)';
-
-                window.modalData.switch.tag = 'Vật tư hiện tại · Switch mạng LAN';
-                window.modalData.switch.title = 'Switch mạng Gigabit chuyên dụng';
-                window.modalData.switch.desc = '<strong>Tại sao cần mua?</strong><br>Để đảm bảo hệ thống Web Platform hoạt động với băng thông ổn định và có tính bảo mật thông tin nội bộ tốt nhất, hệ thống cần được thiết lập trên một phân đoạn mạng LAN cô lập riêng biệt tại trạm biến áp.<br><br>Switch mạng Gigabit chuyên dụng giúp kết nối trực tiếp các máy tính vận hành ca trực của kỹ sư với máy chủ đặt tại tủ rack trung tâm, loại bỏ rủi ro xung đột IP và nhiễu mạng từ các thiết bị văn phòng/hành chính khác của trạm.';
-                window.modalData.switch.label = 'Số lượng mua:';
-                window.modalData.switch.val = '01 bộ (Gigabit Switch)';
-
-                window.modalData.email.tag = 'Vật tư hiện tại · Dịch vụ thông báo';
-                window.modalData.email.title = 'E-mail riêng cho nhóm phát triển';
-                window.modalData.email.desc = '<strong>Tại sao cần mua?</strong><br>Đăng ký gói e-mail nội bộ chuyên dụng giúp nhóm cấu hình các tính năng tự động hóa nâng cao của Web Platform:<br><br>1. <strong>Gửi cảnh báo tự động:</strong> Gửi thông báo tức thời qua mail khi các chỉ số phụ tải, hao hụt điện năng vượt ngưỡng an toàn.<br>2. <strong>Phê duyệt trực tuyến:</strong> Kỹ sư có thể tạo Lệnh Công Tác và hệ thống sẽ tự động gửi email đính kèm mã OTP hoặc link xác nhận nhanh cho trưởng trạm duyệt trực tiếp qua mail.<br>3. <strong>Bảo mật thông tin:</strong> Tách biệt hòm thư kỹ thuật với hòm thư cá nhân để bảo mật tuyệt đối các báo cáo điện lực.';
-                window.modalData.email.label = 'Tính năng:';
-                window.modalData.email.val = 'SMTP Alert &amp; OTP Authentication';
-
-                window.modalData.domain.tag = 'Vật tư hiện tại · Định danh hệ thống';
-                window.modalData.domain.title = 'Địa chỉ Domain riêng chuyên nghiệp';
-                window.modalData.domain.desc = '<strong>Tại sao cần mua?</strong><br>Tên miền chính thức dự kiến mua là: <strong style="color:var(--neon-pink);font-size:1rem;font-family:var(--font-mono);">dcgeportal.vn</strong><br><br>Việc đăng ký tên miền riêng mang lại giá trị thực tiễn rất cao:<br><br>1. <strong>Chuyên nghiệp hóa:</strong> Giúp định danh hệ thống cổng thông tin vận hành (DCGE Portal) chính thống của đơn vị.<br>2. <strong>UX mượt mà:</strong> Giúp các kỹ sư trực ca dễ dàng ghi nhớ và truy cập nhanh chóng từ bất kỳ máy tính nào trong trạm, thay vị phải ghi nhớ và gõ các dãy số địa chỉ IP thô sơ (ví dụ: http://192.168.1.150:8080).';
-                window.modalData.domain.label = 'Tên miền đăng ký:';
-                window.modalData.domain.val = 'dcgeportal.vn';
-
-                window.modalData.server_phase1.tag = 'Thiết bị nhân rộng · Giai đoạn 1';
-                window.modalData.server_phase1.title = '01 Máy chủ Dell PowerEdge R260 (Single)';
-                window.modalData.server_phase1.desc = '<strong>Tại sao cần mua ở Giai đoạn 1?</strong><br>Ở giai đoạn khởi chạy ban đầu cho trạm mới, đề xuất đầu tư trước <strong>01 Máy chủ vật lý chuyên dụng Dell PowerEdge R260</strong> để chạy độc lập toàn bộ lõi ứng dụng và cơ sở dữ liệu của trạm.<br><br>Cấu hình máy chủ Dell R260 bao gồm chip CPU Intel Xeon E-2468, 64GB RAM DDR5 ECC chống sửa lỗi và <strong>2x1TB SSD Enterprise</strong> cấu hình chạy RAID 1 vật lý qua card PERC.<br><br>Giải pháp này giúp trạm mới có một máy chủ hiệu năng cực cao, lưu dữ liệu tại chỗ, đảm bảo an toàn phần cứng ở mức tối đa mà vẫn giữ mức ngân sách đầu tư thiết bị ban đầu rất hợp lý (~62tr / ~2.500 USD).';
-                window.modalData.server_phase1.label = 'Định mức đầu tư GĐ 1:';
-                window.modalData.server_phase1.val = '01 Máy chủ Dell R260 | ~ 62.000.000đ / ~ 2.500 USD';
-
-                window.modalData.server_phase2.tag = 'Thiết bị nhân rộng · Giai đoạn 2';
-                window.modalData.server_phase2.title = 'Bổ sung máy chủ Dell PowerEdge R260 (HA)';
-                window.modalData.server_phase2.desc = '<strong>Tại sao cần mua ở Giai đoạn 2?</strong><br>Dựa vào yêu cầu thực tế và định hướng phát triển của <strong>Chủ đầu tư</strong>, Giai đoạn 2 sẽ tiến hành mua bổ sung thêm <strong>01 máy chủ Dell PowerEdge R260 chuyên dụng</strong> hoặc nhiều hơn.<br><br>Việc bổ sung thêm server này giúp nâng cấp hệ thống trạm biến áp lên mô hình <strong>High Availability (Dự phòng nóng Active/Standby)</strong>:<br><br>1. <strong>Chuyển mạch tự động:</strong> Khi một máy chủ chính gặp sự cố vật lý hoặc lỗi hệ thống, máy chủ phụ sẽ ngay lập tiếp quản vận hành trong vài giây, đảm bảo ca trực không bao giờ bị gián đoạn.<br>2. <strong>Phân tải cơ sở dữ liệu:</strong> Hỗ trợ phân tách các module vận hành nặng (như SCADA log, IoT thu thập số liệu liên tục) sang các máy chủ khác nhau nhằm bảo toàn tài nguyên xử lý tối ưu.';
-                window.modalData.server_phase2.label = 'Định mức đầu tư GĐ 2:';
-                window.modalData.server_phase2.val = 'Bổ sung thêm 01 hoặc nhiều server | ~ 62.000.000đ / ~ 2.500 USD/máy';
-
-                window.modalData.ups_other.tag = 'Thiết bị trạm khác · Nguồn dự phòng';
-                window.modalData.ups_other.title = 'Bộ lưu điện UPS Santak C3K (Tích hợp pin khô)';
-                window.modalData.ups_other.desc = '<strong>Tại sao cần mua?</strong><br>Để bảo vệ hệ thống server và switch mạng khỏi các sự cố mất điện AC tự dùng đột ngột tại trạm biến áp 110kV mới, đề xuất trang bị <strong>01 Bộ lưu điện UPS Santak Castle C3K (3000VA / 2700W)</strong>.<br><br><strong>Đặc điểm kỹ thuật:</strong><br>1. <strong>Pin khô tích hợp an toàn:</strong> Sử dụng hệ thống 6 bình ắc quy khô kín khí (VRLA AGM) tích hợp hoàn toàn bên trong thân máy. Đảm bảo an toàn phòng máy chủ, không rò rỉ hóa chất, không sinh khí ăn mòn và hoàn toàn không cần bảo trì định kỳ.<br>2. <strong>Công nghệ Online chuyển đổi kép:</strong> Lọc sạch nhiễu điện lưới, sụt áp hoặc quá áp đột ngột của trạm điện, cung cấp dòng điện sin chuẩn 220V ổn định cho server.<br>3. <strong>Thời gian lưu điện dự phòng:</strong> Đạt từ <strong>30 đến 45 phút</strong> khi mất điện hoàn toàn đối với tải Server + Switch. Đảm bảo thời gian an toàn tối đa để các tiến trình lưu dữ liệu hoàn tất và kỹ sư trực ca tắt máy chủ an toàn hoặc vận hành máy phát điện dự phòng.';
-                window.modalData.ups_other.label = 'Chi phí tham khảo:';
-                window.modalData.ups_other.val = '~ 17.000.000đ / ~ 680 USD <span style="font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;">* Giá tham khảo trên mạng, có thể thay đổi</span>';
-
-                window.modalData.cables_other.tag = 'Thiết bị trạm khác · Vật tư thi công';
-                window.modalData.cables_other.title = 'Vật tư cáp mạng CAT6 &amp; Thi công';
-                window.modalData.cables_other.desc = '<strong>Tại sao cần mua?</strong><br>Hạ tầng cáp mạng chuẩn CAT6 chất lượng cao cùng các đầu bấm hạt mạng RJ45, ống gen luồn bảo vệ cơ học.<br><br>Đặc biệt cáp CAT6 có vỏ bọc chống nhiễu từ trường cao tại phòng điều khiển trung tâm trạm biến áp, đảm bảo tín hiệu truyền dẫn đạt tốc độ gigabit (1Gbps) ổn định lâu dài, không bị nhiễu sóng xung quanh thiết bị điện cao áp.';
-                window.modalData.cables_other.label = 'Dự toán chi phí:';
-                window.modalData.cables_other.val = '~ 1.200.000đ / ~ 50 USD';
-
-                window.modalData.switch_other.tag = 'Thiết bị trạm khác · Switch mạng';
-                window.modalData.switch_other.title = 'Switch mạng Gigabit 16-Port';
-                window.modalData.switch_other.desc = 'Đóng vai trò là trung tâm kết nối LAN nội bộ của trạm mới, liên kết máy chủ Web/Database vật lý với các máy tính trực ca, các thiết bị đo lường phụ tải thông minh và hệ thống cảm biến nhiệt độ.<br><br>Độ bền cao, chạy ổn định 24/24 trong môi trường phòng máy biến áp có từ trường cao mà không bị suy hao tín hiệu.';
-                window.modalData.switch_other.label = 'Dự toán chi phí:';
-                window.modalData.switch_other.val = '~ 2.500.000đ / ~ 100 USD';
-            }
+        if (typeof window.translateModalData === 'function') {
+            window.translateModalData(currentLang);
         }
     }
 
-    // ============================================================================
-    // BẮT ĐẦU KHỞI TẠO i18n
-    // ============================================================================
+    // Định nghĩa hàm dịch modalData toàn cục để bất cứ file nào (bao gồm roadmap.html) đều có thể gọi khi sẵn sàng
+    window.translateModalData = function(lang) {
+        if (!window.modalData) return;
+        if (lang === 'en') {
+            window.modalData.ssd.tag = 'Current Material · Storage';
+            window.modalData.ssd.title = 'SSD Enterprise 1TB (x2 Drives)';
+            window.modalData.ssd.desc = '<strong>Why buy?</strong><br>We propose 02 SSD Enterprise 1TB drives configured in <strong>RAID 1 (Mirroring)</strong>.<br><br>Operational parameters at a substation are highly critical and must be written continuously in real-time. Using a single standard drive poses a high risk of hardware failure, leading to total data loss.<br><br>RAID 1 writes data simultaneously to both drives; if one drive fails, the other immediately takes over with 100% data preservation.';
+            window.modalData.ssd.label = 'Quantity:';
+            window.modalData.ssd.val = '02 drives (RAID 1)';
+
+            window.modalData.switch.tag = 'Current Material · Network LAN';
+            window.modalData.switch.title = 'Gigabit Switch';
+            window.modalData.switch.desc = '<strong>Why buy?</strong><br>To isolate operations data traffic from administrative traffic, enhancing cybersecurity and lowering LAN latency for direct shift workstation access.';
+            window.modalData.switch.label = 'Quantity:';
+            window.modalData.switch.val = '01 unit (Gigabit)';
+
+            window.modalData.email.tag = 'Current Material · Notifications';
+            window.modalData.email.title = 'Dedicated Dev Team E-mail';
+            window.modalData.email.desc = '<strong>Why buy?</strong><br>Necessary for SMTP alerts when values exceed thresholds and for sending OTP / approval links for digital Work Orders.';
+            window.modalData.email.label = 'Feature:';
+            window.modalData.email.val = 'SMTP Alert & OTP';
+
+            window.modalData.domain.tag = 'Current Material · Identity';
+            window.modalData.domain.title = 'Dedicated Domain Name';
+            window.modalData.domain.desc = '<strong>Why buy?</strong><br>Domain <strong>dcgeportal.vn</strong> guarantees formal system identification and replaces raw, hard-to-remember IP addresses for operators.';
+            window.modalData.domain.label = 'Registered Domain:';
+            window.modalData.domain.val = 'dcgeportal.vn';
+
+            window.modalData.server_phase1.tag = 'Substation Replication · Phase 1';
+            window.modalData.server_phase1.title = '01 Server Dell PowerEdge R260 (Single)';
+            window.modalData.server_phase1.desc = '<strong>Why buy in Phase 1?</strong><br>For new substations, we start with 01 dedicated physical Dell R260 server hosting the core app & database.<br><br>Equipped with Xeon E-2468, 64GB DDR5 ECC RAM, and 2x1TB SSD Enterprise RAID 1. This minimizes the initial capital expenditure (~$2,500) while ensuring high reliability and on-premises security.';
+            window.modalData.server_phase1.label = 'Phase 1 Investment:';
+            window.modalData.server_phase1.val = '01 Dell R260 Server | ~$2,500';
+
+            window.modalData.server_phase2.tag = 'Substation Replication · Phase 2';
+            window.modalData.server_phase2.title = 'Upgrade Server Dell PowerEdge R260 (HA)';
+            window.modalData.server_phase2.desc = '<strong>Why buy in Phase 2?</strong><br>Depending on operational requirements and funding, Phase 2 adds another Dell R260 server to establish <strong>High Availability (HA, Active/Standby)</strong>.<br><br>If the primary server fails, the secondary server takes over within seconds. It also supports distributing heavy operational modules (SCADA, IoT logs) onto separate machines.';
+            window.modalData.server_phase2.label = 'Phase 2 Investment:';
+            window.modalData.server_phase2.val = 'Additional server(s) | ~$2,500/unit';
+
+            window.modalData.ups_other.tag = 'Other Substation · Power Reserve';
+            window.modalData.ups_other.title = 'UPS Santak Castle C3K (Dry Battery)';
+            window.modalData.ups_other.desc = '<strong>Why buy?</strong><br>Protects servers from voltage spikes and power outages common at high-voltage substations. Equipped with safe dry batteries, running dual-server load for 30-45 minutes to shut down safely.';
+            window.modalData.ups_other.label = 'Estimated Cost:';
+            window.modalData.ups_other.val = '~$680';
+
+            window.modalData.cables_other.tag = 'Other Substation · Installation';
+            window.modalData.cables_other.title = 'CAT6 Shielded Network Cables';
+            window.modalData.cables_other.desc = '<strong>Why buy?</strong><br>CAT6 shielded cabling prevents magnetic interference from high-voltage devices, ensuring reliable gigabit LAN communication.';
+            window.modalData.cables_other.label = 'Estimated Cost:';
+            window.modalData.cables_other.val = '~$50';
+
+            window.modalData.switch_other.tag = 'Other Substation · Network Switch';
+            window.modalData.switch_other.title = 'Gigabit 16-Port Network Switch';
+            window.modalData.switch_other.desc = 'Serves as the central LAN connection for the new station, linking physical Web/Database servers with shift computers, smart meters, and temperature sensors. High durability, runs 24/7 in high-voltage room electromagnetic environments without signal degradation.';
+            window.modalData.switch_other.label = 'Estimated Cost:';
+            window.modalData.switch_other.val = '~$100';
+        } 
+        else if (lang === 'ja') {
+            window.modalData.ssd.tag = '現場資材 · ストレージ';
+            window.modalData.ssd.title = 'エンタープライズSSD 1TB (2基)';
+            window.modalData.ssd.desc = '<strong>なぜ必要か？</strong><br>データ保全のため、<strong>RAID 1 (ミラーリング)</strong>構成として02台のエンタープライズSSDを導入します。<br><br>変電所の数値データは極めて重要であり、リアルタイムでの書込が求められます。単一HDD運用は故障時のデータ全損リスクが高いため、RAID 1で同時に2基に書込み、1基が故障しても無停止で稼働しデータを守ります。';
+            window.modalData.ssd.label = '数量:';
+            window.modalData.ssd.val = '02基 (RAID 1)';
+
+            window.modalData.switch.tag = '現場資材 · ネットワークLAN';
+            window.modalData.switch.title = 'ギガビットスイッチ';
+            window.modalData.switch.desc = '<strong>なぜ必要か？</strong><br>変電所内の業務通信を一般の事務通信から物理的に分離し、サイバーセキュリティを高め、シフトエンジニア端末との低レイテンシ通信を保証します。';
+            window.modalData.switch.label = '数量:';
+            window.modalData.switch.val = '01台 (ギガビット)';
+
+            window.modalData.email.tag = '現場資材 · 通知サービス';
+            window.modalData.email.title = '開発チーム専用Eメール';
+            window.modalData.email.desc = '<strong>なぜ必要か？</strong><br>警報閾値超過時の自動メール送信や、デジタル作業命令書の承認・OTP認証リンク の送信用に使用します。';
+            window.modalData.email.label = '機能:';
+            window.modalData.email.val = 'SMTPアラート & OTP';
+
+            window.modalData.domain.tag = '現場資材 · ドメイン';
+            window.modalData.domain.title = '専用ドメイン';
+            window.modalData.domain.desc = '<strong>なぜ必要か？</strong><br>ドメイン <strong>dcgeportal.vn</strong> により、システムを識別し、覚えにくいIPアドレス入力を排除して操作性を高めます。';
+            window.modalData.domain.label = '登録ドメイン:';
+            window.modalData.domain.val = 'dcgeportal.vn';
+
+            window.modalData.server_phase1.tag = '他変電所展開 · 第1段階';
+            window.modalData.server_phase1.title = '01 専用サーバー Dell PowerEdge R260 (シングル)';
+            window.modalData.server_phase1.desc = '<strong>第1段階での導入意義</strong><br>新しい変電所向けに、まずはシステムコア と データベースをホストする01台 の 物理サーバーを設置します。<br><br>Xeon E-2468、64GB DDR5 ECCメモリ、2x1TB SSD (RAID 1)で構成され、オンプレミスの安全性と高い信頼性を保ちながら、初期投資予算を抑えます。';
+            window.modalData.server_phase1.label = '第1段階設備投資:';
+            window.modalData.server_phase1.val = 'Dell R260サーバー01台 | 約38万円';
+
+            window.modalData.server_phase2.tag = '他変電所展開 · 第2段階';
+            window.modalData.server_phase2.title = '専用サーバー Dell PowerEdge R260 増設 (HA)';
+            window.modalData.server_phase2.desc = '<strong>第2段階での増設意義</strong><br>要件や予算に応じて、もう1台のDell R260サーバーを増設し、<strong>高可用性（HA, Active/Standby）</strong>構成にします。<br><br>プライマリ機が故障しても、セカンダリ機が数秒で処理を引き継ぎます。また、SCADA ya IoTなどの負荷の高い処理を別筐体に分散できます。';
+            window.modalData.server_phase2.label = '第2段階設備投資:';
+            window.modalData.server_phase2.val = 'サーバーの追加 | 約38万円/台';
+
+            window.modalData.ups_other.tag = '他変電所展開 · 非常用電源';
+            window.modalData.ups_other.title = 'UPS Santak Castle C3K (ドライバッテリー)';
+            window.modalData.ups_other.desc = '<strong>なぜ必要か？</strong><br>落雷や系統トラブルによる変電所内の瞬時電圧低下や停電から、サーバーを保護します。密閉型ドライバッテリーを内蔵し、約30〜45分間の無停電給電を行ってサーバーを安全にシャットダウンさせます。';
+            window.modalData.ups_other.label = '参考価格:';
+            window.modalData.ups_other.val = '約10万円';
+
+            window.modalData.cables_other.tag = '他変電所展開 · 配線工事';
+            window.modalData.cables_other.title = 'CAT6 シールド付LANケーブル';
+            window.modalData.cables_other.desc = '<strong>なぜ必要か？</strong><br>変電所の強磁界環境下でも外部ノイズを遮断し、安定したギガビットLAN通信品質を維持します。';
+            window.modalData.cables_other.label = '参考価格:';
+            window.modalData.cables_other.val = '約7,500円';
+
+            window.modalData.switch_other.tag = '他変電所展開 · ネットワークスイッチ';
+            window.modalData.switch_other.title = 'ギガビット 16ポート スイッチングハブ';
+            window.modalData.switch_other.desc = '新設変電所の構内LAN接続の中核として、物理Web/DBサーバー、シフト端末、スマートメーター、温度センサーを接続します。高電磁界環境でもノイズに強く、24時間安定稼働します。';
+            window.modalData.switch_other.label = '参考価格:';
+            window.modalData.switch_other.val = '約15,000円';
+        }
+        else {
+            // Tiếng Việt (mặc định)
+            window.modalData.ssd.tag = 'Vật tư hiện tại · Ổ cứng lưu trữ';
+            window.modalData.ssd.title = 'SSD Enterprise 1TB (x2 ổ đĩa)';
+            window.modalData.ssd.desc = '<strong>Tại sao cần mua?</strong><br>Nhóm đề xuất trang bị 02 ổ đĩa SSD Enterprise 1TB để cấu hình chạy <strong>RAID 1 (Gương dữ liệu)</strong>.<br><br>Khi vận hành thực tế tại trạm, dữ liệu ca trực và chỉ số thiết bị phụ tải cực kỳ nhạy cảm và cần được ghi chép liên tục theo thời gian thực. Nếu chỉ sử dụng 1 ổ đĩa thông thường, rủi ro hỏng hóc phần cứng đột xuất dẫn đến mất sạch dữ liệu ca trực là rất lớn.<br><br>Cấu hình RAID 1 sẽ ghi dữ liệu song song đồng thời lên cả 2 ổ; nếu 1 ổ gặp sự cố hỏng hóc vật lý đột xuất, ổ đĩa còn lại lập tức gánh tải và bảo toàn nguyên vẹn 100% dữ liệu vận hành.';
+            window.modalData.ssd.label = 'Số lượng mua:';
+            window.modalData.ssd.val = '02 ổ đĩa (Chạy RAID 1)';
+
+            window.modalData.switch.tag = 'Vật tư hiện tại · Switch mạng LAN';
+            window.modalData.switch.title = 'Switch mạng Gigabit chuyên dụng';
+            window.modalData.switch.desc = '<strong>Tại sao cần mua?</strong><br>Để đảm bảo hệ thống Web Platform hoạt động với băng thông ổn định và có tính bảo mật thông tin nội bộ tốt nhất, hệ thống cần được thiết lập trên một phân đoạn mạng LAN cô lập riêng biệt tại trạm biến áp.<br><br>Switch mạng Gigabit chuyên dụng giúp kết nối trực tiếp các máy tính vận hành ca trực của kỹ sư với máy chủ đặt tại tủ rack trung tâm, loại bỏ rủi ro xung đột IP và nhiễu mạng từ các thiết bị văn phòng/hành chính khác của trạm.';
+            window.modalData.switch.label = 'Số lượng mua:';
+            window.modalData.switch.val = '01 bộ (Gigabit Switch)';
+
+            window.modalData.email.tag = 'Vật tư hiện tại · Dịch vụ thông báo';
+            window.modalData.email.title = 'E-mail riêng cho nhóm phát triển';
+            window.modalData.email.desc = '<strong>Tại sao cần mua?</strong><br>Đăng ký gói e-mail nội bộ chuyên dụng giúp nhóm cấu hình các tính năng tự động hóa nâng cao của Web Platform:<br><br>1. <strong>Gửi cảnh báo tự động:</strong> Gửi thông báo tức thời qua mail khi các chỉ số phụ tải, hao hụt điện năng vượt ngưỡng an toàn.<br>2. <strong>Phê duyệt trực tuyến:</strong> Kỹ sư có thể tạo Lệnh Công Tác và hệ thống sẽ tự động gửi email đính kèm mã OTP hoặc link xác nhận nhanh cho trưởng trạm duyệt trực tiếp qua mail.<br>3. <strong>Bảo mật thông tin:</strong> Tách biệt hòm thư kỹ thuật với hòm thư cá nhân để bảo mật tuyệt đối các báo cáo điện lực.';
+            window.modalData.email.label = 'Tính năng:';
+            window.modalData.email.val = 'SMTP Alert &amp; OTP Authentication';
+
+            window.modalData.domain.tag = 'Vật tư hiện tại · Định danh hệ thống';
+            window.modalData.domain.title = 'Địa chỉ Domain riêng chuyên nghiệp';
+            window.modalData.domain.desc = '<strong>Tại sao cần mua?</strong><br>Tên miền chính thức dự kiến mua là: <strong style="color:var(--neon-pink);font-size:1rem;font-family:var(--font-mono);">dcgeportal.vn</strong><br><br>Việc đăng ký tên miền riêng mang lại giá trị thực tiễn rất cao:<br><br>1. <strong>Chuyên nghiệp hóa:</strong> Giúp định danh hệ thống cổng thông tin vận hành (DCGE Portal) chính thống của đơn vị.<br>2. <strong>UX mượt mà:</strong> Giúp các kỹ sư trực ca dễ dàng ghi nhớ và truy cập nhanh chóng từ bất kỳ máy tính nào trong trạm, thay vị phải ghi nhớ và gõ các dãy số địa chỉ IP thô sơ (ví dụ: http://192.168.1.150:8080).';
+            window.modalData.domain.label = 'Tên miền đăng ký:';
+            window.modalData.domain.val = 'dcgeportal.vn';
+
+            window.modalData.server_phase1.tag = 'Thiết bị nhân rộng · Giai đoạn 1';
+            window.modalData.server_phase1.title = '01 Máy chủ Dell PowerEdge R260 (Single)';
+            window.modalData.server_phase1.desc = '<strong>Tại sao cần mua ở Giai đoạn 1?</strong><br>Ở giai đoạn khởi chạy ban đầu cho trạm mới, đề xuất đầu tư trước <strong>01 Máy chủ vật lý chuyên dụng Dell PowerEdge R260</strong> để chạy độc lập toàn bộ lõi ứng dụng và cơ sở dữ liệu của trạm.<br><br>Cấu hình máy chủ Dell R260 bao gồm chip CPU Intel Xeon E-2468, 64GB RAM DDR5 ECC chống sửa lỗi và <strong>2x1TB SSD Enterprise</strong> cấu hình chạy RAID 1 vật lý qua card PERC.<br><br>Giải pháp này giúp trạm mới có một máy chủ hiệu năng cực cao, lưu dữ liệu tại chỗ, đảm bảo an toàn phần cứng ở mức tối đa mà vẫn giữ mức ngân sách đầu tư thiết bị ban đầu rất hợp lý (~62tr / ~2.500 USD).';
+            window.modalData.server_phase1.label = 'Định mức đầu tư GĐ 1:';
+            window.modalData.server_phase1.val = '01 Máy chủ Dell R260 | ~ 62.000.000đ / ~ 2.500 USD';
+
+            window.modalData.server_phase2.tag = 'Thiết bị nhân rộng · Giai đoạn 2';
+            window.modalData.server_phase2.title = 'Bổ sung máy chủ Dell PowerEdge R260 (HA)';
+            window.modalData.server_phase2.desc = '<strong>Tại sao cần mua ở Giai đoạn 2?</strong><br>Dựa vào yêu cầu thực tế và định hướng phát triển của <strong>Chủ đầu tư</strong>, Giai đoạn 2 sẽ tiến hành mua bổ sung thêm <strong>01 máy chủ Dell PowerEdge R260 chuyên dụng</strong> hoặc nhiều hơn.<br><br>Việc bổ sung thêm server này giúp nâng cấp hệ thống trạm biến áp lên mô hình <strong>High Availability (Dự phòng nóng Active/Standby)</strong>:<br><br>1. <strong>Chuyển mạch tự động:</strong> Khi một máy chủ chính gặp sự cố vật lý hoặc lỗi hệ thống, máy chủ phụ sẽ ngay lập tiếp quản vận hành trong vài giây, đảm bảo ca trực không bao giờ bị gián đoạn.<br>2. <strong>Phân tải cơ sở dữ liệu:</strong> Hỗ trợ phân tách các module vận hành nặng (như SCADA log, IoT thu thập số liệu liên tục) sang các máy chủ khác nhau nhằm bảo toàn tài nguyên xử lý tối ưu.';
+            window.modalData.server_phase2.label = 'Định mức đầu tư GĐ 2:';
+            window.modalData.server_phase2.val = 'Bổ sung thêm 01 hoặc nhiều server | ~ 62.000.000đ / ~ 2.500 USD/máy';
+
+            window.modalData.ups_other.tag = 'Thiết bị trạm khác · Nguồn dự phòng';
+            window.modalData.ups_other.title = 'Bộ lưu điện UPS Santak C3K (Tích hợp pin khô)';
+            window.modalData.ups_other.desc = '<strong>Tại sao cần mua?</strong><br>Để bảo vệ hệ thống server và switch mạng khỏi các sự cố mất điện AC tự dùng đột ngột tại trạm biến áp 110kV mới, đề xuất trang bị <strong>01 Bộ lưu điện UPS Santak Castle C3K (3000VA / 2700W)</strong>.<br><br><strong>Đặc điểm kỹ thuật:</strong><br>1. <strong>Pin khô tích hợp an toàn:</strong> Sử dụng hệ thống 6 bình ắc quy khô kín khí (VRLA AGM) tích hợp hoàn toàn bên trong thân máy. Đảm bảo an toàn phòng máy chủ, không rò rỉ hóa chất, không sinh khí ăn mòn và hoàn toàn không cần bảo trì định kỳ.<br>2. <strong>Công nghệ Online chuyển đổi kép:</strong> Lọc sạch nhiễu điện lưới, sụt áp hoặc quá áp đột ngột của trạm điện, cung cấp dòng điện sin chuẩn 220V ổn định cho server.<br>3. <strong>Thời gian lưu điện dự phòng:</strong> Đạt từ <strong>30 đến 45 phút</strong> khi mất điện hoàn toàn đối với tải Server + Switch. Đảm bảo thời gian an toàn tối đa để các tiến trình lưu dữ liệu hoàn tất và kỹ sư trực ca tắt máy chủ an toàn hoặc vận hành máy phát điện dự phòng.';
+            window.modalData.ups_other.label = 'Chi phí tham khảo:';
+            window.modalData.ups_other.val = '~ 17.000.000đ / ~ 680 USD <span style="font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;">* Giá tham khảo trên mạng, có thể thay đổi</span>';
+
+            window.modalData.cables_other.tag = 'Thiết bị trạm khác · Vật tư thi công';
+            window.modalData.cables_other.title = 'Vật tư cáp mạng CAT6 &amp; Thi công';
+            window.modalData.cables_other.desc = '<strong>Tại sao cần mua?</strong><br>Hạ tầng cáp mạng chuẩn CAT6 chất lượng cao cùng các đầu bấm hạt mạng RJ45, ống gen luồn bảo vệ cơ học.<br><br>Đặc biệt cáp CAT6 có vỏ bọc chống nhiễu từ trường cao tại phòng điều khiển trung tâm trạm biến áp, đảm bảo tín hiệu truyền dẫn đạt tốc độ gigabit (1Gbps) ổn định lâu dài, không bị nhiễu sóng xung quanh thiết bị điện cao áp.';
+            window.modalData.cables_other.label = 'Dự toán chi phí:';
+            window.modalData.cables_other.val = '~ 1.200.000đ / ~ 50 USD';
+
+            window.modalData.switch_other.tag = 'Thiết bị trạm khác · Switch mạng';
+            window.modalData.switch_other.title = 'Switch mạng Gigabit 16-Port';
+            window.modalData.switch_other.desc = 'Đóng vai trò là trung tâm kết nối LAN nội bộ của trạm mới, liên kết máy chủ Web/Database vật lý với các máy tính trực ca, các thiết bị đo lường phụ tải thông minh và hệ thống cảm biến nhiệt độ.<br><br>Độ bền cao, chạy ổn định 24/24 trong môi trường phòng máy biến áp có từ trường cao mà không bị suy hao tín hiệu.';
+            window.modalData.switch_other.label = 'Dự toán chi phí:';
+            window.modalData.switch_other.val = '~ 2.500.000đ / ~ 100 USD';
+        }
+    };
+
     function initLanguageSwitcher() {
-        // Cài đặt nút bấm cho cả 3 trang
         const switchers = document.querySelectorAll('.lang-switcher');
         switchers.forEach(sw => {
             sw.innerHTML = `
@@ -1060,28 +1027,21 @@
             `;
         });
 
-        // Lắng nghe sự kiện click cho các nút ngôn ngữ
-        document.body.addEventListener('click', (e) => {
-            if (e.target.classList.contains('lang-btn')) {
-                const lang = e.target.getAttribute('data-lang');
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
                 setLanguage(lang);
-            }
+            });
         });
-
-        // Khởi chạy ngôn ngữ lưu từ trước
-        setLanguage(currentLang);
     }
 
     if (document.readyState === 'loading') {
-        window.addEventListener('DOMContentLoaded', initLanguageSwitcher);
+        document.addEventListener('DOMContentLoaded', () => {
+            initLanguageSwitcher();
+            setLanguage(currentLang);
+        });
     } else {
         initLanguageSwitcher();
+        setLanguage(currentLang);
     }
-
-    // Xuất hàm global ra ngoài cho các trang sử dụng khi vẽ lại radar
-    window.setLanguage = setLanguage;
-    window.getCurrentLang = () => currentLang;
-    window.getTranslation = (key) => {
-        return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) ? TRANSLATIONS[currentLang][key] : '';
-    };
 })();
