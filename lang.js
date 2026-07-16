@@ -105,7 +105,7 @@
             "cmp_s3_con3": "Yêu cầu kết nối Internet liên tục 24/7, mạng chập chờn sẽ bị gián đoạn.",
             "cmp_s3_con4": "Tùy biến giao diện (UI) và logic nghiệp vụ phức tạp bị giới hạn bởi framework.",
             "cmp_s3_con5": "Cần quản trị viên IT cấu hình phân quyền và quản lý environment phức tạp.",
-            "cmp_s3_con6": "Quy trình phê duyệt mua license mất nhiều thời gian trong khối nhà nước.",
+            "cmp_s3_con6": "Quy trình phê duyệt mua license mất nhiều thời gian.",
             "cmp_s3_eval": "💡 <strong>Đánh giá nhanh:</strong> Phù hợp cho khối văn phòng tổng công ty đã mua sẵn Microsoft 365 doanh nghiệp, ngân sách dồi dào, cần tích hợp báo cáo nhiều phòng ban và kết nối Internet tốt.",
 
             // Slide 4: Web Platform detail
@@ -361,7 +361,7 @@
             "cmp_s3_con3": "Requires persistent 24/7 internet connection; dropouts freeze operations.",
             "cmp_s3_con4": "Advanced user interface tweaks and complex math logic are constrained by the framework.",
             "cmp_s3_con5": "Needs designated IT admins to manage environments, access rights, and connectors.",
-            "cmp_s3_con6": "Procurement and licensing approvals take substantial time in state-owned enterprises.",
+            "cmp_s3_con6": "Procurement and licensing approvals take substantial time.",
             "cmp_s3_eval": "💡 <strong>Quick Evaluation:</strong> Best suited for corporate headquarters with pre-purchased M365 suites, large IT budgets, and stable internet, focusing on multi-department reports.",
 
             // Slide 4: Web Platform detail
