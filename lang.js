@@ -267,7 +267,19 @@
             "rm_rep_tbl_total_gd2": "DỰ KIẾN NÂNG CẤP GIAI ĐOẠN 2",
             "rm_rep_tbl_desc": "* Ghi chú: Việc chia nhỏ lộ trình đầu tư máy chủ chuyên dụng Dell PowerEdge R260 làm 2 giai đoạn giúp tối ưu hóa ngân sách đầu tư ban đầu của trạm biến áp mới, đồng thời sẵn sàng mở rộng năng lực xử lý (High Availability hoặc phân tải dữ liệu) bất cứ lúc nào.",
             "rm_rep_slide_hdr": "HẠ TẦNG TRẠM BIẾN ÁP MỚI",
-            "rm_rep_slide_hint": "Click các dòng thiết bị bên trái để xem lý do kỹ thuật chi tiết"
+            "rm_rep_slide_hint": "Click các dòng thiết bị bên trái để xem lý do kỹ thuật chi tiết",
+
+            // Giá tiền Roadmap
+            "rm_price_server_val": "~ 62.000.000đ / ~ 2.500 USD <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* Giá tham khảo, có thể thay đổi</span>",
+            "rm_price_ups_val": "~ 17.000.000đ / ~ 680 USD <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* Giá tham khảo, có thể thay đổi</span>",
+            "rm_price_total_val": "~ 79.000.000đ / ~ 3.180 USD",
+            "rm_rep_price_server_gd1": "~ 62.000.000đ / ~ 2.500 USD",
+            "rm_rep_price_server_gd2": "~ 62.000.000đ / ~ 2.500 USD/máy",
+            "rm_rep_price_switch": "~ 2.500.000đ / ~ 100 USD",
+            "rm_rep_price_ups": "~ 17.000.000đ / ~ 680 USD",
+            "rm_rep_price_cables": "~ 1.200.000đ / ~ 50 USD",
+            "rm_rep_price_total_gd1": "~ 82.700.000đ / ~ 3.310 USD",
+            "rm_rep_price_total_gd2": "+ từ ~ 62.000.000đ / ~ 2.500 USD"
         },
         en: {
             // Header Links
@@ -533,7 +545,19 @@
             "rm_rep_tbl_total_gd2": "PHASE 2 UPGRADE ESTIMATE",
             "rm_rep_tbl_desc": "* Note: Splitting the Dell PowerEdge R260 server procurement into two phases optimizes initial capital budgets for new substations, while remaining fully ready for High Availability clustering.",
             "rm_rep_slide_hdr": "NEW SUBSTATION INFRASTRUCTURE",
-            "rm_rep_slide_hint": "Click equipment items on the left to read detailed technical reasons"
+            "rm_rep_slide_hint": "Click equipment items on the left to read detailed technical reasons",
+
+            // Roadmap pricing (USD)
+            "rm_price_server_val": "~ $2,500 <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* Reference price, subject to change</span>",
+            "rm_price_ups_val": "~ $680 <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* Reference price, subject to change</span>",
+            "rm_price_total_val": "~ $3,180",
+            "rm_rep_price_server_gd1": "~ $2,500",
+            "rm_rep_price_server_gd2": "~ $2,500 /unit",
+            "rm_rep_price_switch": "~ $100",
+            "rm_rep_price_ups": "~ $680",
+            "rm_rep_price_cables": "~ $50",
+            "rm_rep_price_total_gd1": "~ $3,330",
+            "rm_rep_price_total_gd2": "+ from ~ $2,500"
         },
         ja: {
             // Header Links
@@ -799,7 +823,19 @@
             "rm_rep_tbl_total_gd2": "第2段階 アップグレード参考予算",
             "rm_rep_tbl_desc": "* 注記：Dell PowerEdge R260サーバーの導入を2つのフェーズに分けることで、新規変電所における初期設備投資の負担を抑えつつ、将来的な高可用性（Active/Standby）やデータベース冗長化への拡張性を完全に確保できます。",
             "rm_rep_slide_hdr": "新規変電所設備インフラ",
-            "rm_rep_slide_hint": "左側の項目をクリックして、導入理由の詳細をお読みください"
+            "rm_rep_slide_hint": "左側の項目をクリックして、導入理由の詳細をお読みください",
+
+            // Roadmap pricing (Yen)
+            "rm_price_server_val": "約38万円 <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* 参考価格、変更の可能性あり</span>",
+            "rm_price_ups_val": "約10万円 <span style=\"font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;\">* 参考価格、変更の可能性あり</span>",
+            "rm_price_total_val": "約48万円",
+            "rm_rep_price_server_gd1": "約38万円",
+            "rm_rep_price_server_gd2": "約38万円 /台",
+            "rm_rep_price_switch": "約15,000円",
+            "rm_rep_price_ups": "約10万円",
+            "rm_rep_price_cables": "約7,500円",
+            "rm_rep_price_total_gd1": "約502,500円",
+            "rm_rep_price_total_gd2": "+ 約38万円から"
         }
     };
 
@@ -889,6 +925,12 @@
                 window.modalData.cables_other.desc = '<strong>Why buy?</strong><br>CAT6 shielded cabling prevents magnetic interference from high-voltage devices, ensuring reliable gigabit LAN communication.';
                 window.modalData.cables_other.label = 'Estimated Cost:';
                 window.modalData.cables_other.val = '~$50';
+
+                window.modalData.switch_other.tag = 'Other Substation · Network Switch';
+                window.modalData.switch_other.title = 'Gigabit 16-Port Network Switch';
+                window.modalData.switch_other.desc = 'Serves as the central LAN connection for the new station, linking physical Web/Database servers with shift computers, smart meters, and temperature sensors. High durability, runs 24/7 in high-voltage room electromagnetic environments without signal degradation.';
+                window.modalData.switch_other.label = 'Estimated Cost:';
+                window.modalData.switch_other.val = '~$100';
             } 
             else if (currentLang === 'ja') {
                 window.modalData.ssd.tag = '現場資材 · ストレージ';
@@ -938,6 +980,12 @@
                 window.modalData.cables_other.desc = '<strong>なぜ必要か？</strong><br>変電所の強磁界環境下でも外部ノイズを遮断し、安定したギガビットLAN通信品質を維持します。';
                 window.modalData.cables_other.label = '参考価格:';
                 window.modalData.cables_other.val = '約7,500円';
+
+                window.modalData.switch_other.tag = '他変電所展開 · ネットワークスイッチ';
+                window.modalData.switch_other.title = 'ギガビット 16ポート スイッチングハブ';
+                window.modalData.switch_other.desc = '新設変電所の構内LAN接続の中核として、物理Web/DBサーバー、シフト端末、スマートメーター、温度センサーを接続します。高電磁界環境でもノイズに強く、24時間安定稼働します。';
+                window.modalData.switch_other.label = '参考価格:';
+                window.modalData.switch_other.val = '約15,000円';
             }
             else {
                 // Tiếng Việt (mặc định)
@@ -967,27 +1015,33 @@
 
                 window.modalData.server_phase1.tag = 'Thiết bị nhân rộng · Giai đoạn 1';
                 window.modalData.server_phase1.title = '01 Máy chủ Dell PowerEdge R260 (Single)';
-                window.modalData.server_phase1.desc = '<strong>Tại sao cần mua ở Giai đoạn 1?</strong><br>Ở giai đoạn khởi chạy ban đầu cho trạm mới, đề xuất đầu tư trước <strong>01 Máy chủ vật lý chuyên dụng Dell PowerEdge R260</strong> để chạy độc lập toàn bộ lõi ứng dụng và cơ sở dữ liệu của trạm.<br><br>Cấu hình máy chủ Dell R260 bao gồm chip CPU Intel Xeon E-2468, 64GB RAM DDR5 ECC chống sửa lỗi và <strong>2x1TB SSD Enterprise</strong> cấu hình chạy RAID 1 vật lý qua card PERC.<br><br>Giải pháp này giúp trạm mới có một máy chủ hiệu năng cực cao, lưu dữ liệu tại chỗ, đảm bảo an toàn phần cứng ở mức tối đa mà vẫn giữ mức ngân sách đầu tư thiết bị ban đầu rất hợp lý (~62tr).';
+                window.modalData.server_phase1.desc = '<strong>Tại sao cần mua ở Giai đoạn 1?</strong><br>Ở giai đoạn khởi chạy ban đầu cho trạm mới, đề xuất đầu tư trước <strong>01 Máy chủ vật lý chuyên dụng Dell PowerEdge R260</strong> để chạy độc lập toàn bộ lõi ứng dụng và cơ sở dữ liệu của trạm.<br><br>Cấu hình máy chủ Dell R260 bao gồm chip CPU Intel Xeon E-2468, 64GB RAM DDR5 ECC chống sửa lỗi và <strong>2x1TB SSD Enterprise</strong> cấu hình chạy RAID 1 vật lý qua card PERC.<br><br>Giải pháp này giúp trạm mới có một máy chủ hiệu năng cực cao, lưu dữ liệu tại chỗ, đảm bảo an toàn phần cứng ở mức tối đa mà vẫn giữ mức ngân sách đầu tư thiết bị ban đầu rất hợp lý (~62tr / ~2.500 USD).';
                 window.modalData.server_phase1.label = 'Định mức đầu tư GĐ 1:';
-                window.modalData.server_phase1.val = '01 Máy chủ Dell R260 | ~ 62.000.000đ';
+                window.modalData.server_phase1.val = '01 Máy chủ Dell R260 | ~ 62.000.000đ / ~ 2.500 USD';
 
                 window.modalData.server_phase2.tag = 'Thiết bị nhân rộng · Giai đoạn 2';
                 window.modalData.server_phase2.title = 'Bổ sung máy chủ Dell PowerEdge R260 (HA)';
                 window.modalData.server_phase2.desc = '<strong>Tại sao cần mua ở Giai đoạn 2?</strong><br>Dựa vào yêu cầu thực tế và định hướng phát triển của <strong>Chủ đầu tư</strong>, Giai đoạn 2 sẽ tiến hành mua bổ sung thêm <strong>01 máy chủ Dell PowerEdge R260 chuyên dụng</strong> hoặc nhiều hơn.<br><br>Việc bổ sung thêm server này giúp nâng cấp hệ thống trạm biến áp lên mô hình <strong>High Availability (Dự phòng nóng Active/Standby)</strong>:<br><br>1. <strong>Chuyển mạch tự động:</strong> Khi một máy chủ chính gặp sự cố vật lý hoặc lỗi hệ thống, máy chủ phụ sẽ ngay lập tiếp quản vận hành trong vài giây, đảm bảo ca trực không bao giờ bị gián đoạn.<br>2. <strong>Phân tải cơ sở dữ liệu:</strong> Hỗ trợ phân tách các module vận hành nặng (như SCADA log, IoT thu thập số liệu liên tục) sang các máy chủ khác nhau nhằm bảo toàn tài nguyên xử lý tối ưu.';
                 window.modalData.server_phase2.label = 'Định mức đầu tư GĐ 2:';
-                window.modalData.server_phase2.val = 'Bổ sung thêm 01 hoặc nhiều server | ~ 62.000.000đ/máy';
+                window.modalData.server_phase2.val = 'Bổ sung thêm 01 hoặc nhiều server | ~ 62.000.000đ / ~ 2.500 USD/máy';
 
                 window.modalData.ups_other.tag = 'Thiết bị trạm khác · Nguồn dự phòng';
                 window.modalData.ups_other.title = 'Bộ lưu điện UPS Santak C3K (Tích hợp pin khô)';
                 window.modalData.ups_other.desc = '<strong>Tại sao cần mua?</strong><br>Để bảo vệ hệ thống server và switch mạng khỏi các sự cố mất điện AC tự dùng đột ngột tại trạm biến áp 110kV mới, đề xuất trang bị <strong>01 Bộ lưu điện UPS Santak Castle C3K (3000VA / 2700W)</strong>.<br><br><strong>Đặc điểm kỹ thuật:</strong><br>1. <strong>Pin khô tích hợp an toàn:</strong> Sử dụng hệ thống 6 bình ắc quy khô kín khí (VRLA AGM) tích hợp hoàn toàn bên trong thân máy. Đảm bảo an toàn phòng máy chủ, không rò rỉ hóa chất, không sinh khí ăn mòn và hoàn toàn không cần bảo trì định kỳ.<br>2. <strong>Công nghệ Online chuyển đổi kép:</strong> Lọc sạch nhiễu điện lưới, sụt áp hoặc quá áp đột ngột của trạm điện, cung cấp dòng điện sin chuẩn 220V ổn định cho server.<br>3. <strong>Thời gian lưu điện dự phòng:</strong> Đạt từ <strong>30 đến 45 phút</strong> khi mất điện hoàn toàn đối với tải Server + Switch. Đảm bảo thời gian an toàn tối đa để các tiến trình lưu dữ liệu hoàn tất và kỹ sư trực ca tắt máy chủ an toàn hoặc vận hành máy phát điện dự phòng.';
                 window.modalData.ups_other.label = 'Chi phí tham khảo:';
-                window.modalData.ups_other.val = '~ 17.000.000đ <span style="font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;">* Giá tham khảo trên mạng, có thể thay đổi</span>';
+                window.modalData.ups_other.val = '~ 17.000.000đ / ~ 680 USD <span style="font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;">* Giá tham khảo trên mạng, có thể thay đổi</span>';
 
                 window.modalData.cables_other.tag = 'Thiết bị trạm khác · Vật tư thi công';
                 window.modalData.cables_other.title = 'Vật tư cáp mạng CAT6 &amp; Thi công';
                 window.modalData.cables_other.desc = '<strong>Tại sao cần mua?</strong><br>Hạ tầng cáp mạng chuẩn CAT6 chất lượng cao cùng các đầu bấm hạt mạng RJ45, ống gen luồn bảo vệ cơ học.<br><br>Đặc biệt cáp CAT6 có vỏ bọc chống nhiễu từ trường cao tại phòng điều khiển trung tâm trạm biến áp, đảm bảo tín hiệu truyền dẫn đạt tốc độ gigabit (1Gbps) ổn định lâu dài, không bị nhiễu sóng xung quanh thiết bị điện cao áp.';
                 window.modalData.cables_other.label = 'Dự toán chi phí:';
-                window.modalData.cables_other.val = '~ 1.200.000đ';
+                window.modalData.cables_other.val = '~ 1.200.000đ / ~ 50 USD';
+
+                window.modalData.switch_other.tag = 'Thiết bị trạm khác · Switch mạng';
+                window.modalData.switch_other.title = 'Switch mạng Gigabit 16-Port';
+                window.modalData.switch_other.desc = 'Đóng vai trò là trung tâm kết nối LAN nội bộ của trạm mới, liên kết máy chủ Web/Database vật lý với các máy tính trực ca, các thiết bị đo lường phụ tải thông minh và hệ thống cảm biến nhiệt độ.<br><br>Độ bền cao, chạy ổn định 24/24 trong môi trường phòng máy biến áp có từ trường cao mà không bị suy hao tín hiệu.';
+                window.modalData.switch_other.label = 'Dự toán chi phí:';
+                window.modalData.switch_other.val = '~ 2.500.000đ / ~ 100 USD';
             }
         }
     }
