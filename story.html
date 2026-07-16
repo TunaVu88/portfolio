@@ -179,7 +179,7 @@
         <!-- Settings panel (ẩn mặc định, xuất hiện khi click cài đặt) -->
         <div class="slideshow-settings-panel" id="slideshowSettingsPanel">
             <div class="settings-panel-header">
-                <span>⏱ Thời gian mỗi slide</span>
+                <span data-i18n="story_slideshow_duration">⏱ Thời gian mỗi slide</span>
                 <button class="settings-close-btn" id="settingsCloseBtn">✕</button>
             </div>
             <div class="settings-presets">
@@ -191,7 +191,7 @@
                 <button class="preset-btn" data-seconds="30">30s</button>
             </div>
             <div class="settings-slider-row">
-                <span class="settings-slider-label">Tuỳ chỉnh:</span>
+                <span class="settings-slider-label" data-i18n="story_slideshow_custom">Tuỳ chỉnh:</span>
                 <input type="range" id="durationSlider" min="3" max="60" value="10" step="1" class="settings-slider">
                 <span id="durationDisplay" class="settings-slider-value">10s</span>
             </div>
@@ -260,6 +260,7 @@
             <div class="pres-date" id="presDate"></div>
             <div class="pres-title" id="presTitle"></div>
             <p class="pres-desc" id="presDesc"></p>
+            <div id="presTransitionContainer" style="text-align:center;margin-top:1.8rem;display:none;"></div>
         </div>
 
         <!-- Thanh điều khiển phía dưới overlay -->
@@ -302,14 +303,14 @@
         </div>
 
         <!-- Badge PAUSED -->
-        <div class="pres-paused-badge" id="presPausedBadge">⏸ TẠM DỪNG — nhấn Space để tiếp tục</div>
+        <div class="pres-paused-badge" id="presPausedBadge" data-i18n="story_pres_paused">⏸ TẠM DỪNG — nhấn Space để tiếp tục</div>
 
         <!-- Hint phím tắt -->
-        <div class="pres-hint">← → chuyển slide &nbsp;|&nbsp; <b>Space</b> tạm dừng &nbsp;|&nbsp; <b>ESC</b> thoát</div>
+        <div class="pres-hint" data-i18n="story_pres_hint">← → chuyển slide &nbsp;|&nbsp; <b>Space</b> tạm dừng &nbsp;|&nbsp; <b>ESC</b> thoát</div>
 
         <!-- Nút Slide Navigator góc dưới phải -->
         <div class="pres-nav-panel" id="presNavPanel">
-            <div class="pres-nav-panel-header">Dảnh sách slide</div>
+            <div class="pres-nav-panel-header" data-i18n="story_pres_list">Danh sách slide</div>
             <div class="pres-nav-list" id="presNavList"></div>
         </div>
         <button class="pres-nav-toggle-btn" id="presNavToggleBtn" title="Danh sách slide">
@@ -528,7 +529,7 @@
                     {
                         date:  'Tiếp Theo',
                         title: 'Đánh Giá & So Sánh Giải Pháp',
-                        desc:  'Để hiểu rõ hơn lý do lựa chọn hướng phát triển Web Platform tự vận hành thay vì các giải pháp khác, mời bạn tiếp tục xem phân tích chi tiết.<br><br><a href="compare.html" class="btn btn-primary btn-neon-blue" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.8rem;font-size:0.95rem;text-decoration:none;margin-top:0.8rem;box-shadow:0 0 15px rgba(0,240,255,0.4);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align:middle;margin-right:4px;"><path d="M18 20V10M12 20V4M6 20v-6"/></svg> Chuyển sang trang So Sánh</a>',
+                        desc:  'Để hiểu rõ hơn lý do lựa chọn hướng phát triển Web Platform tự vận hành thay vì các giải pháp khác, mời bạn tiếp tục xem phân tích chi tiết.',
                         bgImage: "url('assets/compare-web-dashboard.jpg')",
                         bgOpacity: 0.28,
                         bgGradient: 'linear-gradient(to bottom, rgba(10,12,16,0.50) 0%, rgba(10,12,16,0.78) 100%)',
@@ -647,6 +648,25 @@
                                 if (tDesc) txtDesc = tDesc;
                             }
 
+                            const transContainer = document.getElementById('presTransitionContainer');
+                            if (stage === STAGES - 1) {
+                                if (transContainer) {
+                                    transContainer.style.display = 'block';
+                                    const btnLabel = (window.getTranslation && window.getTranslation('story_btn_compare')) || 'So sánh giải pháp';
+                                    transContainer.innerHTML = `
+                                        <a href="compare.html" class="btn btn-primary btn-neon-blue" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.8rem;font-size:0.95rem;text-decoration:none;box-shadow:0 0 15px rgba(0,240,255,0.4);">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align:middle;margin-right:4px;"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                                            <span>${btnLabel}</span>
+                                        </a>
+                                    `;
+                                }
+                            } else {
+                                if (transContainer) {
+                                    transContainer.style.display = 'none';
+                                    transContainer.innerHTML = '';
+                                }
+                            }
+
                             presDate.innerHTML  = txtDate;
                             presTitle.innerHTML = txtTitle;
                             presDesc.innerHTML  = txtDesc;
@@ -753,7 +773,7 @@
                     btn.classList.add('is-playing');
                     playIcon.style.display  = 'none';
                     pauseIcon.style.display = '';
-                    label.textContent = 'Dừng';
+                    if (window.__updatePlayBtnLabel) window.__updatePlayBtnLabel();
 
                     overlay.style.display = 'flex';
                     requestAnimationFrame(() => overlay.classList.add('active'));
@@ -779,7 +799,7 @@
                     btn.classList.remove('is-playing');
                     playIcon.style.display  = '';
                     pauseIcon.style.display = 'none';
-                    label.textContent = 'Trình chiếu';
+                    if (window.__updatePlayBtnLabel) window.__updatePlayBtnLabel();
 
                     presPausedBadge.classList.remove('visible');
                     overlay.classList.remove('is-paused');
@@ -957,29 +977,7 @@
                     if (!navToggleBtn || !navPanel || !navList) return;
 
                     // Build danh sách từ STAGE_DATA
-                    STAGE_DATA.forEach((d, idx) => {
-                        const item = document.createElement('button');
-                        item.className = 'pres-nav-item';
-                        item.dataset.stage = idx;
-                        item.innerHTML = `
-                            <span class="pres-nav-num">${String(idx + 1).padStart(2, '0')}</span>
-                            <span class="pres-nav-info">
-                                <span class="pres-nav-date">${d.date}</span>
-                                <span class="pres-nav-title">${d.title}</span>
-                            </span>
-                            <span class="pres-nav-arrow">›</span>
-                        `;
-                        item.addEventListener('click', () => {
-                            if (!isPlaying) return;
-                            // Nếu đang pause → resume
-                            if (isPaused) resumeSlideshow();
-                            clearTimeout(slideTimer);
-                            cancelAnimationFrame(progressRAF);
-                            showStage(idx);
-                            closeNavPanel();
-                        });
-                        navList.appendChild(item);
-                    });
+                    if (window.__updateSlideNavList) window.__updateSlideNavList();
 
                     function openNavPanel() {
                         navPanel.classList.add('visible');
@@ -1020,7 +1018,59 @@
                     });
 
                     // Cập nhật active khi showStage được gọi
-                    const _origShowStage = showStage;
+                    // Xuất các hàm ra toàn cục để lang.js đồng bộ ngôn ngữ
+                window.__updatePlayBtnLabel = function() {
+                    if (typeof label !== 'undefined') {
+                        if (isPlaying) {
+                            label.textContent = (window.getTranslation && window.getTranslation('story_slideshow_stop')) || 'Dừng';
+                        } else {
+                            label.textContent = (window.getTranslation && window.getTranslation('story_slideshow_label')) || 'Trình chiếu';
+                        }
+                    }
+                };
+                window.__updateSlideNavList = function() {
+                    const navList = document.getElementById('presNavList');
+                    if (!navList) return;
+                    navList.innerHTML = '';
+                    STAGE_DATA.forEach((d, idx) => {
+                        let txtDate = d.date;
+                        let txtTitle = d.title;
+                        if (window.getTranslation) {
+                            const tDate = window.getTranslation('st' + idx + '_date');
+                            const tTitle = window.getTranslation('st' + idx + '_title');
+                            if (tDate) txtDate = tDate;
+                            if (tTitle) txtTitle = tTitle;
+                        }
+                        
+                        const item = document.createElement('button');
+                        item.className = 'pres-nav-item';
+                        item.dataset.stage = idx;
+                        item.innerHTML = `
+                            <span class="pres-nav-num">${String(idx + 1).padStart(2, '0')}</span>
+                            <span class="pres-nav-info">
+                                <span class="pres-nav-date">${txtDate}</span>
+                                <span class="pres-nav-title">${txtTitle}</span>
+                            </span>
+                            <span class="pres-nav-arrow">›</span>
+                        `;
+                        item.addEventListener('click', () => {
+                            if (!isPlaying) return;
+                            if (isPaused) resumeSlideshow();
+                            clearTimeout(slideTimer);
+                            cancelAnimationFrame(progressRAF);
+                            showStage(idx);
+                            if (typeof closeNavPanel === 'function') closeNavPanel();
+                        });
+                        navList.appendChild(item);
+                    });
+                    if (typeof updateNavActive === 'function') updateNavActive();
+                };
+                
+                // Khởi động chạy cập nhật nhãn lần đầu
+                window.__updatePlayBtnLabel();
+                window.__updateSlideNavList();
+
+                const _origShowStage = showStage;
                     // Patch: listen to renderStage timing để update nav
                     const _navObserver = new MutationObserver(() => updateNavActive());
                     const presDateEl = document.getElementById('presDate');

@@ -4,13 +4,10 @@
     // ============================================================================
     const TRANSLATIONS = {
         vi: {
-            // Header Links
             "nav_compare": "So Sánh",
             "nav_roadmap": "Hiện tại & Tương lai",
             "nav_story": "Hành Trình",
             "nav_home": "Trang Chủ",
-
-            // --- TRANG STORY.HTML ---
             "story_main_title": "HÀNH TRÌNH SỐ HOÁ 2026",
             "story_main_sub": "Lịch sử phát triển nền tảng quản lý và tối ưu vận hành từ con số 0<br>Tại Trạm Biến Áp 110kV Deep C2.",
             "story_sec_tech": "Tiêu chí kỹ thuật",
@@ -23,41 +20,36 @@
             "story_slideshow_duration": "⏱ Thời gian mỗi slide",
             "story_slideshow_custom": "Tuỳ chỉnh:",
             "story_slideshow_hint": "Phím ← → | 1-6 để nhảy slide | Space: Chạy/Tạm dừng | ESC: Thoát",
-
-            // Timeline details (Story.html)
             "st0_date": "Khởi điểm • Cuối Năm 2025",
             "st0_title": "Vấn Đề Phát Sinh & Ý Tưởng",
             "st0_desc": "Trong quá trình trực ca vận hành tại Trạm Biến Áp 110kV - Khu công nghiệp Deep C2, mình nhận thấy việc ghi chép các thông số sản lượng bằng sổ sách giấy và tổng hợp thủ công phát sinh nhiều bất cập: tốn thời gian và lãng phí văn phòng phẩm, dễ nhầm lẫn số liệu và khó khăn khi tra cứu lịch sử cũng như lập biểu đồ đánh giá. <br>Ý tưởng xây dựng một công cụ số hóa trạm điện bắt đầu nhen nhóm, và thúc đẩy chúng mình bước tay vào thực hiện.",
-            
             "st1_date": "Đầu Năm 2026",
             "st1_title": "Lên Kế Hoạch & Thiết Kế",
             "st1_desc": "Quyết định bắt tay vào thực hiện dự án. Nhóm phát triển - Mr Quang và mình - lên kế hoạch triển khai, chọn phương án thích hợp là sử dụng các ngôn ngữ trên nền tảng web. Từ đây, việc xây dựng chi tiết cho các module cốt lõi được phác hoạ dần: <br>Từ giao diện đăng nhập, tính năng nhập thông số trực quan, khả năng tạo các Lệnh Công Tác đã dần thành hình.",
-
             "st2_date": "Tháng 05/2026",
             "st2_title": "Phiên Bản Thử Nghiệm 0.1.0",
             "st2_desc": "Sau quá trình thiết kế và xây dựng ban đầu, nền tảng website đã khởi chạy với phiên bản 0.1.0dev, nhóm mình đã thực hiện thử nghiệm nội bộ, sửa các lỗi logic và tăng thêm một số tính năng cần thiết.",
-
             "st3_date": "Tháng 06/2026",
             "st3_title": "Vận hành thực tế phiên bản 0.2.0",
             "st3_desc": "Sau quá trình thử nghiệm nội bộ, nhóm đã xin cấp phép, chính thức triển khai với server thực tế. Với điều kiện ưu đãi khi có 01 máy chủ không sử dụng, có thể dùng ngay, nhóm mình thực hiện kết nối, chạy với tên miền tạm và chính thức<br>VẬN HÀNH BẢN THỰC NGHIỆM",
-
             "st4_date": "Tháng 07/2026",
             "st4_title": "Quá trình thực nghiệm",
             "st4_desc": "Nhận được rất nhiều ý kiến đóng góp trong quá trình thực nghiệm, nhóm đã thực hiện nâng cấp, cập nhật và sửa chữa các lỗi tồn tại, nhóm hi vọng nhận được thêm nhiều đóng góp hơn nữa để phát triển.<br>Song hành với đó, với nền tảng và kinh nghiệm đúc kết được từ các phiên bản trước,nhóm thực hiện kế hoạch thiết kế phiên bản 1.0.0 để tối ưu lại toàn bộ, mang lại trải nghiệm tốt hơn cho người dùng, cũng như thêm nhiều tính năng hữu ích khác.",
-
             "st5_date": "Hiện Tại",
             "st5_title": "Tối ưu hệ thống",
             "st5_desc": "Phiên bản 1.0 đang được hoàn thiện dần với giao diện bắt mắt hơn, tính năng ổn định và cơ sở dữ liệu được đồng bộ hơn. Cùng với đó, nhóm đã thực hiện tích hợp các biện pháp bảo mật cơ bản cần thiết để tránh các rủi ro ngoài ý muốn, cũng như bảo toàn dữ liệu vận hành. Trong thời gian tới, nhóm sẽ thực hiện lên phương án triển khai scaling server trong trường hợp cần thiết.",
-
-            // Thumbs
-            "thumb0_lbl": "Khởi điểm", "thumb0_desc": "Phát sinh",
-            "thumb1_lbl": "Kế hoạch", "thumb1_desc": "Thiết kế",
-            "thumb2_lbl": "v0.1.0",    "thumb2_desc": "Thử nghiệm",
-            "thumb3_lbl": "v0.2.0",    "thumb3_desc": "Vận hành",
-            "thumb4_lbl": "07/2026",   "thumb4_desc": "Thực tế",
-            "thumb5_lbl": "v1.0",      "thumb5_desc": "Tối ưu",
-
-            // --- TRANG COMPARE.HTML ---
+            "thumb0_lbl": "Khởi điểm",
+            "thumb0_desc": "Phát sinh",
+            "thumb1_lbl": "Kế hoạch",
+            "thumb1_desc": "Thiết kế",
+            "thumb2_lbl": "v0.1.0",
+            "thumb2_desc": "Thử nghiệm",
+            "thumb3_lbl": "v0.2.0",
+            "thumb3_desc": "Vận hành",
+            "thumb4_lbl": "07/2026",
+            "thumb4_desc": "Thực tế",
+            "thumb5_lbl": "v1.0",
+            "thumb5_desc": "Tối ưu",
             "cmp_slide1_tag": "// Giới thiệu mục tiêu",
             "cmp_slide1_title": "Cùng Nhau So Sánh & Lựa Chọn",
             "cmp_slide1_sub": "Chúng ta sẽ cùng nhau thực hiện so sánh các ứng dụng hiện được sử dụng với phương án triển khai web platform, nhằm đưa ra giải pháp vận hành tối ưu nhất cho Trạm biến áp 110kV.",
@@ -68,8 +60,6 @@
             "cmp_opt3_title": "Web Platform tự phát triển",
             "cmp_opt3_desc": "Hệ thống web tuỳ biến 100% theo nghiệp vụ trạm, lưu trữ dữ liệu tại chỗ, toàn quyền kiểm soát tính năng và mở rộng.",
             "cmp_hint_nav": "Phím ← → | 1-8 để nhảy slide | Space: Chạy/Tạm dừng | ESC: Thoát",
-
-            // Slide 2: Công cụ rời rạc detail
             "cmp_s2_tag": "📋 Phương án 01",
             "cmp_s2_title": "Công Cụ Rời Rạc",
             "cmp_s2_sub": "Excel, sổ tay trực, file Word/PDF riêng lẻ — đây là phương thức thủ công truyền thống đang được áp dụng tại các trạm vận hành hiện tại.",
@@ -87,8 +77,6 @@
             "cmp_s2_con5": "Không thể tra cứu nhanh lịch sử phụ tải hoặc vẽ biểu đồ xu hướng tự động.",
             "cmp_s2_con6": "Không có cơ chế phân quyền, rủi ro sửa đè dữ liệu lịch sử.",
             "cmp_s2_eval": "💡 <strong>Đánh giá nhanh:</strong> Chỉ phù hợp khi quy mô vận hành rất nhỏ, ít ca trực trực tiếp và không có nhu cầu khai thác dữ liệu dài hạn hoặc phân tích tự động.",
-
-            // Slide 3: Power Platform detail
             "cmp_s3_tag": "🔷 Phương án 02",
             "cmp_s3_title": "Microsoft Power Platform",
             "cmp_s3_sub": "Bộ công cụ low-code (Power Apps, Power BI, Power Automate) chạy trên hệ sinh thái Microsoft Cloud của doanh nghiệp.",
@@ -107,8 +95,6 @@
             "cmp_s3_con5": "Cần quản trị viên IT cấu hình phân quyền và quản lý environment phức tạp.",
             "cmp_s3_con6": "Quy trình phê duyệt mua license mất nhiều thời gian trong khối nhà nước.",
             "cmp_s3_eval": "💡 <strong>Đánh giá nhanh:</strong> Phù hợp cho khối văn phòng tổng công ty đã mua sẵn Microsoft 365 doanh nghiệp, ngân sách dồi dào, cần tích hợp báo cáo nhiều phòng ban và kết nối Internet tốt.",
-
-            // Slide 4: Web Platform detail
             "cmp_s4_tag": "🌐 Phương án chọn",
             "cmp_s4_title": "Web Platform Tự Phát Triển",
             "cmp_s4_sub": "Hệ thống web tùy biến 100% được xây dựng đúng theo quy trình vận hành thực tế của trạm điện.",
@@ -126,8 +112,6 @@
             "cmp_s4_con3": "Nhóm vận hành phải tự duy trì và khắc phục các lỗi phát sinh trong thực tế.",
             "cmp_s4_con4": "Không có tổng đài hỗ trợ kỹ thuật 24/7 từ nhà phân phối lớn bên ngoài.",
             "cmp_s4_eval": "💡 <strong>Đánh giá nhanh:</strong> Là phương án tối ưu nhất cho trạm biến áp vận hành độc lập, đòi hỏi tính bảo mật dữ liệu cao, tùy biến quy trình sâu và tối ưu hóa ngân sách vận hành.",
-
-            // Slide 5: Radar
             "radar_axis_data": "Kiểm soát DL",
             "radar_axis_custom": "Tuỳ biến",
             "radar_axis_dev": "Phát triển DL",
@@ -141,64 +125,68 @@
             "cmp_radar_score_power": "Power",
             "cmp_radar_score_web": "Web",
             "cmp_radar_desc": "💡 Biểu đồ thể hiện ưu thế vượt trội của <strong>Web Platform</strong> ở các mặt cốt lỗi: kiểm soát dữ liệu, khả năng tuỳ biến nghiệp vụ sâu và tính bảo mật tuyệt đối khi chạy trong LAN của trạm điện.",
-
-            // Slide 6: Tech improvement process
             "cmp_s6_tag": "📈 Quy trình & Hiệu quả",
             "cmp_s6_title": "Hiệu Quả Cải Tiến Công Nghệ",
             "cmp_s6_sub": "So sánh định lượng thời gian xử lý công việc và tỷ lệ sai sót giữa phương pháp cũ và mới:",
             "cmp_s6_bar_title": "Thời gian hoàn thành tác vụ (Phút) &amp; Tỷ lệ sai số (%)",
             "cmp_s6_desc": "📊 Biểu đồ thể hiện thời gian lập báo cáo giảm từ <strong>120 phút xuống còn 5 phút</strong> (giảm 95.8%), tỷ lệ nhập liệu sai lệch logic giảm từ <strong>15% về mức 0%</strong> nhờ bộ cảnh báo logic tự động chặn số liệu vô lý.",
-
-            // Slide 7: Compare Table
             "tbl_hdr_criteria": "Tiêu chí kỹ thuật",
             "tbl_hdr_discrete": "📋 Công cụ rời rạc",
             "tbl_hdr_power": "🔷 Power Platform",
             "tbl_hdr_web": "🌐 Web Platform",
-            "tbl_c1": "Chi phí ban đầu", "tbl_c1_d": "Rất thấp", "tbl_c1_p": "Cao (license)", "tbl_c1_w": "Trung bình",
-            "tbl_c2": "Chi phí vận hành / năm", "tbl_c2_d": "Gần như 0", "tbl_c2_p": "Cao (per user)", "tbl_c2_w": "Thấp",
-            "tbl_c3": "Tuỳ biến nghiệp vụ", "tbl_c3_d": "Hạn chế", "tbl_c3_p": "Có giới hạn", "tbl_c3_w": "100%",
-            "tbl_c4": "Dữ liệu lưu tại chỗ", "tbl_c4_d": "Có", "tbl_c4_p": "Cloud MS", "tbl_c4_w": "Server nội bộ",
-            "tbl_c5": "Báo cáo tự động", "tbl_c5_d": "Thủ công", "tbl_c5_p": "Power Automate", "tbl_c5_w": "Excel/PDF tự động",
-            "tbl_c6": "Hoạt động offline", "tbl_c6_d": "Hoàn toàn", "tbl_c6_p": "Cần internet", "tbl_c6_w": "LAN nội bộ",
-            "tbl_c7": "Thời gian triển khai", "tbl_c7_d": "Ngay lập tức", "tbl_c7_p": "1–3 tháng", "tbl_c7_w": "3–6 tháng",
-            "tbl_c8": "Phân quyền ca trực", "tbl_c8_d": "Không có", "tbl_c8_p": "Có sẵn", "tbl_c8_w": "Chi tiết (Role)",
-
-            // Slide 8: Conclusion
+            "tbl_c1": "Chi phí ban đầu",
+            "tbl_c1_d": "Rất thấp",
+            "tbl_c1_p": "Cao (license)",
+            "tbl_c1_w": "Trung bình",
+            "tbl_c2": "Chi phí vận hành / năm",
+            "tbl_c2_d": "Gần như 0",
+            "tbl_c2_p": "Cao (per user)",
+            "tbl_c2_w": "Thấp",
+            "tbl_c3": "Tuỳ biến nghiệp vụ",
+            "tbl_c3_d": "Hạn chế",
+            "tbl_c3_p": "Có giới hạn",
+            "tbl_c3_w": "100%",
+            "tbl_c4": "Dữ liệu lưu tại chỗ",
+            "tbl_c4_d": "Có",
+            "tbl_c4_p": "Cloud MS",
+            "tbl_c4_w": "Server nội bộ",
+            "tbl_c5": "Xuất báo cáo form mẫu",
+            "tbl_c5_d": "Thủ công hoàn toàn",
+            "tbl_c5_p": "Power BI (khác form mẫu)",
+            "tbl_c5_w": "Tự động Excel/PDF 100%",
+            "tbl_c6": "Tích hợp mail/Teams công ty",
+            "tbl_c6_d": "Không có",
+            "tbl_c6_p": "Sẵn có (Điểm mạnh lớn)",
+            "tbl_c6_w": "Lập trình bổ sung được",
+            "tbl_c7": "Hoạt động khi mất Internet",
+            "tbl_c7_d": "Bình thường",
+            "tbl_c7_p": "Không thể hoạt động",
+            "tbl_c7_w": "Bình thường (LAN)",
+            "tbl_c8": "Chi phí vận hành dài hạn",
+            "tbl_c8_d": "Gần như bằng 0",
+            "tbl_c8_p": "Cao (theo đầu user)",
+            "tbl_c8_w": "Chỉ chi phí server",
             "cmp_s8_tag": "🏆 Kết luận",
             "cmp_s8_title": "Lý Do Chọn Web Platform",
             "cmp_s8_sub": "Tối ưu hóa quy trình ca trực và đảm bảo an toàn thông tin là ưu tiên hàng đầu tại trạm biến áp:",
-            "tbl_c5": "Xuất báo cáo form mẫu", "tbl_c5_d": "Thủ công hoàn toàn", "tbl_c5_p": "Power BI (khác form mẫu)", "tbl_c5_w": "Tự động Excel/PDF 100%",
-            "tbl_c6": "Tích hợp mail/Teams công ty", "tbl_c6_d": "Không có", "tbl_c6_p": "Sẵn có (Điểm mạnh lớn)", "tbl_c6_w": "Lập trình bổ sung được",
-            "tbl_c7": "Hoạt động khi mất Internet", "tbl_c7_d": "Bình thường", "tbl_c7_p": "Không thể hoạt động", "tbl_c7_w": "Bình thường (LAN)",
-            "tbl_c8": "Chi phí vận hành dài hạn", "tbl_c8_d": "Gần như bằng 0", "tbl_c8_p": "Cao (theo đầu user)", "tbl_c8_w": "Chỉ chi phí server",
-            "tbl_c9": "Độ phù hợp nghiệp vụ trạm", "tbl_c9_d": "Thấp", "tbl_c9_p": "Trung bình", "tbl_c9_w": "Cao nhất ★★★",
+            "tbl_c9": "Độ phù hợp nghiệp vụ trạm",
+            "tbl_c9_d": "Thấp",
+            "tbl_c9_p": "Trung bình",
+            "tbl_c9_w": "Cao nhất ★★★",
             "compare_tbl_note_power": "ℹ️ <strong style=\"color:var(--neon-purple);\">Đặc biệt:</strong> Ghi nhận Power Platform đã liên kết sẵn với mail và Teams của tổng công ty (đây là điểm mạnh sẵn có rất tiện dụng).",
             "compare_tbl_note_web": "💡 <strong style=\"color:var(--neon-blue);\">Lộ trình:</strong> Web Platform sau khi chạy ổn định hoàn toàn có thể kết nối với SMTP hoặc API Webhook để tự động gửi thông báo qua mail/Teams của trạm.",
-
-            // Slide 8: Conclusion
-            "cmp_s8_tag": "🏆 Kết luận",
-            "cmp_s8_title": "Lý Do Chọn Web Platform",
-            "cmp_s8_sub": "Tối ưu hóa quy trình ca trực và đảm bảo an toàn thông tin là ưu tiên hàng đầu tại trạm biến áp:",
             "cmp_s8_cp1_title": "Làm chủ công nghệ và an toàn thông tin tại chỗ (On-premises):",
             "cmp_s8_cp1_desc": "Dữ liệu sản lượng điện, sơ đồ phương thức vận hành và Lệnh Công Tác được lưu trực tiếp trên ổ cứng máy chủ đặt tại trạm. Hoàn toàn không chuyển dữ liệu ra ngoài Internet, triệt tiêu rủi ro rò rỉ dữ liệu hoặc mất quyền kiểm soát do sự cố đường truyền mạng quốc tế.",
             "cmp_s8_cp2_title": "Tùy biến nghiệp vụ sâu và bám sát thực tế ca trực:",
             "cmp_s8_cp2_desc": "Giao diện và các cảnh báo logic được thiết kế riêng theo quy trình đặc thù của Trạm 110kV Deep C2, điều mà các công cụ đóng gói sẵn hay low-code rất khó tùy biến sâu nếu không mua các gói tích hợp đắt đỏ.",
             "cmp_s8_cp3_title": "Hiệu quả tài chính vượt trội cho vòng đời sản phẩm lâu dài:",
             "cmp_s8_cp3_desc": "Không phát sinh chi phí mua bản quyền hàng tháng trên đầu người như Power Platform. Hệ thống chạy ổn định lâu dài trên hạ tầng máy chủ Dell R260 sẵn có giúp giảm chi phí vận hành lâu dài về mức tối thiểu.",
-
-
-            // --- TRANG ROADMAP.HTML ---
-            // Road map bullets
             "rm_b1_title": "Tận dụng 01 máy chủ server vật lý cũ có sẵn:",
             "rm_b1_desc": "Trạm hiện đang có dư thừa 01 thiết bị máy chủ server không còn sử dụng nhưng cấu hình vẫn hoạt động ổn định và bền bỉ. Nhóm phát triển đã tận dụng ngay máy chủ này để cài đặt cơ sở dữ liệu và vận hành ứng dụng trực tiếp (On-premises). Việc này giúp hệ thống được vận hành thực tế ngay lập tức mà không cần tốn thời gian chờ đợi phê duyệt mua sắm phần cứng mới, đồng thời giảm thiểu chi phí đầu tư ban đầu về mức 0 đồng.",
-            
             "rm_b2_title": "Hạ tầng cáp LAN nội bộ kết nối sẵn mượt mà:",
             "rm_b2_desc": "Máy chủ thử nghiệm được đặt trực tiếp và kết nối an toàn vào tủ mạng switch trung tâm của trạm biến áp. Nhờ vậy, tất cả các máy tính của kỹ sư trực ca và máy tính trưởng trạm đều dễ dàng truy cập cổng thông tin với tốc độ truyền tải cực cao (Gigabit LAN), ổn định tuyệt đối và hoàn toàn không phụ thuộc vào kết nối Internet ra bên ngoài.",
-            
             "rm_b3_title": "Môi trường thực nghiệm và tương tác ca trực trực tiếp:",
             "rm_b3_desc": "Lợi thế lớn nhất là hệ thống đặt ngay tại phòng điều khiển trung tâm trạm. Nhóm phát triển (sự phối hợp chặt chẽ giữa Mr Quang và đội ngũ phát triển) có cơ hội làm việc và lấy phản hồi trực tiếp từ các kỹ sư vận hành trong suốt các ca trực 24/7. Điều này giúp nhanh chóng tinh chỉnh các form nhập liệu, logic tính hao hụt điện năng và cơ chế cảnh báo logic để bám sát 100% quy trình vận hành thực tế của trạm.",
-
-            // Slide 2: Equipment details (Roadmap)
             "rm_s2_tag": "// Nhu cầu vật tư hiện tại",
             "rm_s2_title": "Vật Tư Đề Xuất Mua Bổ Sung",
             "rm_s2_sub": "<strong style=\"color:var(--neon-pink);\">Tương tác trực quan:</strong> Nhấn vào từng vật tư bên dưới để xem lý do kỹ thuật bắt buộc và mô phỏng 3D đối tượng:",
@@ -212,18 +200,6 @@
             "rm_s2_i4_desc": "Tên miền chính thức dự kiến <strong>dcgeportal.vn</strong> để định danh và chuyên nghiệp hóa hệ thống.",
             "rm_s2_slide_hdr": "VẬT TƯ ĐỀ XUẤT MUA SẮM",
             "rm_s2_slide_hint": "Click các vật tư bên trái để xem lý do kỹ thuật chi tiết",
-
-            // Slide 3: scaling Server (Roadmap)
-            "rm_scale_tag": "// Định hướng tương lai · Hệ thống mở rộng",
-            "rm_scale_title": "Mở Rộng Mô Hình & Scaling Server/UPS",
-            "rm_scale_sub": "Thiết kế nâng cao sử dụng máy chủ chuyên dụng Dell R260 kết hợp cùng bộ lưu điện an toàn Santak C3K:",
-            "rm_s2_i3_desc": "Tự động hóa thông báo lỗi, gửi báo cáo và phê duyệt từ xa Lệnh Công Tác qua e-mail.",
-            "rm_s2_i4_title": "Địa chỉ Domain riêng chuyên nghiệp",
-            "rm_s2_i4_desc": "Tên miền chính thức dự kiến <strong>dcgeportal.vn</strong> để định danh và chuyên nghiệp hóa hệ thống.",
-            "rm_s2_slide_hdr": "VẬT TƯ ĐỀ XUẤT MUA SẮM",
-            "rm_s2_slide_hint": "Click các vật tư bên trái để xem lý do kỹ thuật chi tiết",
-
-            // Slide 3: scaling Server (Roadmap)
             "rm_scale_tag": "// Định hướng tương lai · Hệ thống mở rộng",
             "rm_scale_title": "Mở Rộng Mô Hình & Scaling Server/UPS",
             "rm_scale_sub": "Thiết kế nâng cao sử dụng máy chủ chuyên dụng Dell R260 kết hợp cùng bộ lưu điện an toàn Santak C3K:",
@@ -245,8 +221,6 @@
             "rm_scale_tbl_server_price": "Giá tham khảo máy chủ",
             "rm_scale_tbl_ups_price": "Giá tham khảo UPS",
             "rm_scale_tbl_total": "Tổng gói (Server + UPS)",
-
-            // Slide 4: replication (Roadmap)
             "rm_rep_tag": "// Triển khai diện rộng",
             "rm_rep_title": "Nhân Rộng Mô Hình Cho Trạm Khác",
             "rm_rep_sub": "Click vào các dòng thiết bị trong bảng dưới đây để xem lý do kỹ thuật chi tiết và hình ảnh solo trong suốt:",
@@ -267,53 +241,72 @@
             "rm_rep_tbl_total_gd2": "DỰ KIẾN NÂNG CẤP GIAI ĐOẠN 2",
             "rm_rep_tbl_desc": "* Ghi chú: Việc chia nhỏ lộ trình đầu tư máy chủ chuyên dụng Dell PowerEdge R260 làm 2 giai đoạn giúp tối ưu hóa ngân sách đầu tư ban đầu của trạm biến áp mới, đồng thời sẵn sàng mở rộng năng lực xử lý (High Availability hoặc phân tải dữ liệu) bất cứ lúc nào.",
             "rm_rep_slide_hdr": "HẠ TẦNG TRẠM BIẾN ÁP MỚI",
-            "rm_rep_slide_hint": "Click các dòng thiết bị bên trái để xem lý do kỹ thuật chi tiết"
+            "rm_rep_slide_hint": "Click các dòng thiết bị bên trái để xem lý do kỹ thuật chi tiết",
+            "cmp_s9_tag": "➡️ Bước Tiếp Theo",
+            "cmp_s9_title": "Kế Hoạch &amp; Lộ Trình Chi Tiết",
+            "cmp_s9_sub": "Để xem kế hoạch mua sắm trang thiết bị vật tư hiện tại và định hướng nhân rộng hệ thống, xin mời bạn chuyển tiếp sang phần Lộ trình.",
+            "cmp_s6_bar1": "1. Mức độ kiểm soát dữ liệu &amp; Bảo mật nội bộ (On-premises)",
+            "cmp_s6_bar2": "2. Khả năng tuỳ biến giao diện &amp; logic nghiệp vụ đặc thù",
+            "cmp_s6_bar3": "3. Khả năng phát triển, mở rộng tính năng độc lập",
+            "cmp_s6_bar4": "4. Hiệu quả chi phí vận hành lâu dài (Điểm cao = Tiết kiệm hơn)",
+            "rm_main_title": "Hạ tầng &amp; Lợi thế triển khai",
+            "rm_main_sub": "Tận dụng tối đa tài nguyên phần cứng sẵn có tại trạm 110kV để triển khai thử nghiệm hiệu quả.",
+            "rm_panel_title": "Chi tiết tận dụng hạ tầng tại trạm",
+            "rm_panel_intro": "Trong quá trình triển khai tại trạm 110kV Deep C2, nhóm phát triển đã tận dụng các lợi thế hạ tầng sẵn có:",
+            "story_slideshow_stop": "Dừng",
+            "story_pres_paused": "⏸ TẠM DỪNG — nhấn Space để tiếp tục",
+            "story_pres_hint": "← → chuyển slide &nbsp;|&nbsp; <b>Space</b> tạm dừng &nbsp;|&nbsp; <b>ESC</b> thoát",
+            "story_pres_list": "Danh sách slide",
+            "rm_price_server_val": "~ 62.000.000đ / ~ 2.500 USD",
+            "rm_price_ups_val": "~ 17.000.000đ / ~ 680 USD",
+            "rm_price_total_val": "~ 79.000.000đ / ~ 3.180 USD",
+            "rm_rep_price_server_gd1": "~ 62.000.000đ / ~ 2.500 USD",
+            "rm_rep_price_server_gd2": "~ 62.000.000đ / ~ 2.500 USD / máy",
+            "rm_rep_price_switch": "~ 2.500.000đ / ~ 100 USD",
+            "rm_rep_price_ups": "~ 17.000.000đ / ~ 680 USD",
+            "rm_rep_price_cables": "~ 1.200.000đ / ~ 50 USD",
+            "rm_rep_price_total_gd1": "~ 82.700.000đ / ~ 3.330 USD",
+            "rm_rep_price_total_gd2": "+ từ ~ 62.000.000đ / + từ ~ 2.500 USD",
+            "st6_date": "Tiếp Theo",
+            "st6_title": "Đánh Giá &amp; So Sánh Giải Pháp",
+            "st6_desc": "Để hiểu rõ hơn lý do lựa chọn hướng phát triển Web Platform tự vận hành thay vì các giải pháp khác, mời bạn tiếp tục xem phân tích chi tiết."
         },
         en: {
-            // Header Links
             "nav_compare": "Compare",
             "nav_roadmap": "Present & Future",
             "nav_story": "Journey",
             "nav_home": "Home",
-
-            // --- TRANG STORY.HTML ---
             "story_main_title": "DIGITALIZATION JOURNEY 2026",
             "st0_date": "Beginning • Late 2025",
             "st0_title": "Issues & Ideas",
             "st0_desc": "During shifts at Deep C2 110kV Substation, I noticed that manual records and Excel sheets caused issues: time-consuming, prone to errors, and difficult to query history. The idea of a digitalization portal emerged.",
-            
             "st1_date": "Early 2026",
             "st1_title": "Planning & Design",
             "st1_desc": "Decided to build the project. The dev team - Mr. Quang and me - planned the layout, choosing web technologies. Core modules (login, load logs, Work Orders) began taking shape.",
-            
             "st2_date": "May 2026",
             "st2_title": "Beta Version 0.1.0",
             "st2_desc": "The website was launched in version 0.1.0dev. We tested it internally, fixed calculation bugs, and added basic features.",
-            
             "st3_date": "June 2026",
             "st3_title": "Go Live Version 0.2.0",
             "st3_desc": "After internal testing, we got approval to deploy on a physical server at the station. We set up local LAN access and began real shifts operations.",
-            
             "st4_date": "July 2026",
             "st4_title": "Trial and Optimization",
             "st4_desc": "Receiving valuable feedback from shifts, the team upgraded, resolved database bugs, and optimized layouts. We look forward to more suggestions to continue improvement.<br>Simultaneously, leveraging lessons from early runs, we planned the major 1.0.0 release to optimize UX/UI and include advanced calculations.",
-            "st4_date": "July 2026",
-            "st4_title": "Trial and Optimization",
-            "st4_desc": "Receiving valuable feedback from shifts, the team upgraded, resolved database bugs, and optimized layouts. We look forward to more suggestions to continue improvement.<br>Simultaneously, leveraging lessons from early runs, we planned the major 1.0.0 release to optimize UX/UI and include advanced calculations.",
-
             "st5_date": "Present",
             "st5_title": "System Stabilization",
             "st5_desc": "Version 1.0 is currently being polished with a sleek dashboard, stable network connections, and database sync. We implemented baseline cybersecurity policies to prevent data loss. The next step is drafting server scaling plans for expansion.",
-
-            // Thumbs
-            "thumb0_lbl": "Start",       "thumb0_desc": "Ideation",
-            "thumb1_lbl": "Planning",    "thumb1_desc": "Design",
-            "thumb2_lbl": "v0.1.0",      "thumb2_desc": "Beta Run",
-            "thumb3_lbl": "v0.2.0",      "thumb3_desc": "Go Live",
-            "thumb4_lbl": "07/2026",     "thumb4_desc": "Production",
-            "thumb5_lbl": "v1.0",        "thumb5_desc": "Optimize",
-
-            // --- TRANG COMPARE.HTML ---
+            "thumb0_lbl": "Start",
+            "thumb0_desc": "Ideation",
+            "thumb1_lbl": "Planning",
+            "thumb1_desc": "Design",
+            "thumb2_lbl": "v0.1.0",
+            "thumb2_desc": "Beta Run",
+            "thumb3_lbl": "v0.2.0",
+            "thumb3_desc": "Go Live",
+            "thumb4_lbl": "07/2026",
+            "thumb4_desc": "Production",
+            "thumb5_lbl": "v1.0",
+            "thumb5_desc": "Optimize",
             "cmp_slide1_tag": "// Objective Overview",
             "cmp_slide1_title": "Compare & Select Together",
             "cmp_slide1_sub": "We will compare currently used manual tools with the proposed web platform to find the optimal operations solution for the 110kV Substation.",
@@ -324,8 +317,6 @@
             "cmp_opt3_title": "Self-developed Web Platform",
             "cmp_opt3_desc": "100% customized web app built around real substation shifts, utilizing local servers for data control and flexibility.",
             "cmp_hint_nav": "Arrow keys | 1-8 quick navigation | Space: Play/Pause | ESC: Close Presentation",
-
-            // Slide 2: Công cụ rời rạc detail
             "cmp_s2_tag": "📋 Option 01",
             "cmp_s2_title": "Isolated Tools",
             "cmp_s2_sub": "Excel sheets, paper shift logs, fragmented Word/PDF files - the traditional manual methods used at most operations stations.",
@@ -343,8 +334,6 @@
             "cmp_s2_con5": "Cannot easily query historical trends or generate automatic load graphs.",
             "cmp_s2_con6": "No user access control; risk of historical records being modified.",
             "cmp_s2_eval": "💡 <strong>Quick Evaluation:</strong> Only viable for very small scale operations with few shifts, where historical data mining is not needed.",
-
-            // Slide 3: Power Platform detail
             "cmp_s3_tag": "🔷 Option 02",
             "cmp_s3_title": "Microsoft Power Platform",
             "cmp_s3_sub": "Low-code application suite (Power Apps, Power BI, Power Automate) hosted on the corporate Microsoft cloud environment.",
@@ -363,8 +352,6 @@
             "cmp_s3_con5": "Needs designated IT admins to manage environments, access rights, and connectors.",
             "cmp_s3_con6": "Procurement and licensing approvals take substantial time in state-owned enterprises.",
             "cmp_s3_eval": "💡 <strong>Quick Evaluation:</strong> Best suited for corporate headquarters with pre-purchased M365 suites, large IT budgets, and stable internet, focusing on multi-department reports.",
-
-            // Slide 4: Web Platform detail
             "cmp_s4_tag": "🌐 Chosen Option",
             "cmp_s4_title": "Self-developed Web Platform",
             "cmp_s4_sub": "A 100% customized web application engineered strictly around real shift operations of the substation.",
@@ -382,8 +369,6 @@
             "cmp_s4_con3": "The internal team must maintain the host, database, and handle bug fixes.",
             "cmp_s4_con4": "No third-party 24/7 technical hotline from global software vendors.",
             "cmp_s4_eval": "💡 <strong>Quick Evaluation:</strong> The optimal choice for standalone substations requiring high data confidentiality, deep workflow integration, and minimized operating budgets.",
-
-            // Slide 5: Radar axis & details
             "radar_axis_data": "Data Control",
             "radar_axis_custom": "Customization",
             "radar_axis_dev": "Independent Dev",
@@ -397,48 +382,55 @@
             "cmp_radar_score_power": "Power",
             "cmp_radar_score_web": "Web App",
             "cmp_radar_desc": "💡 The chart highlights the superior advantages of the <strong>Web Platform</strong>: complete data control, deep workflow customization, and absolute local security in the substation LAN.",
-
-            // Slide 6: Tech improvement process
             "cmp_s6_tag": "📈 Workflow & Efficiency",
             "cmp_s6_title": "Technology Improvement Impact",
             "cmp_s6_sub": "Quantitative comparison of task execution time and error rates between old and new methods:",
             "cmp_s6_bar_title": "Task Completion Time (Min) &amp; Error Rate (%)",
             "cmp_s6_desc": "📊 The chart illustrates that report preparation time dropped from <strong>120 mins to 5 mins</strong> (a 95.8% reduction), while logical data entry errors fell from <strong>15% to 0%</strong> due to automated validation rules.",
-
-            // Slide 7: Compare Table
             "tbl_hdr_criteria": "Technical Criteria",
             "tbl_hdr_discrete": "📋 Isolated Tools",
             "tbl_hdr_power": "🔷 Power Platform",
             "tbl_hdr_web": "🌐 Web Platform",
-            "tbl_c1": "Initial Cost", "tbl_c1_d": "Very Low", "tbl_c1_p": "High (licensing)", "tbl_c1_w": "Medium",
-            "tbl_c2": "Operating Cost / Year", "tbl_c2_d": "Near 0", "tbl_c2_p": "High (per user)", "tbl_c2_w": "Low",
-            "tbl_c3": "Workflow Customization", "tbl_c3_d": "Restricted", "tbl_c3_p": "Limited", "tbl_c3_w": "100%",
-            "tbl_c4": "On-premises Storage", "tbl_c4_d": "Yes", "tbl_c4_p": "Cloud MS", "tbl_c4_w": "Local Server",
-            "tbl_c5": "Automated Reports", "tbl_c5_d": "Manual", "tbl_c5_p": "Power Automate", "tbl_c5_w": "Auto Excel/PDF",
-            "tbl_c6": "Offline Capability", "tbl_c6_d": "Fully Offline", "tbl_c6_p": "Needs Internet", "tbl_c6_w": "Local LAN",
-            "tbl_c7": "Deployment Time", "tbl_c7_d": "Instant", "tbl_c7_p": "1-3 Months", "tbl_c7_w": "3-6 Months",
-            "tbl_c8": "Shift Access Rights", "tbl_c8_d": "None", "tbl_c8_p": "Standard", "tbl_c8_w": "Granular Roles",
-
-            // Slide 8: Conclusion
+            "tbl_c1": "Data Control &amp; Ownership",
+            "tbl_c1_d": "Local client machine",
+            "tbl_c1_p": "MS Cloud (Overseas)",
+            "tbl_c1_w": "Direct local server",
+            "tbl_c2": "Internal Data Security",
+            "tbl_c2_d": "Depends on client PC",
+            "tbl_c2_p": "Microsoft Cloud",
+            "tbl_c2_w": "Fully within LAN",
+            "tbl_c3": "UI &amp; Logic Customization",
+            "tbl_c3_d": "Very restricted",
+            "tbl_c3_p": "Power Apps template",
+            "tbl_c3_w": "100% customized",
+            "tbl_c4": "Independent Extension",
+            "tbl_c4_d": "Not possible",
+            "tbl_c4_p": "Requires MS license",
+            "tbl_c4_w": "Free upgrades",
+            "tbl_c5": "Report Formatting",
+            "tbl_c5_d": "Fully manual",
+            "tbl_c5_p": "Power BI (generic format)",
+            "tbl_c5_w": "100% auto Excel/PDF",
+            "tbl_c6": "Mail/Teams Integration",
+            "tbl_c6_d": "None",
+            "tbl_c6_p": "Out of box (Major pro)",
+            "tbl_c6_w": "Integrable via API",
+            "tbl_c7": "Offline Operation",
+            "tbl_c7_d": "Normal",
+            "tbl_c7_p": "Fails without internet",
+            "tbl_c7_w": "Normal (LAN)",
+            "tbl_c8": "Long-term Operation Cost",
+            "tbl_c8_d": "Near zero",
+            "tbl_c8_p": "High (per user)",
+            "tbl_c8_w": "Only server maintenance",
             "cmp_s8_tag": "🏆 Conclusion",
             "cmp_s8_title": "Why Choose Web Platform?",
-            "tbl_hdr_power": "🔷 Power Platform",
-            "tbl_hdr_web": "🌐 Web Platform",
-            "tbl_c1": "Data Control &amp; Ownership", "tbl_c1_d": "Local client machine", "tbl_c1_p": "MS Cloud (Overseas)", "tbl_c1_w": "Direct local server",
-            "tbl_c2": "Internal Data Security", "tbl_c2_d": "Depends on client PC", "tbl_c2_p": "Microsoft Cloud", "tbl_c2_w": "Fully within LAN",
-            "tbl_c3": "UI &amp; Logic Customization", "tbl_c3_d": "Very restricted", "tbl_c3_p": "Power Apps template", "tbl_c3_w": "100% customized",
-            "tbl_c4": "Independent Extension", "tbl_c4_d": "Not possible", "tbl_c4_p": "Requires MS license", "tbl_c4_w": "Free upgrades",
-            "tbl_c5": "Report Formatting", "tbl_c5_d": "Fully manual", "tbl_c5_p": "Power BI (generic format)", "tbl_c5_w": "100% auto Excel/PDF",
-            "tbl_c6": "Mail/Teams Integration", "tbl_c6_d": "None", "tbl_c6_p": "Out of box (Major pro)", "tbl_c6_w": "Integrable via API",
-            "tbl_c7": "Offline Operation", "tbl_c7_d": "Normal", "tbl_c7_p": "Fails without internet", "tbl_c7_w": "Normal (LAN)",
-            "tbl_c8": "Long-term Operation Cost", "tbl_c8_d": "Near zero", "tbl_c8_p": "High (per user)", "tbl_c8_w": "Only server maintenance",
-            "tbl_c9": "Substation Suitability", "tbl_c9_d": "Low", "tbl_c9_p": "Medium", "tbl_c9_w": "Highest ★★★",
+            "tbl_c9": "Substation Suitability",
+            "tbl_c9_d": "Low",
+            "tbl_c9_p": "Medium",
+            "tbl_c9_w": "Highest ★★★",
             "compare_tbl_note_power": "ℹ️ <strong style=\"color:var(--neon-purple);\">Note:</strong> Power Platform is pre-integrated with company mail and Teams (a highly convenient native feature).",
             "compare_tbl_note_web": "💡 <strong style=\"color:var(--neon-blue);\">Roadmap:</strong> Once stable, Web Platform can easily integrate SMTP or Webhook APIs to automate mail/Teams alerts.",
-
-            // Slide 8: Conclusion
-            "cmp_s8_tag": "🏆 Conclusion",
-            "cmp_s8_title": "Why Choose Web Platform?",
             "cmp_s8_sub": "Optimizing shift workflows and ensuring information security are paramount at substations:",
             "cmp_s8_cp1_title": "Local control and data security (On-premises):",
             "cmp_s8_cp1_desc": "Electric production parameters, operational layout schemes, and Work Orders are stored directly on-site. Data is never exposed to the public web, eliminating risks of data leaks or connectivity dependency.",
@@ -446,9 +438,6 @@
             "cmp_s8_cp2_desc": "The application interface and data checks are specifically built for Deep C2 110kV Substation shift guidelines, avoiding generic layouts that block efficient work.",
             "cmp_s8_cp3_title": "High financial return over product lifecycle:",
             "cmp_s8_cp3_desc": "No recurring monthly license fees per engineer. The system operates stably on existing server infrastructure, keeping operational overhead to an absolute minimum.",
-
-
-            // --- TRANG ROADMAP.HTML ---
             "rm_main_title": "Infrastructure Advantages",
             "rm_main_sub": "Initial deployment succeeded by leveraging and optimizing existing resources at the 110kV Substation.",
             "rm_panel_title": "Detailed Analysis of Existing Infrastructure",
@@ -461,8 +450,6 @@
             "rm_s2_i4_desc": "Formal domain registration of <strong>dcgeportal.vn</strong> simplifies access for operators.",
             "rm_s2_slide_hdr": "PROPOSED EQUIPMENT SPECIFICATION",
             "rm_s2_slide_hint": "Click hardware items on the left to read detailed technical reasons",
-
-            // Slide 3: scaling Server (Roadmap)
             "rm_scale_tag": "// Future Direction · Expansion System",
             "rm_scale_title": "Model Expansion & Server/UPS Scaling",
             "rm_scale_sub": "Advanced design using Dell PowerEdge R260 server and Santak Castle C3K online UPS:",
@@ -484,8 +471,6 @@
             "rm_scale_tbl_server_price": "Server Estimated Price",
             "rm_scale_tbl_ups_price": "UPS Estimated Price",
             "rm_scale_tbl_total": "Total Package (Server + UPS)",
-
-            // Slide 4: replication (Roadmap)
             "rm_rep_tag": "// Substation Scaling",
             "rm_rep_title": "Replicating Model to Other Substations",
             "rm_rep_sub": "Click each equipment row below to view technical rationale and transparent 3D renders:",
@@ -506,70 +491,98 @@
             "rm_rep_tbl_total_gd2": "PHASE 2 UPGRADE ESTIMATE",
             "rm_rep_tbl_desc": "* Note: Splitting the Dell PowerEdge R260 server procurement into two phases optimizes initial capital budgets for new substations, while remaining fully ready for High Availability clustering.",
             "rm_rep_slide_hdr": "NEW SUBSTATION INFRASTRUCTURE",
-            "rm_rep_slide_hint": "Click equipment items on the left to read detailed technical reasons"
+            "rm_rep_slide_hint": "Click equipment items on the left to read detailed technical reasons",
+            "cmp_s9_tag": "➡️ Next Steps",
+            "cmp_s9_title": "Detailed Plan &amp; Roadmap",
+            "cmp_s9_sub": "To view the current equipment procurement plan and the system expansion roadmap, please proceed to the Roadmap section.",
+            "cmp_s6_bar1": "1. Data Control &amp; On-premises Security",
+            "cmp_s6_bar2": "2. Custom UI &amp; Specific Business Logic Flexibility",
+            "cmp_s6_bar3": "3. Independent Feature Development &amp; Scalability",
+            "cmp_s6_bar4": "4. Long-term Operational Cost Efficiency (Higher = More Savings)",
+            "story_main_sub": "Evolution of the management and optimization platform from scratch at the Deep C2 110kV Substation.",
+            "story_sec_tech": "Technical Criteria",
+            "story_sec_sol": "Solution Alternatives",
+            "story_sec_slides": "Analysis Slides",
+            "story_hint": "Press arrow keys or click dots to navigate | Toggle slideshow below",
+            "story_btn_compare": "Compare Solutions",
+            "story_btn_back": "Back to Home",
+            "story_slideshow_label": "Slideshow",
+            "story_slideshow_duration": "⏱ Slide Duration",
+            "story_slideshow_custom": "Custom:",
+            "story_slideshow_hint": "Left/Right keys | 1-6 keys to jump slide | Space: Play/Pause | ESC: Exit",
+            "rm_b1_title": "Reuse of 01 spare rack-mounted physical server:",
+            "rm_b1_desc": "There was an unused server at the substation. The team built the database and web host on this hardware. This allowed immediate testing without waiting for new equipment approval, keeping initial capital expenditure at 0 VND.",
+            "rm_b2_title": "Gigabit Switch LAN:",
+            "rm_b2_desc": "Using a spare switch at the station to segment the local operational network from the company's external internet connection, ensuring high network security.",
+            "rm_b3_title": "Local E-mail server for SMTP alerts:",
+            "rm_b3_desc": "Configuring SMTP notifications for instant alerts to operators and administrators when logs exceed safe operating limits.",
+            "rm_s2_tag": "🛠️ Implementation Details",
+            "rm_s2_title": "Hardware Integration &amp; Security",
+            "rm_s2_sub": "How the platform leverages local substation infrastructure for secure offline operation:",
+            "rm_s2_i1_title": "Local Server Cabinet Hosting",
+            "rm_s2_i1_desc": "The web host and SQL database run directly on the substation's physical server, preventing external cloud data dependency.",
+            "story_slideshow_stop": "Stop",
+            "story_pres_paused": "⏸ PAUSED — press Space to resume",
+            "story_pres_hint": "← → navigate slides &nbsp;|&nbsp; <b>Space</b> pause/resume &nbsp;|&nbsp; <b>ESC</b> exit",
+            "story_pres_list": "Slide List",
+            "rm_price_server_val": "~ 62,000,000 VND / ~ 2,500 USD",
+            "rm_price_ups_val": "~ 17,000,000 VND / ~ 680 USD",
+            "rm_price_total_val": "~ 79,000,000 VND / ~ 3,180 USD",
+            "rm_rep_price_server_gd1": "~ 62,000,000 VND / ~ 2,500 USD",
+            "rm_rep_price_server_gd2": "~ 62,000,000 VND / ~ 2,500 USD per unit",
+            "rm_rep_price_switch": "~ 2,500,000 VND / ~ 100 USD",
+            "rm_rep_price_ups": "~ 17,000,000 VND / ~ 680 USD",
+            "rm_rep_price_cables": "~ 1,200,000 VND / ~ 50 USD",
+            "rm_rep_price_total_gd1": "~ 82,700,000 VND / ~ 3,330 USD",
+            "rm_rep_price_total_gd2": "+ from ~ 62,000,000 VND / + from ~ 2,500 USD",
+            "st6_date": "Next Step",
+            "st6_title": "Solution Evaluation &amp; Comparison",
+            "st6_desc": "To better understand the reasons for choosing our self-developed Web Platform over other alternatives, please proceed to the detailed analysis."
         },
         ja: {
-            // Header Links
             "nav_compare": "比較分析",
             "nav_roadmap": "現在と未来",
             "nav_story": "ストーリー",
             "nav_home": "ホーム",
-
-            // --- TRANG STORY.HTML ---
             "story_main_title": "2026年デジタル化への道のり",
             "story_main_sub": "ゼロからの運用管理および最適化プラットフォームの開発進化<br>Deep C2 110kV変電所にて。",
             "story_sec_tech": "技術基準",
             "story_sec_sol": "解決策の比較",
             "story_sec_slides": "分析スライド",
             "story_hint": "矢印キーまたはドットをクリックして移動 | 自動スライドショーの再生",
-            "rm_rep_tbl_server_gd2_spec": "Phase 2: Add 1 or more servers to construct High Availability (HA, Active/Standby).",
-            "rm_rep_tbl_switch": "⚡ 01 Gigabit Switch",
-            "rm_rep_tbl_switch_spec": "Dedicated 16-Port rack-mounted Gigabit switch for local server cabinet communication.",
-            "rm_rep_tbl_ups": "⚡ 01 UPS Santak C3K (Dry Battery)",
-            "rm_rep_tbl_ups_spec": "3000VA / 2700W Online UPS with internal maintenance-free AGM battery modules.",
-            "rm_rep_tbl_cables": "⚡ Network Cabling & Installation",
-            "rm_rep_tbl_cables_spec": "Shielded CAT6 cabling, RJ45 connectors, protective conduits to prevent EMI.",
-            "rm_rep_tbl_total_gd1": "PHASE 1 TOTAL ESTIMATE",
-            "rm_rep_tbl_total_gd2": "PHASE 2 UPGRADE ESTIMATE",
-            "rm_rep_tbl_desc": "* Note: Splitting the Dell PowerEdge R260 server procurement into two phases optimizes initial capital budgets for new substations, while remaining fully ready for High Availability clustering.",
-            "rm_rep_slide_hdr": "NEW SUBSTATION INFRASTRUCTURE",
-            "rm_rep_slide_hint": "Click equipment items on the left to read detailed technical reasons"
-        },
-        ja: {
-            // Header Links
-            "nav_compare": "比較分析",
-            "nav_roadmap": "現在と未来",
-            "nav_story": "ストーリー",
-            "nav_home": "ホーム",
-
-            // --- TRANG STORY.HTML ---
-            "story_main_title": "2026年デジタル化への道のり",
-            "story_main_sub": "ゼロからの運用管理および最適化プラットフォームの開発進化<br>Deep C2 110kV変電所にて。",
-            "story_sec_tech": "技術基準",
-            "story_sec_sol": "解決策の比較",
-            "story_sec_slides": "分析スライド",
-
+            "rm_rep_tbl_server_gd2_spec": "第2段階：高可用性（HA冗長化、Active/Standby）構成のため、もう1台の筐体を増設。",
+            "rm_rep_tbl_switch": "⚡ 01 ギガビットスイッチ",
+            "rm_rep_tbl_switch_spec": "専用ラックキャビネット内に搭載する16ポートの業務接続用スイッチ。",
+            "rm_rep_tbl_ups": "⚡ 01 オンラインUPS (バッテリー内蔵)",
+            "rm_rep_tbl_ups_spec": "メンテナンスフリーの鉛密閉バッテリー（AGM）を内蔵した3000VAオンラインUPS。",
+            "rm_rep_tbl_cables": "⚡ 配線用資材および工事費",
+            "rm_rep_tbl_cables_spec": "電磁シールド付CAT6ケーブル、RJ45コネクタ、保護用配管による耐ノイズ配線敷設。",
+            "rm_rep_tbl_total_gd1": "第1段階 合計参考予算",
+            "rm_rep_tbl_total_gd2": "第2段階 アップグレード参考予算",
+            "rm_rep_tbl_desc": "* 注記：Dell PowerEdge R260サーバーの導入を2つのフェーズに分けることで、新規変電所における初期設備投資の負担を抑えつつ、将来的な高可用性（Active/Standby）やデータベース冗長化への拡張性を完全に確保できます。",
+            "rm_rep_slide_hdr": "新規変電所設備インフラ",
+            "rm_rep_slide_hint": "左側の項目をクリックして、導入理由の詳細をお読みください",
             "st3_date": "2026年6ch",
             "st3_title": "現場実証 - バージョン 0.2.0",
             "st3_desc": "社内テスト の成功後、変電所内の物理サーバーへの配置許可を得ました。休止中のサーバーマシンを利用してローカルネットワークを構築し、現場実証運用を正式に開始しました。",
-
             "st4_date": "2026年7ch",
             "st4_title": "実証と最適化プロセス",
             "st4_desc": "各現場シフトからのフィードバックを基に、計算ロジックの最適化やデータベースバグ của 修正を行いました。<br>同時に、この実証結果を活かして、大幅なUX/UI改善と高度な計算機能を備えた「1.0.0」メジャーリリースの計画を策定しました。",
-
             "st5_date": "現在",
             "st5_title": "システム最適化と安定化",
             "st5_desc": "バージョン1.0は現在、洗練されたダッシュボード、安定したネットワーク接続、データベースの同期機能の磨き上げを行っています。情報セキュリティ対策も適用し、データの安全を確保しています。次は、将来のサーバー増設計画を策定します。",
-
-            // Thumbs
-            "thumb0_lbl": "起点",       "thumb0_desc": "課題抽出",
-            "thumb1_lbl": "計画",       "thumb1_desc": "システム設計",
-            "thumb2_lbl": "v0.1.0",      "thumb2_desc": "開発テスト",
-            "thumb3_lbl": "v0.2.0",      "thumb3_desc": "実証開始",
-            "thumb4_lbl": "07/2026",     "thumb4_desc": "現場評価",
-            "thumb5_lbl": "v1.0",        "thumb5_desc": "システム最適化",
-
-            // --- TRANG COMPARE.HTML ---
+            "thumb0_lbl": "起点",
+            "thumb0_desc": "課題抽出",
+            "thumb1_lbl": "計画",
+            "thumb1_desc": "システム設計",
+            "thumb2_lbl": "v0.1.0",
+            "thumb2_desc": "開発テスト",
+            "thumb3_lbl": "v0.2.0",
+            "thumb3_desc": "実証開始",
+            "thumb4_lbl": "07/2026",
+            "thumb4_desc": "現場評価",
+            "thumb5_lbl": "v1.0",
+            "thumb5_desc": "システム最適化",
             "cmp_slide1_tag": "// 比較目的",
             "cmp_slide1_title": "共同比較と解決策の選定",
             "cmp_slide1_sub": "現在の現場業務で使用されている個別ツールと、提案するウェブプラットフォームを多角的に比較し、110kV変電所にとって最適な運用ソリューションを選定します。",
@@ -580,8 +593,6 @@
             "cmp_opt3_title": "自社開発Web Platform",
             "cmp_opt3_desc": "変電所の実際のシフト業務に合わせて100%カスタマイズされたWebアプリ。オンプレミスサーバーによるデータ管理で柔軟な拡張が可能。",
             "cmp_hint_nav": "矢印キー | 1-8キーでジャンプ | Space: 再生/一時停止 | ESC: 終了",
-
-            // Slide 2: Công cụ rời rạc detail
             "cmp_s2_tag": "📋 選択肢 01",
             "cmp_s2_title": "個別ツール",
             "cmp_s2_sub": "Excel、手書きログ、Word/PDFファイル - 変電所で広く使われている従来の手動管理方法。",
@@ -599,8 +610,6 @@
             "cmp_s2_con5": "過去データのトレンド検索や、電力負荷推移グラフの自動描画が不可能。",
             "cmp_s2_con6": "権限管理がないため、過去の運転履歴が上書きされるリスクがある。",
             "cmp_s2_eval": "💡 <strong>簡易評価:</strong> 規模が非常に小さく、データ分析や長期保存を必要としない変電所にのみ適しています。",
-
-            // Slide 3: Power Platform detail
             "cmp_s3_tag": "🔷 選択肢 02",
             "cmp_s3_title": "Microsoft Power Platform",
             "cmp_s3_sub": "企業のMicrosoftクラウド上で動作するローコードアプリ群（Power Apps, Power BI, Power Automate）。",
@@ -619,8 +628,6 @@
             "cmp_s3_con5": "管理者（IT部門）によるアクセス権限や環境構成の厳格な管理が必要。",
             "cmp_s3_con6": "ライセンス調達における社内承認や契約処理に長い時間が必要。",
             "cmp_s3_eval": "💡 <strong>簡易評価:</strong> すでにM365ライセンスが社内配布されており、十分なIT予算と安定した通信網を持つ本社レベルのレポート集計に向いています。",
-
-            // Slide 4: Web Platform detail
             "cmp_s4_tag": "🌐 推奨案",
             "cmp_s4_title": "自社開発Web Platform",
             "cmp_s4_sub": "変電所の実際のシフト業務フローに完全に基づき、100%カスタマイズしたオンプレミスWebアプリ。",
@@ -638,8 +645,6 @@
             "cmp_s4_con3": "不具合発生時やOSアップデートなどの保守作業を自主管理する必要がある。",
             "cmp_s4_con4": "大手ソフトベンダーのような外部の24時間サポート窓口は存在しない。",
             "cmp_s4_eval": "💡 <strong>簡易評価:</strong> データの重要性が高く、業務プロセスのカスタマイズ要求が強い独立した変電所において、最も効果的なソリューションです。",
-
-            // Slide 5: Radar axis & details
             "radar_axis_data": "データ制御力",
             "radar_axis_custom": "カスタマイズ性",
             "radar_axis_dev": "独立開発性",
@@ -653,52 +658,56 @@
             "cmp_radar_score_power": "Powerプラットフォーム",
             "cmp_radar_score_web": "Webアプリ",
             "cmp_radar_desc": "💡 自社開発ウェブプラットフォームは、変電所LAN内での完全なデータ制御、業務に応じた柔軟なロジック追加、ローカルセキュリティの観点で他ソリューションを圧倒しています。",
-
-            // Slide 6: Tech improvement process
             "cmp_s6_tag": "📈 プロセスと効率",
             "cmp_s6_title": "技術導入による改善効果",
             "cmp_s6_sub": "従来方式と新プラットフォームでの業務処理時間およびエラー発生率の量的比較：",
             "cmp_s6_bar_title": "タスク処理時間（分） ＆ エラー発生率（％）",
             "cmp_s6_desc": "📊 グラフが示すように、レポート作成時間は<strong>120分から5分</strong>に短縮され（95.8%削減）、自動入力チェックによりデータの誤入力率は<strong>15%から0%</strong>へ低下しました。",
-
-            // Slide 7: Compare Table
             "tbl_hdr_criteria": "技術評価項目",
             "tbl_hdr_discrete": "📋 個別ツール",
             "tbl_hdr_power": "🔷 Power Platform",
             "tbl_hdr_web": "🌐 Web Platform",
-            "tbl_c1": "初期コスト", "tbl_c1_d": "極めて低い", "tbl_c1_p": "高額", "tbl_c1_w": "中程度",
-            "tbl_c2": "年間維持費", "tbl_c2_d": "ほぼ0", "tbl_c2_p": "高額 (アカウント毎)", "tbl_c2_w": "少額",
-            "tbl_c3": "業務最適化度", "tbl_c3_d": "制限あり", "tbl_c3_p": "制限あり", "tbl_c3_w": "100%",
-            "tbl_c4": "構内データ蓄積", "tbl_c4_d": "可", "tbl_c4_p": "MSクラウド", "tbl_c4_w": "構内物理サーバー",
-            "tbl_c5": "自動帳票出力", "tbl_c5_d": "手動のみ", "tbl_c5_p": "Power Automate", "tbl_c5_w": "自動PDF/Excel出力",
-            "tbl_c6": "通信障害耐性", "tbl_c6_d": "完全動作", "tbl_c6_p": "要接続", "tbl_c6_w": "構内LAN動作",
-            "tbl_c7": "導入準備期間", "tbl_c7_d": "即時", "tbl_c7_p": "1〜3ヶ月", "tbl_c7_w": "3〜6ヶ月",
-            "tbl_c8": "ロール別権限管理", "tbl_c8_d": "なし", "tbl_c8_p": "標準機能", "tbl_c8_w": "詳細権限設定",
-
-            // Slide 8: Conclusion
+            "tbl_c1": "データの制御と所有",
+            "tbl_c1_d": "個別クライアントPC",
+            "tbl_c1_p": "MSクラウド（海外）",
+            "tbl_c1_w": "構内物理サーバー",
+            "tbl_c2": "構内データセキュリティ",
+            "tbl_c2_d": "個別PC環境に依存",
+            "tbl_c2_p": "Microsoftクラウド",
+            "tbl_c2_w": "構内LAN内で完結",
+            "tbl_c3": "UI・ロジックのカスタム性",
+            "tbl_c3_d": "厳しく制限",
+            "tbl_c3_p": "Power Apps標準枠内",
+            "tbl_c3_w": "100%業務に特化",
+            "tbl_c4": "独立した拡張・開発性",
+            "tbl_c4_d": "不可能",
+            "tbl_c4_p": "MSライセンスに依存",
+            "tbl_c4_w": "無制限にアップグレード",
+            "tbl_c5": "所定形式での帳票出力",
+            "tbl_c5_d": "完全手作業",
+            "tbl_c5_p": "Power BI（別形式）",
+            "tbl_c5_w": "Excel/PDF自動出力100%",
+            "tbl_c6": "社内メール/Teams連携",
+            "tbl_c6_d": "なし",
+            "tbl_c6_p": "標準装備（強力な長所）",
+            "tbl_c6_w": "API経由で追加開発可能",
+            "tbl_c7": "通信障害（オフライン）時",
+            "tbl_c7_d": "正常動作",
+            "tbl_c7_p": "稼働停止",
+            "tbl_c7_w": "正常動作（LAN内）",
+            "tbl_c8": "長期的なシステム運用費",
+            "tbl_c8_d": "ほぼゼロ",
+            "tbl_c8_p": "高額（ユーザー課金）",
+            "tbl_c8_w": "サーバー電気代・保守のみ",
             "cmp_s8_tag": "🏆 結論のまとめ",
             "cmp_s6_bar3": "3. 独立した機能開発 ＆ 将来の拡張性",
             "cmp_s6_bar4": "4. 長期的な運用コスト効率 (点数が高いほど省コスト)",
-
-            // Slide 7: Compare Table
-            "tbl_hdr_criteria": "技術評価項目",
-            "tbl_hdr_discrete": "📋 個別ツール",
-            "tbl_hdr_power": "🔷 Power Platform",
-            "tbl_hdr_web": "🌐 Web Platform",
-            "tbl_c1": "データの制御と所有", "tbl_c1_d": "個別クライアントPC", "tbl_c1_p": "MSクラウド（海外）", "tbl_c1_w": "構内物理サーバー",
-            "tbl_c2": "構内データセキュリティ", "tbl_c2_d": "個別PC環境に依存", "tbl_c2_p": "Microsoftクラウド", "tbl_c2_w": "構内LAN内で完結",
-            "tbl_c3": "UI・ロジックのカスタム性", "tbl_c3_d": "厳しく制限", "tbl_c3_p": "Power Apps標準枠内", "tbl_c3_w": "100%業務に特化",
-            "tbl_c4": "独立した拡張・開発性", "tbl_c4_d": "不可能", "tbl_c4_p": "MSライセンスに依存", "tbl_c4_w": "無制限にアップグレード",
-            "tbl_c5": "所定形式での帳票出力", "tbl_c5_d": "完全手作業", "tbl_c5_p": "Power BI（別形式）", "tbl_c5_w": "Excel/PDF自動出力100%",
-            "tbl_c6": "社内メール/Teams連携", "tbl_c6_d": "なし", "tbl_c6_p": "標準装備（強力な長所）", "tbl_c6_w": "API経由で追加開発可能",
-            "tbl_c7": "通信障害（オフライン）時", "tbl_c7_d": "正常動作", "tbl_c7_p": "稼働停止", "tbl_c7_w": "正常動作（LAN内）",
-            "tbl_c8": "長期的なシステム運用費", "tbl_c8_d": "ほぼゼロ", "tbl_c8_p": "高額（ユーザー課金）", "tbl_c8_w": "サーバー電気代・保守のみ",
-            "tbl_c9": "変電所業務への適正度", "tbl_c9_d": "低い", "tbl_c9_p": "中程度", "tbl_c9_w": "最高 ★★★",
+            "tbl_c9": "変電所業務への適正度",
+            "tbl_c9_d": "低い",
+            "tbl_c9_p": "中程度",
+            "tbl_c9_w": "最高 ★★★",
             "compare_tbl_note_power": "ℹ️ <strong style=\"color:var(--neon-purple);\">特記:</strong> Power Platformは、全社共通のOutlookメールやTeamsと最初から連携している点が非常に実用的です。",
             "compare_tbl_note_web": "💡 <strong style=\"color:var(--neon-blue);\">ロードマップ:</strong> 自社開発Web Platformも、稼働安定後にSMTPサーバーやWebhook APIと連携し、メールやTeamsへの通知自動化が可能です。",
-
-            // Slide 8: Conclusion
-            "cmp_s8_tag": "🏆 結論のまとめ",
             "cmp_s8_title": "自社開発プラットフォーム選定の理由",
             "cmp_s8_sub": "変電所運用における業務フローの最適化と情報セキュリティの確保が最優先事項です：",
             "cmp_s8_cp1_title": "技術の自主管理と構内データ安全の確保 (On-premises):",
@@ -707,60 +716,16 @@
             "cmp_s8_cp2_desc": "Deep C2 110kV変電所の特殊な運用手順に合わせて入力ロジックを最適化。汎用パッケージで発生する「使いにくさ」を完全に排除しました。",
             "cmp_s8_cp3_title": "長期運用時における圧倒的な財務的メリット:",
             "cmp_s8_cp3_desc": "Power Platformのような恒久的な月額サブスクリプション費用が不要です。既設のDell R260サーバー上で長期間安定稼働させることで、運用コストを大幅に削減できます。",
-
-
-            // --- TRANG ROADMAP.HTML ---
             "rm_main_title": "既存インフラと開発の利点",
             "rm_main_sub": "110kV変電所の既存ハードウェア資源を最大限活用し、円滑な初期導入を実現しました。",
             "rm_panel_title": "既存インフラの活用状況詳細",
             "rm_panel_intro": "Deep C2 110kV変電所のオンプレミスWeb Platform導入において、以下の現地ハードウェアの強みを活かしています：",
-            
-            // Road map bullets
             "rm_b1_title": "余剰の物理ラックサーバー1台の再利用:",
             "rm_b1_desc": "変電所内に未使用のサーバーが1台ありました。開発チームはこの筐体にデータベースとWebホストを構築（オンプレミス）しました。これにより、新たなハードウェア調達の承認を待つことなく即座にテスト運用が開始でき、初期設備投資を0円に抑えることができました。",
-            
             "rm_b2_title": "構築済みのLAN配線環境:",
             "rm_b2_desc": "検証サーバーは中央ネットワークラックに直接マウントされています。各シフトエンジニアの端末からは、高品質なギガビットLAN経byでアクセスでき、外部インターネット回線の切断リスクに影響されずに運用可能です。",
-            
-            "rm_b3_title": "現場直結のフィードバックループ:",
-            "rm_b3_desc": "中央制御室内にサーバーがあるため、開発チーム（Quang氏およびプログラマー）は24時間体制で稼働するシフト員から対面で意見を吸い上げることができました。",
-
-            // Slide 2: Equipment details (Roadmap)
-            "rm_s2_tag": "// 現状の必要資材",
-            "rm_s2_title": "追加提案機器",
-            "rm_s2_sub": "<strong style=\"color:var(--neon-pink);\">インタラクティブ表示:</strong> 左側の機器をクリックすると、詳細な技術的理由と透過3D画像が表示されます：",
-            "rm_s2_i1_title": "エンタープライズSSD 1TB (2基)",
-            "rm_s2_i1_desc": "ミラーリング（RAID 1）構成により、物理ドライブ故障時のデータ消失リスクを完全に防ぎます。",
-            "rm_s2_i2_title": "ギガビットLANスイッチ",
-            "rm_s2_i2_desc": "業務データ通信用にセキュアなサブネットを物理的に分離し、通信遅延を最小限に抑えます。",
-            "rm_s2_i3_title": "開発者専用Eメールアカウント",
-            "rm_s2_i3_desc": "値の逸脱警告アラートの自動送信や、作業安全指示書のOTP承認通知処理の自動化。",
-            "rm_s2_i4_title": "変電所専用ドメイン名",
-            "rm_s2_i4_desc": "ドメイン <strong>dcgeportal.vn</strong> の導入により、シフト員のシステムへのアクセス性を向上します。",
-            "rm_s2_slide_hdr": "提案資材仕様スペック",
-            "rm_s2_slide_hint": "左側の項目をクリックして、導入理由の詳細をお読みください",
-
-            // Slide 3: scaling Server (Roadmap)
-            "rm_scale_tag": "// 将来像 · サーバーの拡張",
-            "rm_scale_title": "モデル拡張とサーバー・UPSのスケーリング",
-            "rm_scale_sub": "Dell PowerEdge R260専用サーバーとSantak C3KオンラインUPSを組み合わせた高度なオンプレミス設計：",
-            "rm_scale_i1_title": "データベース分割構成（パーティショニング）",
-            "rm_scale_i1_desc": "<strong>CPU Xeon E-2468 (8コア/16スレッド)</strong> と <strong>64GB DDR5 ECCメモリ</strong> の能力を活かし、SCADAデータや電力量データをシフト日程ごとに細分化管理し、検索処理を高速化します。",
-            "rm_scale_i2_title": "独立サービス（モジュール）のコンテナ分離",
-            "rm_scale_i2_desc": "SCADA自動収集、IoTセンサ中継、デジタル作業指示書の各機能をDocker等で分離独立させ、他機能の無停止アップデートを可能にします。",
-            "rm_rep_tbl_server_gd1": "⚡ 専用サーバー Dell R260 (第1段階)",
-            "rm_rep_tbl_server_gd1_spec": "第1段階：システムコアとRAID 1データベースをホストする専用物理サーバー1台を構築。",
-            "rm_rep_tbl_server_gd2": "⚡ 専用サーバー Dell R260 (第2段階)",
-            "rm_rep_tbl_server_gd2_spec": "第2段階：高可用性（HA冗長化、Active/Standby）構成のため、もう1台の筐体を増設。",
-            "rm_rep_tbl_switch": "⚡ 01 ギガビットスイッチ",
-            "rm_rep_tbl_switch_spec": "専用ラックキャビネット内に搭載する16ポートの業務接続用スイッチ。",
-            "rm_rep_tbl_ups": "⚡ 01 オンラインUPS (バッテリー内蔵)",
-            "rm_rep_tbl_ups_spec": "メンテナンスフリーの鉛密閉バッテリー（AGM）を内蔵した3000VAオンラインUPS。",
-            "rm_rep_tbl_cables": "⚡ 配線用資材および工事費",
-            "rm_rep_tbl_cables_spec": "電磁シールド付CAT6ケーブル、RJ45コネクタ、保護用配管による耐ノイズ配線敷設。",
             "rm_b3_title": "現場直結のフィードバックループ:",
             "rm_b3_desc": "最大の利点は、システムが変電所の制御室に直接設置されていることです。開発チーム（Quang氏と私）は、24時間365日のシフト勤務中にエンジニアから直接フィードバックを受け取り、入力フォームや電力量計算ロジックを現場の運用手順に100%合わせることができました。",
-            
             "rm_s2_tag": "// 現状の必要資材",
             "rm_s2_title": "追加提案機器",
             "rm_s2_sub": "<strong style=\"color:var(--neon-pink);\">インタラクティブ表示:</strong> 左側の機器をクリックすると、詳細な技術的理由 và 透過3D画像が表示されます：",
@@ -774,7 +739,6 @@
             "rm_s2_i4_desc": "ドメイン <strong>dcgeportal.vn</strong> の導入により、シフト員のシステムへのアクセス性を向上します。",
             "rm_s2_slide_hdr": "提案資材仕様スペック",
             "rm_s2_slide_hint": "左側の項目をクリックして、導入理由の詳細をお読みください",
-            
             "rm_scale_tag": "// 将来像 · サーバーの拡張",
             "rm_scale_title": "モデル拡張とサーバー・UPSのスケーリング",
             "rm_scale_sub": "Dell PowerEdge R260専用サーバーとSantak C3KオンラインUPSを組み合わせた高度なオンプレミス設計：",
@@ -782,34 +746,84 @@
             "rm_scale_i1_desc": "<strong>CPU Xeon E-2468 (8コア/16スレッド)</strong> と <strong>64GB DDR5 ECCメモリ</strong> の能力を活かし、SCADAデータや電力量データをシフト日程ごとに細分化管理し、検索処理を高速化します。",
             "rm_scale_i2_title": "独立サービス（モジュール）のコンテナ分離",
             "rm_scale_i2_desc": "SCADA自動収集、IoTセンサ中継、デジタル作業指示書の各機能をDocker等で分離独立させ、他機能の無停止アップデートを可能にします。",
-            "rm_scale_i3_title": "Tối ưu hiệu năng Web & Băng thông LAN",
-            "rm_scale_i3_desc": "Sự kết hợp giữa 2 × 1TB Enterprise NVMe SSD (chạy RAID 1 cứng qua card PERC H355/H755) và băng thông Dual 1GbE LOM đảm bảo loại bỏ hoàn toàn hiện tượng nghẽn cổ chai đọc/ghi I/O, phản hồi giao diện web tức thì kể cả khi có hàng trăm yêu cầu cùng lúc.",
-            "rm_scale_i4_title": "Đảm bảo nguồn điện sạch liên tục (UPS Santak C3K)",
-            "rm_scale_i4_desc": "Tích hợp bộ lưu điện Online 3000VA có ắc quy khô kín khí trong thân máy bảo vệ server Dell R260 khỏi các sự cố sốc điện, sụt áp hoặc mất điện tự dùng đột ngột của trạm 110kV. Công nghệ chuyển đổi kép tạo ra dòng điện hình sin chuẩn sạch, kéo dài tuổi thọ phần cứng máy chủ.",
-            "rm_scale_tbl_title": "CẤU HÌNH GÓI THIẾT BỊ MỞ RỘNG",
+            "rm_rep_tbl_server_gd1": "⚡ 専用サーバー Dell R260 (第1段階)",
+            "rm_rep_tbl_server_gd1_spec": "第1段階：システムコアとRAID 1データベースをホストする専用物理サーバー1台を構築。",
             "rm_rep_tbl_server_gd2": "⚡ 専用サーバー Dell R260 (第2段階)",
-            "rm_rep_tbl_server_gd2_spec": "第2段階：高可用性（HA冗長化、Active/Standby）構成のため、もう1台の筐体を増設。",
-            "rm_rep_tbl_switch": "⚡ 01 ギガビットスイッチ",
-            "rm_rep_tbl_switch_spec": "専用ラックキャビネット内に搭載する16ポートの業務接続用スイッチ。",
-            "rm_rep_tbl_ups": "⚡ 01 オンラインUPS (バッテリー内蔵)",
-            "rm_rep_tbl_ups_spec": "メンテナンスフリーの鉛密閉バッテリー（AGM）を内蔵した3000VAオンラインUPS。",
-            "rm_rep_tbl_cables": "⚡ 配線用資材および工事費",
-            "rm_rep_tbl_cables_spec": "電磁シールド付CAT6ケーブル、RJ45コネクタ、保護用配管による耐ノイズ配線敷設。",
-            "rm_rep_tbl_total_gd1": "第1段階 合計参考予算",
-            "rm_rep_tbl_total_gd2": "第2段階 アップグレード参考予算",
-            "rm_rep_tbl_desc": "* 注記：Dell PowerEdge R260サーバーの導入を2つのフェーズに分けることで、新規変電所における初期設備投資の負担を抑えつつ、将来的な高可用性（Active/Standby）やデータベース冗長化への拡張性を完全に確保できます。",
-            "rm_rep_slide_hdr": "新規変電所設備インフラ",
-            "rm_rep_slide_hint": "左側の項目をクリックして、導入理由の詳細をお読みください"
+            "rm_scale_i3_title": "WebパフォーマンスとLAN帯域幅の最適化",
+            "rm_scale_i3_desc": "<strong>2 × 1TB Enterprise NVMe SSD (PERC H355/H755カードによるハードウェアRAID 1)</strong> と <strong>デュアル 1GbE LOM 帯域幅</strong> の組み合わせにより、ディスク I/O ボトルネックを完全に解消し、同時に数百のアクセス要求があっても瞬時に応答可能なWebパフォーマンスを実現します。",
+            "rm_scale_i4_title": "クリーンで無停電の安定電源供給 (UPS Santak C3K)",
+            "rm_scale_i4_desc": "<strong>3000VA オンラインUPS</strong> （メンテナンスフリー密閉型鉛蓄電池内蔵）を統合し、110kV変電所の予期せぬ停電、電圧低下、または電力サージから Dell R260 サーバーを強力に保護します。ダブルコンバージョン技術により、クリーンな正弦波を出力し、サーバーの製品寿命を延ばします。",
+            "rm_scale_tbl_title": "拡張設備構成パッケージ",
+            "cmp_s9_tag": "➡️ 次のステップ",
+            "cmp_s9_title": "詳細計画とロードマップ",
+            "cmp_s9_sub": "現在の設備調達計画およびシステムの広域展開ロードマップを確認するには、ロードマップセクションへお進みください。",
+            "cmp_s6_bar1": "1. データ制御力とオンプレミスセキュリティ",
+            "cmp_s6_bar2": "2. UIカスタマイズと個別業務ロジックの柔軟性",
+            "story_btn_compare": "比較分析を見る",
+            "story_btn_back": "ホームに戻る",
+            "story_slideshow_label": "自動再生",
+            "story_slideshow_duration": "⏱ 各スライドの表示時間",
+            "story_slideshow_custom": "カスタム:",
+            "story_slideshow_hint": "← → キー | 1-6キーでスライド移動 | Space: 再生/一時停止 | ESC: 終了",
+            "st0_date": "起点 • 2025年末",
+            "st0_title": "課題の発生とアイデア",
+            "st0_desc": "Deep C2 110kV変電所での直直勤務中、送電量データを手書きの日誌や手作業で集計することによる非効率性に気づきました。時間と文房具の無駄、データの入力ミスのリスク、過去履歴の照会や分析グラフ作成の困難さなど、多くの問題がありました。これが、変電所業務のデジタル化ツールの開発アイデアが生まれたきっかけです。",
+            "st1_date": "2026年初頭",
+            "st1_title": "計画立案と設計",
+            "st1_desc": "プロジェクトの実施を決定。開発チーム（Quang氏と私）は実装計画を立て、ウェブプラットフォームを採用することに決定しました。ここから、ログイン画面、直感的なデータ入力モジュール、デジタル作業指示書などのコア機能の設計が具体化し始めました。",
+            "st2_date": "2026年5月",
+            "st2_title": "プロトタイプ v0.1.0 の稼働",
+            "st2_desc": "初期設計と構築を経て、ウェブプラットフォームのv0.1.0devバージョンが起動し、内部テストを実施。ロジックエラーの修正と必要な機能の追加を行いました。",
+            "rm_scale_tbl_col1": "インフラ機器・ライセンス/変電所",
+            "rm_scale_tbl_col2": "技術仕様および導入ロードマップ",
+            "rm_scale_tbl_server": "1. 専有物理サーバー",
+            "rm_scale_tbl_server_spec": "Dell PowerEdge R260 (Xeon E-2468 CPU, 64GB DDR5 ECC RAM, 2x1TB Enterprise SSD RAID 1)",
+            "rm_scale_tbl_ups": "2. UPS無停電電源装置",
+            "rm_scale_tbl_ups_spec": "Santak Castle C3K (3000VA / 2700W, メンテナンスフリー密閉型鉛蓄電池内蔵)",
+            "rm_scale_tbl_server_price": "サーバー参考価格",
+            "rm_scale_tbl_ups_price": "UPS参考価格",
+            "rm_scale_tbl_total": "合計予算 (サーバー + UPS)",
+            "rm_rep_tag": "➡️ 広域展開計画",
+            "rm_rep_title": "他変電所への水平展開",
+            "rm_rep_sub": "現在の実績に基づき、他変電所へのシステム展開の参考構成とコスト見積もりを提示します：",
+            "rm_rep_tbl_col1": "ハードウェア機器 / 変電所",
+            "rm_rep_tbl_col2": "技術仕様 & 導入フェーズ詳細",
+            "rm_rep_tbl_col3": "参考コスト",
+            "story_slideshow_stop": "停止",
+            "story_pres_paused": "⏸ 一時停止 — スペースキーで再開",
+            "story_pres_hint": "← → スライド移動 &nbsp;|&nbsp; <b>Space</b> 一時停止/再開 &nbsp;|&nbsp; <b>ESC</b> 終了",
+            "story_pres_list": "スライド一覧",
+            "rm_price_server_val": "~ 62,000,000 VND / ~ 2,500 USD",
+            "rm_price_ups_val": "~ 17,000,000 VND / ~ 680 USD",
+            "rm_price_total_val": "~ 79,000,000 VND / ~ 3,180 USD",
+            "rm_rep_price_server_gd1": "~ 62,000,000 VND / ~ 2,500 USD",
+            "rm_rep_price_server_gd2": "~ 62,000,000 VND / ~ 2,500 USD / 台",
+            "rm_rep_price_switch": "~ 2,500,000 VND / ~ 100 USD",
+            "rm_rep_price_ups": "~ 17,000,000 VND / ~ 680 USD",
+            "rm_rep_price_cables": "~ 1,200,000 VND / ~ 50 USD",
+            "rm_rep_price_total_gd1": "~ 82,700,000 VND / ~ 3,330 USD",
+            "rm_rep_price_total_gd2": "+ ~ 62,000,000 VND / + ~ 2,500 USDから",
+            "st6_date": "次へ",
+            "st6_title": "解決策の評価と比較分析",
+            "st6_desc": "他の代替手段ではなく、自主開発のWebプラットフォームを選択する理由をより深く理解するために、詳細な比較分析に進んでください。"
         }
     };
 
     // ============================================================================
     // CORE LOGIC i18n
     // ============================================================================
-    // ============================================================================
-    // CORE LOGIC i18n
-    // ============================================================================
     let currentLang = localStorage.getItem('selected_lang') || 'vi';
+    
+    window.getCurrentLang = function() {
+        return currentLang;
+    };
+    
+    window.getTranslation = function(key) {
+        if (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) {
+            return TRANSLATIONS[currentLang][key];
+        }
+        return '';
+    };
 
     function setLanguage(lang) {
         if (!TRANSLATIONS[lang]) lang = 'vi';
@@ -843,6 +857,14 @@
         // --- POPUP TRONG ROADMAP.HTML ---
         if (typeof window.translateModalData === 'function') {
             window.translateModalData(currentLang);
+        }
+        
+        // --- TRANG STORY (story.html) SLIDESHOW CONTROLS ---
+        if (typeof window.__updatePlayBtnLabel === 'function') {
+            window.__updatePlayBtnLabel();
+        }
+        if (typeof window.__updateSlideNavList === 'function') {
+            window.__updateSlideNavList();
         }
     }
 
