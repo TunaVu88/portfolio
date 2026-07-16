@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>So sánh Giải pháp Quản lý Vận hành | TA_DCGE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-dark:      #0a0c10;
+    --neon-blue:    #00f0ff;
+    --neon-pink:    #ff007f;
+    --neon-green:   #00ff88;
+    --neon-amber:   #fbbf24;
+    --neon-purple:  #9d9dff;
+    --text-primary: rgba(255,255,255,0.92);
+    --text-muted:   rgba(255,255,255,0.45);
+    --border-color: rgba(255,255,255,0.08);
+    --font-body:    'Inter', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+    --transition:   all 0.3s cubic-bezier(0.4,0,0.2,1);
+    --glow-blue:    0 0 12px rgba(0, 240, 255, 0.35);
+}
+
+/* Language Switcher */
+.lang-switcher {
+    display: inline-flex;
+    gap: 0.2rem;
+    margin-left: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.22rem;
+    border-radius: 10px;
+    align-items: center;
+}
+.lang-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.22rem 0.45rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+.lang-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+.lang-btn.active {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--neon-blue);
+    text-shadow: var(--glow-blue);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--bg-dark); color: var(--text-primary); font-family: var(--font-body); }
+#pageEnterOverlay { position: fixed; inset: 0; z-index: 9999; background: #0a0c10; opacity: 1; pointer-events: none; transition: opacity 0.45s ease; }
+
+/* === PRESENTATION MODE TIMER BAR === */
+#ptbar { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 300; background: rgba(255, 255, 255, 0.08); opacity: 0; transition: opacity 0.3s; }
+#ptfill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink)); transition: width 0.1s linear; box-shadow: 0 0 8px var(--neon-blue); }
+.pres-active #ptbar { opacity: 1; }
+
+/* Pause banner */
+#ppause { position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 400; padding: 0.4rem 1.4rem; background: rgba(255,0,127,0.18); border: 1px solid rgba(255,0,127,0.4); border-radius: 0 0 14px 14px; font-family: var(--font-mono); font-size: 0.7rem; color: #ff007f; display: none; backdrop-filter: blur(10px); letter-spacing: 1px; }
+.pres-paused #ppause { display: block; }
+
+/* Header hide in pres */
+.pres-active header { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+
+/* Nút thoát trình chiếu góc trên bên phải */
+.cmp-pres-close-btn {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.2rem;
+    z-index: 350;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(10,12,16,0.65);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.2s;
+}
+.cmp-pres-close-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+    transform: scale(1.05);
+}
+.pres-active .cmp-pres-close-btn {
+    display: flex;
+}
+
+/* === HEADER === */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    background-color: rgba(10, 12, 16, 0.75);
+    transition: opacity 0.3s;
+}
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+.logo-img {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 240, 255, 0.22);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.18);
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+.logo:hover .logo-img {
+    border-color: var(--neon-blue);
+    box-shadow: var(--glow-blue);
+    transform: rotate(5deg) scale(1.05);
+}
+.logo-text {
+    font-size: 1.25rem;
+    font-weight: 800;
+    border-bottom: 2px solid var(--neon-blue);
+    padding-bottom: 1px;
+}
+.logo-accent {
+    color: var(--neon-blue);
+    text-shadow: var(--glow-blue);
+}
+.hnav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: auto;
+}
+.bk {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.48rem 1.1rem 0.48rem 0.85rem;
+    text-decoration: none;
+    color: var(--neon-blue);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: rgba(0, 240, 255, 0.05);
+    border: 1px solid rgba(0, 240, 255, 0.28);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.08);
+    transition: all 0.28s ease;
+    white-space: nowrap;
+}
+.bk:hover {
+    background: rgba(0, 240, 255, 0.12);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.28), inset 0 0 12px rgba(0, 240, 255, 0.06);
+    color: #fff;
+    transform: translateX(-2px);
+}
+.bk svg {
+    transition: transform 0.28s ease;
+}
+.bk:hover svg {
+    transform: translateX(-3px);
+}
+
+.bk-roadmap {
+    color: var(--neon-pink);
+    background: rgba(255, 0, 127, 0.05);
+    border-color: rgba(255, 0, 127, 0.28);
+    box-shadow: 0 0 12px rgba(255, 0, 127, 0.08);
+}
+.bk-roadmap:hover {
+    background: rgba(255, 0, 127, 0.12);
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.28), inset 0 0 12px rgba(255, 0, 127, 0.06);
+    color: #fff;
+}
+
+/* === SLIDES === */
+.sw { position: fixed; inset: 0; }
+.sl { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 5.8rem 2rem 5.5rem; opacity: 0; pointer-events: none; transform: translateY(18px); transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2,0.8,0.2,1); }
+.sl.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+.si { position: relative; z-index: 1; max-height: calc(100vh - 10.5rem); overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(0, 240, 255, 0.2) transparent; width: 100%; display: flex; flex-direction: column; align-items: center; }
+.si::-webkit-scrollbar { width: 3px; }
+.si::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.25); border-radius: 3px; }
+
+/* === SLIDE BACKGROUNDS === */
+.slide-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.70;
+    filter: brightness(0.42) contrast(1.15);
+    transition: opacity 0.5s ease;
+}
+.sl-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at center, rgba(10,12,16,0.05) 0%, rgba(10,12,16,0.72) 100%);
+    pointer-events: none;
+}
+.sl-matrix {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.26;
+}
+
+/* === CARD === */
+.card { width: 100%; max-width: 980px; background: rgba(10,13,20,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.10); border-radius: 20px; padding: 2rem 2.6rem; box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+.tag { font-family: var(--font-mono); font-size: 0.63rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 0.55rem; }
+.ttl { font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 900; line-height: 1.2; margin-bottom: 0.5rem; }
+.sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.4rem; line-height: 1.6; }
+
+/* === PROS/CONS === */
+.pcg { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.lb { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 1rem 1.1rem; }
+.lbh { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.75rem; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.lb ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.lb li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; line-height: 1.5; color: rgba(255,255,255,0.78); }
+.lb-text { flex: 1; display: block; color: rgba(255,255,255,0.78); }
+.ic { flex-shrink: 0; width: 15px; height: 15px; margin-top: 2px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.58rem; font-weight: 900; }
+.pro .lbh { color: var(--neon-green); }
+.pro .dot { background: var(--neon-green); }
+.pro .ic { background: rgba(0,255,136,0.12); color: var(--neon-green); }
+.con .lbh { color: #f87171; }
+.con .dot { background: #f87171; }
+.con .ic { background: rgba(248,113,113,0.12); color: #f87171; }
+.nb { margin-top: 0.9rem; padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.62); font-style: italic; }
+
+/* === INTRO COLS === */
+.ic3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.2rem; }
+.ic3c { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.ic3i { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; }
+.ic3n { font-weight: 700; font-size: 0.88rem; }
+.ic3d { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+/* === RADAR CHART SLIDE === */
+.chart-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; align-items: center; width: 100%; }
+#radarSvg { width: 320px; height: 320px; margin: auto; display: block; }
+.legend-wrap { display: flex; flex-direction: column; gap: 0.65rem; }
+.score-row { display: grid; grid-template-columns: auto 1fr 1fr 1fr; gap: 0.3rem 0.6rem; font-size: 0.76rem; align-items: center; }
+
+/* === BAR CHART === */
+.bar-chart { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.9rem; width: 100%; }
+.bar-row { display: flex; flex-direction: column; gap: 0.3rem; }
+.bar-lbl { font-size: 0.76rem; color: rgba(255,255,255,0.7); font-weight: 600; }
+.bar-group { display: flex; flex-direction: column; gap: 0.2rem; }
+.bar-track { position: relative; height: 16px; background: rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 8px; width: 0%; transition: width 0.9s cubic-bezier(0.2,0.8,0.2,1); }
+.bar-val { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: rgba(255,255,255,0.9); position: absolute; right: 8px; top: 50%; transform: translateY(-50%); }
+.bar-name { font-family: var(--font-mono); font-size: 0.58rem; color: rgba(255,255,255,0.38); }
+
+/* === TABLE === */
+.tw { overflow-x: auto; margin-top: 1.1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); width: 100%; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { padding: 0.7rem 0.9rem; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08); white-space: nowrap; background: rgba(255,255,255,0.03); }
+th:first-child { text-align: left; }
+td { padding: 0.6rem 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; color: rgba(255,255,255,0.72); vertical-align: middle; }
+td:first-child { text-align: left; font-weight: 600; color: rgba(255,255,255,0.88); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+td.cw, th.cw { color: var(--neon-blue); font-weight: 600; }
+td.cp, th.cp { color: var(--neon-purple); font-weight: 600; }
+.chip { display: inline-block; padding: 0.16rem 0.55rem; border-radius: 20px; font-family: var(--font-mono); font-size: 0.63rem; font-weight: 700; }
+.cg { background: rgba(0,255,136,0.12); color: var(--neon-green); }
+.cr { background: rgba(248,113,113,0.12); color: #f87171; }
+.ca { background: rgba(251,191,36,0.12); color: var(--neon-amber); }
+.cb { background: rgba(0,240,255,0.12); color: var(--neon-blue); }
+
+/* === CONCLUSION === */
+.cplist { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 1rem; width: 100%; }
+.cpt { display: flex; align-items: flex-start; gap: 0.9rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 0.85rem 1.1rem; }
+.cpn { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 900; flex-shrink: 0; min-width: 1.6rem; }
+.cptx { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.78); }
+.cptx strong { color: #fff; }
+
+/* === CONTROLS WRAPPER === */
+.ctrl-wrapper { position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%); z-index: 150; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; width: min(480px, 85vw); }
+
+/* POPUP SETTINGS */
+.slideshow-settings-panel {
+    display: none;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem 1.1rem;
+    background: rgba(10, 12, 16, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 240, 255, 0.22);
+    border-radius: 16px;
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(0,240,255,0.08);
+    width: 100%;
+    animation: panelSlideUp 0.25s cubic-bezier(0.2,0.8,0.2,1);
+}
+.slideshow-settings-panel.visible { display: flex; }
+
+@keyframes panelSlideUp {
+    from { opacity: 0; transform: translateY(8px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.settings-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    letter-spacing: 0.5px;
+}
+.settings-close-btn { background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 0.85rem; padding: 0 0.2rem; transition: color 0.2s; }
+.settings-close-btn:hover { color: #fff; }
+
+.settings-presets { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.preset-btn {
+    padding: 0.3rem 0.65rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    color: rgba(255,255,255,0.6);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.preset-btn:hover { background: rgba(0, 240, 255, 0.1); border-color: rgba(0, 240, 255, 0.4); color: var(--neon-blue); }
+.preset-btn.active {
+    background: rgba(0, 240, 255, 0.15);
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.settings-slider-row { display: flex; align-items: center; gap: 0.6rem; }
+.settings-slider-label { font-family: var(--font-mono); font-size: 0.68rem; color: rgba(255,255,255,0.4); white-space: nowrap; flex-shrink: 0; }
+.settings-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 3px; background: rgba(255,255,255,0.12); border-radius: 3px; outline: none; cursor: pointer; }
+.settings-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--neon-blue); box-shadow: 0 0 8px rgba(0,240,255,0.5); cursor: pointer; transition: transform 0.15s; }
+.settings-slider::-webkit-slider-thumb:hover { transform: scale(1.3); }
+.settings-slider-value { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--neon-blue); min-width: 2.5rem; text-align: right; }
+
+.bottom-action-row { display: flex; align-items: center; gap: 0.45rem; width: 100%; justify-content: center; }
+
+/* NUT SETTINGS */
+.slideshow-settings-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.38rem 0.75rem;
+    background: rgba(10, 12, 16, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.slideshow-settings-btn:hover { border-color: rgba(0, 240, 255, 0.35); color: var(--neon-blue); box-shadow: 0 0 14px rgba(0, 240, 255, 0.18), 0 4px 14px rgba(0,0,0,0.45); }
+.slideshow-settings-btn.is-open { border-color: var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 16px rgba(0, 240, 255, 0.28); }
+
+/* NUT NAVIGATION PREV/NEXT */
+.nav-circle-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.16); background: rgba(10,12,16,0.75); backdrop-filter: blur(8px); color: rgba(255,255,255,0.6); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); flex-shrink: 0; }
+.nav-circle-btn:hover { border-color: var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 12px rgba(0,240,255,0.2); }
+
+/* BỘ ĐẾM VÀ DOTS */
+.dots-counter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(10,12,16,0.6);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 0.38rem 0.9rem;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.bottom-counter {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    border-right: 1px solid rgba(255,255,255,0.15);
+    padding-right: 0.75rem;
+    white-space: nowrap;
+}
+.bottom-counter span {
+    color: var(--neon-blue);
+    font-weight: 700;
+}
+.cmp-dots { display: flex; gap: 0.45rem; align-items: center; }
+.cmp-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.22); cursor: pointer; transition: all 0.3s; }
+.cmp-dot.active { background: #fff; transform: scale(1.4); box-shadow: 0 0 8px rgba(255,255,255,0.5); }
+
+/* NUT PLAY SLIDESHOW */
+.play-slideshow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.38rem 1.2rem;
+    background: rgba(10, 12, 16, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 240, 255, 0.32);
+    border-radius: 20px;
+    color: var(--neon-blue);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.14), 0 4px 16px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    flex-grow: 1;
+}
+.play-slideshow-btn:hover { background: rgba(0, 240, 255, 0.09); border-color: var(--neon-blue); box-shadow: 0 0 24px rgba(0, 240, 255, 0.28), 0 4px 16px rgba(0,0,0,0.5); transform: scale(1.03); }
+.play-slideshow-btn.is-playing { border-color: var(--neon-pink); color: var(--neon-pink); box-shadow: 0 0 18px rgba(255, 0, 127, 0.28), 0 4px 16px rgba(0,0,0,0.5); animation: playBtnPulse 1.8s ease-in-out infinite; }
+.play-slideshow-btn.is-playing:hover { background: rgba(255, 0, 127, 0.08); transform: scale(1.03); }
+
+@keyframes playBtnPulse {
+    0%, 100% { box-shadow: 0 0 18px rgba(255, 0, 127, 0.28), 0 4px 16px rgba(0,0,0,0.5); }
+    50%       { box-shadow: 0 0 32px rgba(255, 0, 127, 0.52), 0 4px 16px rgba(0,0,0,0.5); }
+}
+
+.hint-bar { font-family: var(--font-mono); font-size: 0.56rem; color: rgba(255,255,255,0.18); text-align: center; }
+
+/* Slide Active Colors */
+.sl1 .card { border-color: rgba(0,240,255,0.2); }.sl1 .tag { color: var(--neon-blue); }.sl1 .ttl { background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sl2 .card { border-color: rgba(251,191,36,0.2); }.sl2 .tag { color: var(--neon-amber); }.sl2 .ttl { color: var(--neon-amber); }
+.sl3 .card { border-color: rgba(107,107,255,0.28); }.sl3 .tag { color: #7c7cff; }.sl3 .ttl { color: #9d9dff; }
+.sl4 .card { border-color: rgba(0,240,255,0.22); }.sl4 .tag { color: var(--neon-blue); }.sl4 .ttl { color: var(--neon-blue); }
+.sl5 .card { border-color: rgba(255,255,255,0.1); }.sl5 .tag { color: rgba(255,255,255,0.5); }.sl5 .ttl { background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sl6 .card { border-color: rgba(251,191,36,0.15); }.sl6 .tag { color: var(--neon-amber); }.sl6 .ttl { background: linear-gradient(135deg, var(--neon-amber), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sl7 .card { border-color: rgba(255,255,255,0.12); }.sl7 .tag { color: var(--text-muted); }.sl7 .ttl { background: linear-gradient(135deg, #fff, rgba(255,255,255,0.55)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sl8 .card { border-color: rgba(0,255,136,0.2); }.sl8 .tag { color: var(--neon-green); }.sl8 .ttl { color: var(--neon-green); }
+
+@media (max-width: 768px) {
+    .card { padding: 1.2rem 1rem; }
+    .pcg, .ic3, .chart-layout { grid-template-columns: 1fr; }
+    .ttl { font-size: 1.3rem; }
+    .nav-container { padding: 0 1rem; height: 70px; }
+    .logo-text { font-size: 1.05rem; }
+    .logo-img { width: 30px; height: 30px; }
+    .bk { padding: 0.35rem 0.75rem; font-size: 0.7rem; }
+}
+</style>
+</head>
+<body>
+<div id="pageEnterOverlay"></div>
+<div id="ptbar"><div id="ptfill"></div></div>
+<div id="ppause">⏸ TẠM DỪNG — nhấn Space để tiếp tục | ESC để thoát</div>
+<button class="cmp-pres-close-btn" id="cmpPresCloseBtn" title="Thoát trình chiếu (Esc)">✕</button>
+
+<header>
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="assets/logo.jpg" alt="TuNa88VN Logo" class="logo-img">
+            <span class="logo-text"><span class="logo-accent">&lt;</span>TuNa88VN<span class="logo-accent"> /&gt;</span></span>
+        </a>
+        
+        <div class="hnav">
+            <a href="roadmap.html" class="bk bk-roadmap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13" style="vertical-align:middle;margin-right:2px;"><path d="M9 18l6-6-6-6"/></svg>
+                <span data-i18n="nav_roadmap">Hiện tại &amp; Tương lai</span>
+            </a>
+            <a href="story.html" class="bk" style="color:var(--neon-purple); border-color:rgba(157,157,255,0.28); background:rgba(157,157,255,0.05);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13" style="vertical-align:middle;margin-right:2px;"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                <span data-i18n="nav_story">Hành Trình</span>
+            </a>
+            <a href="index.html" class="bk" style="color:var(--text-muted); border-color:rgba(255,255,255,0.12); background:rgba(255,255,255,0.02);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" style="vertical-align:middle;margin-right:2px;"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                <span data-i18n="nav_home">Trang Chủ</span>
+            </a>
+            <div class="lang-switcher"></div>
+        </div>
+    </div>
+</header>
+
+<div class="sw">
+
+<!-- SLIDE 1: GIỚI THIỆU MỤC TIÊU -->
+<div class="sl sl1 active" data-s="0">
+    <div class="slide-bg" style="background-image:url('assets/compare-future-substation.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="cmp_slide1_tag">// Giới thiệu mục tiêu</div>
+        <div class="ttl" data-i18n="cmp_slide1_title">Cùng Nhau So Sánh &amp; Lựa Chọn</div>
+        <p class="sub" data-i18n="cmp_slide1_sub">Chúng ta sẽ cùng nhau thực hiện so sánh các ứng dụng hiện được sử dụng với phương án triển khai web platform, nhằm đưa ra giải pháp vận hành tối ưu nhất cho Trạm biến áp 110kV.</p>
+        <div class="ic3">
+            <div class="ic3c">
+                <div class="ic3i" style="background:rgba(251,191,36,0.1);">📋</div>
+                <div class="ic3n" style="color:var(--neon-amber);" data-i18n="cmp_opt1_title">Công cụ rời rạc</div>
+                <div class="ic3d" data-i18n="cmp_opt1_desc">Excel, sổ tay, file Word/PDF — phương pháp vận hành thủ công truyền thống đang dùng tại nhiều trạm điện hiện nay.</div>
+            </div>
+            <div class="ic3c">
+                <div class="ic3i" style="background:rgba(157,157,255,0.1);">🔷</div>
+                <div class="ic3n" style="color:var(--neon-purple);" data-i18n="cmp_opt2_title">Microsoft Power Platform</div>
+                <div class="ic3d" data-i18n="cmp_opt2_desc">Đã được tích hợp sẵn với hệ thống mail/Teams của công ty. Có lợi thế kết nối nhanh nhưng phụ thuộc cloud và chi phí duy trì cao.</div>
+            </div>
+            <div class="ic3c">
+                <div class="ic3i" style="background:rgba(0,240,255,0.1);">🌐</div>
+                <div class="ic3n" style="color:var(--neon-blue);" data-i18n="cmp_opt3_title">Web Platform tự phát triển</div>
+                <div class="ic3d" data-i18n="cmp_opt3_desc">Hệ thống web tuỳ biến 100% theo nghiệp vụ trạm, lưu trữ dữ liệu tại chỗ, toàn quyền kiểm soát tính năng và mở rộng.</div>
+            </div>
+        </div>
+        <div style="margin-top:1.2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;">
+            <div style="text-align:center;padding:0.7rem;background:rgba(251,191,36,0.05);border:1px solid rgba(251,191,36,0.12);border-radius:10px;">
+                <div style="font-family:var(--font-mono);font-size:1.4rem;font-weight:900;color:var(--neon-amber);">6</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);" data-i18n="story_sec_tech">Tiêu chí kỹ thuật</div>
+            </div>
+            <div style="text-align:center;padding:0.7rem;background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.12);border-radius:10px;">
+                <div style="font-family:var(--font-mono);font-size:1.4rem;font-weight:900;color:var(--neon-blue);">3</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);" data-i18n="story_sec_sol">Phương án giải pháp</div>
+            </div>
+            <div style="text-align:center;padding:0.7rem;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.12);border-radius:10px;">
+                <div style="font-family:var(--font-mono);font-size:1.4rem;font-weight:900;color:var(--neon-green);">8</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);" data-i18n="story_sec_slides">Slides phân tích</div>
+            </div>
+        </div>
+        <p style="margin-top:1rem;font-size:0.76rem;color:var(--text-muted);text-align:center;font-family:var(--font-mono);" data-i18n="cmp_hint_nav">Nhấn phím mũi tên hoặc click dots để di chuyển | Bật Trình Chiếu tự động phía dưới</p>
+    </div></div>
+</div>
+
+<!-- SLIDE 2: CÔNG CỤ RỜI RẠC -->
+<div class="sl sl2" data-s="1">
+    <div class="slide-bg" style="background-image:url('assets/compare-traditional-tools.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="cmp_s2_tag">📋 Phương án 01</div>
+        <div class="ttl" data-i18n="cmp_s2_title">Công Cụ Rời Rạc</div>
+        <p class="sub" data-i18n="cmp_s2_sub">Excel, sổ tay trực, file Word/PDF riêng lẻ — đây là phương thức thủ công truyền thống đang được áp dụng tại các trạm vận hành hiện tại.</p>
+        <div class="pcg">
+            <div class="lb pro">
+                <div class="lbh"><span class="dot"></span><span data-i18n="cmp_s2_pro_h">Ưu điểm</span></div>
+                <ul>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s2_pro1">Không tốn chi phí đầu tư ban đầu, phần mềm Microsoft Office có sẵn.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s2_pro2">Nhân viên vận hành đã quen thuộc, hầu như không cần đào tạo lại.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s2_pro3">Hoạt động offline hoàn toàn, không phụ thuộc vào kết nối mạng.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s2_pro4">Dễ dàng chỉnh sửa cấu trúc bảng biểu theo nhu cầu phát sinh tức thời.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s2_pro5">Dữ liệu lưu cục bộ tại máy trạm trực, không chuyển ra internet.</span></li>
+                </ul>
+            </div>
+            <div class="lb con">
+                <div class="lbh"><span class="dot"></span><span data-i18n="cmp_s2_con_h">Nhược điểm</span></div>
+                <ul>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s2_con1">Dữ liệu bị phân tán, cực kỳ khó tổng hợp báo cáo liên ca hoặc liên tháng.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s2_con2">Dễ nhầm lẫn công thức, dễ mất mát hoặc hỏng file dữ liệu.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s2_con3">Báo cáo thủ công tốn từ 2-3 giờ mỗi tuần của kỹ sư trực ca.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s2_con4">Không có cảnh báo logic — sai lệch số liệu nhập vào không bị phát hiện.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s2_con5">Không thể tra cứu nhanh lịch sử phụ tải hoặc vẽ biểu đồ xu hướng tự động.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s2_con6">Không có cơ chế phân quyền, rủi ro sửa đè dữ liệu lịch sử.</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="nb" style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.15);" data-i18n="cmp_s2_eval">💡 <strong>Đánh giá nhanh:</strong> Chỉ phù hợp khi quy mô vận hành rất nhỏ, ít ca trực trực tiếp và không có nhu cầu khai thác dữ liệu dài hạn hoặc phân tích tự động.</div>
+    </div></div>
+</div>
+
+<!-- SLIDE 3: POWER PLATFORM -->
+<div class="sl sl3" data-s="2">
+    <div class="slide-bg" style="background-image:url('assets/compare-power-platform.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="cmp_s3_tag">🔷 Phương án 02</div>
+        <div class="ttl" data-i18n="cmp_s3_title">Microsoft Power Platform</div>
+        <p class="sub" data-i18n="cmp_s3_sub">Bộ công cụ low-code (Power Apps, Power BI, Power Automate) chạy trên hệ sinh thái Microsoft Cloud của doanh nghiệp.</p>
+        <div class="pcg">
+            <div class="lb pro">
+                <div class="lbh"><span class="dot"></span><span data-i18n="cmp_s3_pro_h">Ưu điểm lớn</span></div>
+                <ul>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s3_pro1">Tích hợp sẵn sâu với hệ sinh thái Microsoft 365, Teams có sẵn của công ty.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s3_pro2">Power Apps giúp tạo giao diện nhập liệu di động và máy tính khá nhanh.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s3_pro3">Power BI hỗ trợ tạo báo cáo dashboard trực quan rất mạnh mẽ.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s3_pro4">Độ bảo mật doanh nghiệp cao đạt chuẩn ISO/SOC do Microsoft vận hành.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s3_pro5">Low-code giúp giảm thời gian viết code thuần, kéo thả tiện lợi.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s3_pro6">Có sự hỗ trợ kỹ thuật chính thức từ đại lý Microsoft.</span></li>
+                </ul>
+            </div>
+            <div class="lb con">
+                <div class="lbh"><span class="dot"></span><span data-i18n="cmp_s3_con_h">Nhược điểm lớn</span></div>
+                <ul>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s3_con1">Chi phí bản quyền license hàng tháng rất cao tính theo đầu người (User).</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s3_con2">Dữ liệu bắt buộc lưu trên Cloud Microsoft, không kiểm soát vật lý tại trạm.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s3_con3">Yêu cầu kết nối Internet liên tục 24/7, mạng chập chờn sẽ bị gián đoạn.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s3_con4">Tùy biến giao diện (UI) và logic nghiệp vụ phức tạp bị giới hạn bởi framework.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s3_con5">Cần quản trị viên IT cấu hình phân quyền và quản lý environment phức tạp.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s3_con6">Quy trình phê duyệt mua license mất nhiều thời gian trong khối nhà nước.</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="nb" style="background:rgba(157,157,255,0.06);border:1px solid rgba(157,157,255,0.18);" data-i18n="cmp_s3_eval">💡 <strong>Đánh giá nhanh:</strong> Phù hợp cho khối văn phòng tổng công ty đã mua sẵn Microsoft 365 doanh nghiệp, ngân sách dồi dào, cần tích hợp báo cáo nhiều phòng ban và kết nối Internet tốt.</div>
+    </div></div>
+</div>
+
+<!-- SLIDE 4: WEB PLATFORM -->
+<div class="sl sl4" data-s="3">
+    <div class="slide-bg" style="background-image:url('assets/compare-web-dashboard.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="cmp_s4_tag">🌐 Phương án chọn</div>
+        <div class="ttl" data-i18n="cmp_s4_title">Web Platform Tự Phát Triển</div>
+        <p class="sub" data-i18n="cmp_s4_sub">Hệ thống web tùy biến 100% được xây dựng đúng theo quy trình vận hành thực tế của trạm điện.</p>
+        <div class="pcg">
+            <div class="lb pro">
+                <div class="lbh"><span class="dot"></span><span data-i18n="cmp_s4_pro_h">Ưu điểm cốt lõi</span></div>
+                <ul>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s4_pro1">Tùy biến 100% giao diện và logic nhập liệu theo nghiệp vụ đặc thù của trạm.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s4_pro2">Chi phí vận hành lâu dài cực thấp — chạy trực tiếp trên phần cứng máy chủ sẵn có.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s4_pro3">Toàn quyền kiểm soát và sở hữu dữ liệu tại trạm (On-premises), bảo mật nội bộ.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s4_pro4">Thiết kế tối ưu hóa riêng cho màn hình giám sát rộng tại phòng điều khiển.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s4_pro5">Tự động xuất báo cáo Excel/PDF theo đúng biểu mẫu pháp lý quy chuẩn điện lực.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s4_pro6">Hệ thống chạy mượt mà trong mạng LAN nội bộ, không cần mạng internet ngoại vi.</span></li>
+                    <li><span class="ic">✓</span><span class="lb-text" data-i18n="cmp_s4_pro7">Phân quyền chi tiết, bảo vệ lịch sử ghi nhận thông số chống sửa xóa ca trực.</span></li>
+                </ul>
+            </div>
+            <div class="lb con">
+                <div class="lbh"><span class="dot"></span><span data-i18n="cmp_s4_con_h">Thử thách cần xử lý</span></div>
+                <ul>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s4_con1">Yêu cầu thời gian lập trình ban đầu lâu hơn (khoảng 3–6 tháng).</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s4_con2">Nhóm dự án tự chịu trách nhiệm vận hành, cập nhật bảo mật và sửa bug.</span></li>
+                    <li><span class="ic">✗</span><span class="lb-text" data-i18n="cmp_s4_con3">Chưa có sẵn tích hợp mail/Teams (tuy nhiên hoàn toàn có thể lập trình bổ sung thông qua API/webhook sau này).</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="nb" style="background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.18);" data-i18n="cmp_s4_eval">💡 <strong>Đánh giá nhanh:</strong> Là lựa chọn tối ưu lâu dài, mang lại khả năng làm chủ công nghệ và an toàn thông tin cao nhất cho trạm trực trực tiếp.</div>
+    </div></div>
+</div>
+
+<!-- SLIDE 5: RADAR CHART -->
+<div class="sl sl5" data-s="4">
+    <div class="slide-bg" style="background-image:url('assets/compare-web-dashboard.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="story_sec_tech">// Phân tích đa chiều</div>
+        <div class="ttl" data-i18n="cmp_radar_title">Biểu Đồ So Sánh Kỹ Thuật</div>
+        <div class="chart-layout">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.7rem;">
+                <svg id="radarSvg" viewBox="0 0 340 340" width="320" height="320"></svg>
+                <div style="display:flex;gap:0.8rem;flex-wrap:wrap;justify-content:center;">
+                    <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.7rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--neon-amber);display:inline-block;"></span><span data-i18n="cmp_opt1_title">Công cụ rời rạc</span></div>
+                    <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.7rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--neon-purple);display:inline-block;"></span><span data-i18n="cmp_opt2_title">Power Platform</span></div>
+                    <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.7rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--neon-blue);display:inline-block;"></span><span data-i18n="cmp_opt3_title">Web Platform</span></div>
+                </div>
+            </div>
+            <div class="legend-wrap">
+                <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-muted);margin-bottom:0.5rem;letter-spacing:1px;" data-i18n="cmp_radar_sub">BẢNG ĐIỂM SO SÁNH (Thang điểm 10)</div>
+                <div class="score-row">
+                    <div style="color:var(--text-muted);font-family:var(--font-mono);font-size:0.57rem;padding-bottom:0.3rem;" data-i18n="cmp_radar_axis_title">Tiêu chí so sánh</div>
+                    <div style="color:var(--neon-amber);font-family:var(--font-mono);font-size:0.57rem;text-align:center;padding-bottom:0.3rem;" data-i18n="cmp_radar_score_discrete">Rời rạc</div>
+                    <div style="color:var(--neon-purple);font-family:var(--font-mono);font-size:0.57rem;text-align:center;padding-bottom:0.3rem;" data-i18n="cmp_radar_score_power">Power</div>
+                    <div style="color:var(--neon-blue);font-family:var(--font-mono);font-size:0.57rem;text-align:center;padding-bottom:0.3rem;" data-i18n="cmp_radar_score_web">Web</div>
+                    
+                    <div style="color:rgba(255,255,255,0.7);">1. <span data-i18n="radar_axis_data">Kiểm soát dữ liệu</span></div><div style="text-align:center;color:var(--neon-amber);font-weight:700;">7</div><div style="text-align:center;color:var(--neon-purple);font-weight:700;">3</div><div style="text-align:center;color:var(--neon-blue);font-weight:700;">10</div>
+                    <div style="color:rgba(255,255,255,0.7);">2. <span data-i18n="radar_axis_custom">Khả năng tuỳ biến</span></div><div style="text-align:center;color:var(--neon-amber);font-weight:700;">3</div><div style="text-align:center;color:var(--neon-purple);font-weight:700;">5</div><div style="text-align:center;color:var(--neon-blue);font-weight:700;">10</div>
+                    <div style="color:rgba(255,255,255,0.7);">3. <span data-i18n="radar_axis_dev">Phát triển độc lập</span></div><div style="text-align:center;color:var(--neon-amber);font-weight:700;">2</div><div style="text-align:center;color:var(--neon-purple);font-weight:700;">5</div><div style="text-align:center;color:var(--neon-blue);font-weight:700;">9</div>
+                    <div style="color:rgba(255,255,255,0.7);">4. <span data-i18n="radar_axis_cost">Hiệu quả chi phí</span></div><div style="text-align:center;color:var(--neon-amber);font-weight:700;">9</div><div style="text-align:center;color:var(--neon-purple);font-weight:700;">3</div><div style="text-align:center;color:var(--neon-blue);font-weight:700;">8</div>
+                    <div style="color:rgba(255,255,255,0.7);">5. <span data-i18n="radar_axis_offline">Hoạt động offline</span></div><div style="text-align:center;color:var(--neon-amber);font-weight:700;">9</div><div style="text-align:center;color:var(--neon-purple);font-weight:700;">2</div><div style="text-align:center;color:var(--neon-blue);font-weight:700;">8</div>
+                    <div style="color:rgba(255,255,255,0.7);">6. <span data-i18n="radar_axis_security">Bảo mật nội bộ</span></div><div style="text-align:center;color:var(--neon-amber);font-weight:700;">7</div><div style="text-align:center;color:var(--neon-purple);font-weight:700;">4</div><div style="text-align:center;color:var(--neon-blue);font-weight:700;">10</div>
+                </div>
+                <div style="margin-top:0.9rem;padding:0.7rem 0.9rem;background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.15);border-radius:10px;font-size:0.78rem;color:rgba(255,255,255,0.65);line-height:1.5;" data-i18n="cmp_radar_desc">
+                    💡 Biểu đồ thể hiện ưu thế vượt trội của <strong style="color:var(--neon-blue);">Web Platform</strong> ở các mặt cốt lỗi: kiểm soát dữ liệu, khả năng tuỳ biến nghiệp vụ sâu và tính bảo mật tuyệt đối khi chạy trong LAN của trạm điện.
+                </div>
+            </div>
+        </div>
+    </div></div>
+</div>
+
+<!-- SLIDE 6: BAR CHART TIẾN TRÌNH -->
+<div class="sl sl6" data-s="5">
+    <div class="slide-bg" style="background-image:url('assets/compare-future-substation.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="cmp_s6_tag">// So sánh tiến trình</div>
+        <div class="ttl" data-i18n="cmp_s6_title">Quá Trình Cải Tiến Công Nghệ</div>
+        <p class="sub" style="margin-bottom:0.5rem;" data-i18n="cmp_s6_sub">Cột mốc cải tiến chỉ số kỹ thuật từ phương pháp truyền thống lên Microsoft Power Platform và hướng tới Web Platform chuyên biệt.</p>
+        <div class="bar-chart" id="barChart">
+            <div class="bar-row">
+                <div class="bar-lbl" data-i18n="cmp_s6_bar1">1. Mức độ kiểm soát dữ liệu &amp; Bảo mật nội bộ (On-premises)</div>
+                <div class="bar-group">
+                    <div class="bar-name" style="color:var(--neon-amber);" data-i18n="cmp_opt1_title">Công cụ rời rạc</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(251,191,36,0.7),var(--neon-amber));" data-val="70"><span class="bar-val">7.0</span></div></div>
+                    <div class="bar-name" style="color:var(--neon-purple);" data-i18n="cmp_opt2_title">Power Platform</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(157,157,255,0.7),var(--neon-purple));" data-val="30"><span class="bar-val">3.0</span></div></div>
+                    <div class="bar-name" style="color:var(--neon-blue);" data-i18n="cmp_opt3_title">Web Platform</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(0,240,255,0.7),var(--neon-blue));" data-val="100"><span class="bar-val">10.0 ★</span></div></div>
+                </div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-lbl" data-i18n="cmp_s6_bar2">2. Khả năng tuỳ biến giao diện &amp; logic nghiệp vụ dặc thù</div>
+                <div class="bar-group">
+                    <div class="bar-name" style="color:var(--neon-amber);" data-i18n="cmp_opt1_title">Công cụ rời rạc</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(251,191,36,0.7),var(--neon-amber));" data-val="30"><span class="bar-val">3.0</span></div></div>
+                    <div class="bar-name" style="color:var(--neon-purple);" data-i18n="cmp_opt2_title">Power Platform</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(157,157,255,0.7),var(--neon-purple));" data-val="50"><span class="bar-val">5.0</span></div></div>
+                    <div class="bar-name" style="color:var(--neon-blue);" data-i18n="cmp_opt3_title">Web Platform</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(0,240,255,0.7),var(--neon-blue));" data-val="100"><span class="bar-val">10.0 ★</span></div></div>
+                </div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-lbl" data-i18n="cmp_s6_bar3">3. Khả năng phát triển, mở rộng tính năng độc lập</div>
+                <div class="bar-group">
+                    <div class="bar-name" style="color:var(--neon-amber);" data-i18n="cmp_opt1_title">Công cụ rời rạc</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(251,191,36,0.7),var(--neon-amber));" data-val="20"><span class="bar-val">2.0</span></div></div>
+                    <div class="bar-name" style="color:var(--neon-purple);" data-i18n="cmp_opt2_title">Power Platform</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(157,157,255,0.7),var(--neon-purple));" data-val="50"><span class="bar-val">5.0</span></div></div>
+                    <div class="bar-name" style="color:var(--neon-blue);" data-i18n="cmp_opt3_title">Web Platform</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(0,240,255,0.7),var(--neon-blue));" data-val="90"><span class="bar-val">9.0 ★</span></div></div>
+                </div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-lbl" data-i18n="cmp_s6_bar4">4. Hiệu quả chi phí vận hành lâu dài (Điểm cao = Tiết kiệm hơn)</div>
+                <div class="bar-group">
+                    <div class="bar-name" style="color:var(--neon-amber);" data-i18n="cmp_opt1_title">Công cụ rời rạc</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(251,191,36,0.7),var(--neon-amber));" data-val="90"><span class="bar-val">9.0 ★</span></div></div>
+                    <div class="bar-name" style="color:var(--neon-purple);" data-i18n="cmp_opt2_title">Power Platform</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(157,157,255,0.7),var(--neon-purple));" data-val="30"><span class="bar-val">3.0</span></div></div>
+                    <div class="bar-name" style="color:var(--neon-blue);" data-i18n="cmp_opt3_title">Web Platform</div>
+                    <div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,rgba(0,240,255,0.7),var(--neon-blue));" data-val="80"><span class="bar-val">8.0</span></div></div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+</div>
+
+<!-- SLIDE 7: BẢNG SO SÁNH KỸ THUẬT -->
+<div class="sl sl7" data-s="6">
+    <div class="slide-bg" style="background-image:url('assets/compare-web-dashboard.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="st4_title">// Tổng hợp thông số</div>
+        <div class="ttl" data-i18n="cmp_radar_title">So Sánh Kỹ Thuật Tổng Hợp</div>
+        <div class="tw"><table>
+            <thead><tr>
+                <th data-i18n="tbl_hdr_criteria">Tiêu chí kỹ thuật</th>
+                <th style="color:var(--neon-amber);" data-i18n="tbl_hdr_discrete">📋 Công cụ rời rạc</th>
+                <th class="cp" data-i18n="tbl_hdr_power">🔷 Power Platform</th>
+                <th class="cw" data-i18n="tbl_hdr_web">🌐 Web Platform</th>
+            </tr></thead>
+            <tbody>
+                <tr><td data-i18n="tbl_c1">Kiểm soát &amp; sở hữu dữ liệu</td><td><span class="chip ca" data-i18n="tbl_c1_d">Cục bộ máy cá nhân</span></td><td><span class="chip cr" data-i18n="tbl_c1_p">Cloud MS (Nước ngoài)</span></td><td class="cw"><span class="chip cb" data-i18n="tbl_c1_w">Server nội bộ trực tiếp</span></td></tr>
+                <tr><td data-i18n="tbl_c2">Bảo mật dữ liệu nội bộ</td><td><span class="chip ca" data-i18n="tbl_c2_d">Phụ thuộc máy cá nhân</span></td><td><span class="chip cr" data-i18n="tbl_c2_p">Cloud Microsoft</span></td><td class="cw"><span class="chip cg" data-i18n="tbl_c2_w">Hoàn toàn trong LAN</span></td></tr>
+                <tr><td data-i18n="tbl_c3">Tuỳ biến giao diện &amp; logic</td><td><span class="chip cr" data-i18n="tbl_c3_d">Rất hạn chế</span></td><td><span class="chip ca" data-i18n="tbl_c3_p">Theo khung Power Apps</span></td><td class="cw"><span class="chip cg" data-i18n="tbl_c3_w">100% theo nghiệp vụ</span></td></tr>
+                <tr><td data-i18n="tbl_c4">Phát triển &amp; mở rộng độc lập</td><td><span class="chip cr" data-i18n="tbl_c4_d">Không thể</span></td><td><span class="chip ca" data-i18n="tbl_c4_p">Phụ thuộc bản quyền MS</span></td><td class="cw"><span class="chip cg" data-i18n="tbl_c4_w">Tự do nâng cấp</span></td></tr>
+                <tr><td data-i18n="tbl_c5">Xuất báo cáo form mẫu</td><td><span class="chip cr" data-i18n="tbl_c5_d">Thủ công hoàn toàn</span></td><td><span class="chip ca" data-i18n="tbl_c5_p">Power BI (khác form mẫu)</span></td><td class="cw"><span class="chip cg" data-i18n="tbl_c5_w">Tự động Excel/PDF 100%</span></td></tr>
+                <tr><td data-i18n="tbl_c6">Tích hợp mail/Teams công ty</td><td><span class="chip cr" data-i18n="tbl_c6_d">Không có</span></td><td><span class="chip cg" data-i18n="tbl_c6_p">Sẵn có (Điểm mạnh lớn)</span></td><td class="cw"><span class="chip ca" data-i18n="tbl_c6_w">Lập trình bổ sung được</span></td></tr>
+                <tr><td data-i18n="tbl_c7">Hoạt động khi mất Internet</td><td><span class="chip cg" data-i18n="tbl_c7_d">Bình thường</span></td><td><span class="chip cr" data-i18n="tbl_c7_p">Không thể hoạt động</span></td><td class="cw"><span class="chip cg" data-i18n="tbl_c7_w">Bình thường (LAN)</span></td></tr>
+                <tr><td data-i18n="tbl_c8">Chi phí vận hành dài hạn</td><td><span class="chip cg" data-i18n="tbl_c8_d">Gần như bằng 0</span></td><td><span class="chip cr" data-i18n="tbl_c8_p">Cao (theo đầu user)</span></td><td class="cw"><span class="chip cg" data-i18n="tbl_c8_w">Chỉ chi phí server</span></td></tr>
+                <tr><td data-i18n="tbl_c9">Độ phù hợp nghiệp vụ trạm</td><td><span class="chip ca" data-i18n="tbl_c9_d">Thấp</span></td><td><span class="chip ca" data-i18n="tbl_c9_p">Trung bình</span></td><td class="cw"><span class="chip cg" data-i18n="tbl_c9_w">Cao nhất ★★★</span></td></tr>
+            </tbody>
+        </table></div>
+        <div style="margin-top:0.8rem;display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+            <div style="padding:0.6rem 0.8rem;background:rgba(157,157,255,0.06);border:1px solid rgba(157,157,255,0.18);border-radius:10px;font-size:0.75rem;color:rgba(255,255,255,0.65);line-height:1.5;" data-i18n="compare_tbl_note_power">
+                ℹ️ <strong style="color:var(--neon-purple);">Đặc biệt:</strong> Ghi nhận Power Platform đã liên kết sẵn với mail và Teams của tổng công ty (đây là điểm mạnh sẵn có rất tiện dụng).
+            </div>
+            <div style="padding:0.6rem 0.8rem;background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.18);border-radius:10px;font-size:0.75rem;color:rgba(255,255,255,0.65);line-height:1.5;" data-i18n="compare_tbl_note_web">
+                💡 <strong style="color:var(--neon-blue);">Lộ trình:</strong> Web Platform sau khi chạy ổn định hoàn toàn có thể kết nối với SMTP hoặc API Webhook để tự động gửi thông báo qua mail/Teams của trạm.
+            </div>
+        </div>
+    </div></div>
+</div>
+
+<!-- SLIDE 8: KẾT LUẬN -->
+<div class="sl sl8" data-s="7">
+    <div class="slide-bg" style="background-image:url('assets/compare-future-substation.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="cmp_s8_tag">✅ Kết luận chung</div>
+        <div class="ttl" data-i18n="cmp_s8_title">Lý Do Web Platform Là Tối Ưu Nhất</div>
+        <p class="sub" data-i18n="cmp_s8_sub">Tổng hợp phân tích kỹ thuật và kinh nghiệm triển khai thực tế, việc tự xây dựng Web Platform là con đường đúng đắn và hiệu quả lâu dài.</p>
+        <div class="cplist">
+            <div class="cpt">
+                <div class="cpn" style="color:var(--neon-green);">01</div>
+                <div class="cptx"><strong data-i18n="cmp_s8_cp1_title">Làm chủ và bảo mật dữ liệu tuyệt đối</strong> — <span data-i18n="cmp_s8_cp1_desc">Dữ liệu vận hành hệ thống điện trực tiếp không thể chuyển ra máy chủ cloud nước ngoài. Server nội bộ của Web Platform đáp ứng hoàn hảo tiêu chí này.</span></div>
+            </div>
+            <div class="cpt">
+                <div class="cpn" style="color:var(--neon-green);">02</div>
+                <div class="cptx"><strong data-i18n="cmp_s8_cp2_title">Đáp ứng 100% nghiệp vụ đặc thù</strong> — <span data-i18n="cmp_s8_cp2_desc">Các biểu mẫu ghi chép ca trực, kiểm tra thiết bị định kỳ và tính toán điện năng tổn thất đều rất phức tạp, đòi hỏi khả năng tuỳ biến tối đa mà low-code khó giải quyết triệt để.</span></div>
+            </div>
+            <div class="cpt">
+                <div class="cpn" style="color:var(--neon-green);">03</div>
+                <div class="cptx"><strong data-i18n="rm_scale_i2_title">Hỗ trợ phân tách các Module vận hành độc lập</strong> — <span data-i18n="cmp_s8_cp3_desc">Trong tương lai, Web Platform có thể kết nối trực tiếp với các cảm biến IoT tại trạm, hệ thống SCADA hoặc cổng dữ liệu EVN mà không vướng rào cản bản quyền.</span></div>
+            </div>
+            <div class="cpt">
+                <div class="cpn" style="color:var(--neon-green);">04</div>
+                <div class="cptx"><strong data-i18n="cmp_s8_cp3_title">Tiết kiệm chi phí vận hành dài hạn</strong> — <span data-i18n="cmp_s8_cp3_desc">Loại bỏ hoàn toàn chi phí thuê bản quyền hàng tháng của bên thứ ba. Hệ thống chạy trên máy chủ sẵn có của trạm, chi phí bảo trì tối thiểu.</span></div>
+            </div>
+        </div>
+    </div></div>
+</div>
+
+</div><!-- /.sw -->
+
+<div class="ctrl-wrapper">
+    <div class="slideshow-settings-panel" id="slideshowSettingsPanel">
+        <div class="settings-panel-header">
+            <span>⏱ Thời gian mỗi slide</span>
+            <button class="settings-close-btn" id="settingsCloseBtn">✕</button>
+        </div>
+        <div class="settings-presets">
+            <button class="preset-btn" data-seconds="5">5s</button>
+            <button class="preset-btn" data-seconds="8">8s</button>
+            <button class="preset-btn active" data-seconds="10">10s</button>
+            <button class="preset-btn" data-seconds="15">15s</button>
+            <button class="preset-btn" data-seconds="20">20s</button>
+            <button class="preset-btn" data-seconds="30">30s</button>
+        </div>
+        <div class="settings-slider-row">
+            <span class="settings-slider-label">Tuỳ chỉnh:</span>
+            <input type="range" id="durationSlider" min="3" max="60" value="10" step="1" class="settings-slider">
+            <span id="durationDisplay" class="settings-slider-value">10s</span>
+        </div>
+    </div>
+
+    <div class="bottom-action-row">
+        <button id="settingsBtn" class="slideshow-settings-btn" title="Cài đặt thời gian">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            <span id="settingsDurationLabel">10s</span>
+        </button>
+
+        <button class="nav-circle-btn" id="pb" title="Slide trước (←)">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+
+        <div class="dots-counter-group">
+            <span class="bottom-counter">slide <span id="sn">1</span>/8</span>
+            <div class="cmp-dots" id="dots">
+                <div class="cmp-dot active" data-s="0"></div>
+                <div class="cmp-dot" data-s="1"></div>
+                <div class="cmp-dot" data-s="2"></div>
+                <div class="cmp-dot" data-s="3"></div>
+                <div class="cmp-dot" data-s="4"></div>
+                <div class="cmp-dot" data-s="5"></div>
+                <div class="cmp-dot" data-s="6"></div>
+                <div class="cmp-dot" data-s="7"></div>
+            </div>
+        </div>
+
+        <button class="nav-circle-btn" id="nb" title="Slide sau (→)">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+
+        <button id="playSlideshowBtn" class="play-slideshow-btn" title="Trình chiếu tự động (Phím Space)">
+            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="15" height="15" style="display:none">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+            <span id="playBtnLabel">Trình chiếu</span>
+        </button>
+    </div>
+    <div class="hint-bar">Phím ← → | 1-8 để nhảy slide | Space: Chạy/Tạm dừng | ESC: Thoát</div>
+</div>
+
+<script>
+const matrixEngine = (function(){
+    const ch = '01アイウエオカキクケコサシスセソ０１２３４５6７８９';
+    const fs = 14;
+    let cols = 0, drops = [], colPh = [];
+    let canvas = null, ctx = null, animId = null, lastT = 0;
+    
+    function init(c) {
+        if (!c) return;
+        stop();
+        canvas = c;
+        ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        cols = Math.floor(canvas.width / fs);
+        drops = Array.from({length: cols}, () => Math.random() * (canvas.height / fs));
+        colPh = Array.from({length: cols}, () => Math.random() * Math.PI * 2);
+        lastT = 0;
+        loop(0);
+    }
+    
+    function stop() {
+        if (animId) {
+            cancelAnimationFrame(animId);
+            animId = null;
+        }
+        if (ctx && canvas) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        canvas = null;
+        ctx = null;
+    }
+    
+    function loop(ts) {
+        if (!canvas || !ctx) return;
+        animId = requestAnimationFrame(loop);
+        if (ts - lastT < 55) return;
+        lastT = ts;
+        
+        ctx.fillStyle = 'rgba(10,12,16,0.14)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = fs + 'px JetBrains Mono, monospace';
+        
+        for (let i = 0; i < cols; i++) {
+            const char = ch[Math.floor(Math.random() * ch.length)];
+            const wave = (Math.sin(ts * 0.0008 + colPh[i]) + 1) / 2;
+            const fl = Math.random();
+            const br = wave * 0.5 + fl * 0.5;
+            
+            ctx.fillStyle = br > 0.88 ? `rgba(200,245,255,${0.65 + br * 0.35})`
+                          : br > 0.65 ? `rgba(0,190,255,${0.50 + br * 0.30})`
+                          : br > 0.38 ? `rgba(0,110,210,${0.30 + br * 0.22})`
+                                      : `rgba(0,60,165,${br * 0.28})`;
+                                      
+            ctx.fillText(char, i * fs, drops[i] * fs);
+            if (drops[i] * fs > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i] += (Math.random() * 0.18 + 0.08);
+        }
+    }
+    
+    window.addEventListener('resize', () => {
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            cols = Math.floor(canvas.width / fs);
+            drops = Array.from({length: cols}, () => Math.random() * (canvas.height / fs));
+            colPh = Array.from({length: cols}, () => Math.random() * Math.PI * 2);
+        }
+    });
+    
+    return { init: init, stop: stop };
+})();
+
+function updateActiveMatrix() {
+    const activeSlide = document.querySelector('.sl.active');
+    if (activeSlide) {
+        const c = activeSlide.querySelector('.sl-matrix');
+        matrixEngine.init(c);
+    }
+}
+
+// ---- SLIDE NAVIGATION ----
+const TOTAL = 8;
+let cur = 0;
+const sls = document.querySelectorAll('.sl');
+const dots = document.querySelectorAll('.cmp-dot');
+const pf = document.getElementById('ptfill');
+const sn = document.getElementById('sn');
+
+function goTo(n){
+    n = ((n % TOTAL) + TOTAL) % TOTAL;
+    if (cur === 5 && n !== 5) {
+        document.querySelectorAll('#barChart .bar-fill').forEach(f => f.style.width = '0%');
+    }
+    
+    sls[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = n;
+    sls[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    sn.textContent = cur + 1;
+    
+    updateActiveMatrix();
+    if(cur === 4){ setTimeout(drawRadar, 80); }
+    if(cur === 5){ setTimeout(animateBars, 120); }
+    if(presMode) resetPresTimer();
+}
+
+document.getElementById('pb').onclick = () => goTo(cur-1);
+document.getElementById('nb').onclick = () => goTo(cur+1);
+dots.forEach(function(d){
+    d.addEventListener('click', function(){ goTo(parseInt(d.dataset.s)); });
+});
+
+document.addEventListener('keydown', function(e){
+    if(e.code === 'ArrowRight' || e.code === 'ArrowDown'){ e.preventDefault(); goTo(cur+1); }
+    else if(e.code === 'ArrowLeft' || e.code === 'ArrowUp'){ e.preventDefault(); goTo(cur-1); }
+    else if(e.key >= '1' && e.key <= '8') goTo(parseInt(e.key)-1);
+    else if(e.code === 'Space'){ e.preventDefault(); presMode ? togglePause() : startPres(); }
+    else if(e.code === 'Escape'){ e.preventDefault(); if(presMode) stopPres(); }
+});
+
+let tx = 0;
+document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx;
+    if(Math.abs(dx) > 50) goTo(dx < 0 ? cur+1 : cur-1);
+});
+
+// ---- RADAR CHART ----
+function drawRadar(){
+    var svg = document.getElementById('radarSvg');
+    if(!svg) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var cx = 170, cy = 170, maxR = 118;
+    var axes = ['Kiểm soát DL', 'Tuỳ biến', 'Phát triển DL', 'Hiệu quả CP', 'Offline', 'Bảo mật NB'];
+    try {
+        if (window.getCurrentLang) {
+            const lang = window.getCurrentLang();
+            if (lang === 'en') {
+                axes = ['Data Control', 'Customization', 'Indie Dev', 'Cost Eff.', 'Offline', 'Local Security'];
+            } else if (lang === 'ja') {
+                axes = ['データ制御力', 'カスタム性', '独立開発性', '長期コスト', 'オフライン', 'ローカルセキュリティ'];
+            }
+        }
+    } catch(e) {}
+    var datasets = [
+        { vals: [7, 3, 2, 9, 9, 7], color: '#fbbf24' },
+        { vals: [3, 5, 6, 3, 2, 4], color: '#9d9dff' },
+        { vals: [10, 10, 9, 8, 8, 10], color: '#00f0ff' }
+    ];
+    var n = axes.length;
+    svg.innerHTML = '';
+    
+    [.2, .4, .6, .8, 1].forEach(function(frac){
+        var pts = axes.map(function(_, i){
+            var a = (2*Math.PI*i/n) - Math.PI/2;
+            return (cx + maxR*frac*Math.cos(a)).toFixed(1) + ',' + (cy + maxR*frac*Math.sin(a)).toFixed(1);
+        }).join(' ');
+        var el = document.createElementNS(NS, 'polygon');
+        el.setAttribute('points', pts);
+        el.setAttribute('fill', 'none');
+        el.setAttribute('stroke', frac===1 ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.06)');
+        el.setAttribute('stroke-width', '1');
+        svg.appendChild(el);
+        
+        if(frac>0.19 && frac<0.81){
+            var t = document.createElementNS(NS, 'text');
+            t.setAttribute('x', cx+5); t.setAttribute('y', cy-maxR*frac+3);
+            t.setAttribute('font-size', '7'); t.setAttribute('fill', 'rgba(255,255,255,0.28)');
+            t.setAttribute('font-family', 'Inter, sans-serif');
+            t.appendChild(document.createTextNode(Math.round(frac*10)));
+            svg.appendChild(t);
+        }
+    });
+    
+    axes.forEach(function(_, i){
+        var a = (2*Math.PI*i/n) - Math.PI/2;
+        var line = document.createElementNS(NS, 'line');
+        line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+        line.setAttribute('x2', (cx + maxR*Math.cos(a)).toFixed(1));
+        line.setAttribute('y2', (cy + maxR*Math.sin(a)).toFixed(1));
+        line.setAttribute('stroke', 'rgba(255,255,255,0.1)'); line.setAttribute('stroke-width', '1');
+        svg.appendChild(line);
+        
+        var lx = cx + (maxR + 22)*Math.cos(a), ly = cy + (maxR + 22)*Math.sin(a);
+        var t = document.createElementNS(NS, 'text');
+        t.setAttribute('x', lx.toFixed(1)); t.setAttribute('y', ly.toFixed(1));
+        t.setAttribute('font-size', '9.5'); t.setAttribute('fill', 'rgba(255,255,255,0.72)');
+        t.setAttribute('font-family', 'Inter, sans-serif');
+        var anch = Math.abs(lx - cx) < 8 ? 'middle' : lx > cx ? 'start' : 'end';
+        var base = Math.abs(ly - cy) < 8 ? 'middle' : ly > cy ? 'hanging' : 'auto';
+        t.setAttribute('text-anchor', anch); t.setAttribute('dominant-baseline', base);
+        t.appendChild(document.createTextNode(axes[i]));
+        svg.appendChild(t);
+    });
+    
+    datasets.forEach(function(ds){
+        var pts = ds.vals.map(function(v, i){
+            var a = (2*Math.PI*i/n) - Math.PI/2;
+            var r = maxR*v/10;
+            return (cx + r*Math.cos(a)).toFixed(1) + ',' + (cy + r*Math.sin(a)).toFixed(1);
+        }).join(' ');
+        var fill = document.createElementNS(NS, 'polygon');
+        fill.setAttribute('points', pts);
+        fill.setAttribute('fill', ds.color + '20');
+        fill.setAttribute('stroke', ds.color);
+        fill.setAttribute('stroke-width', '2.5');
+        fill.setAttribute('stroke-linejoin', 'round');
+        fill.style.opacity = '0'; fill.style.transition = 'opacity 0.65s ease';
+        svg.appendChild(fill);
+        
+        setTimeout(function(){ fill.style.opacity = '1'; }, 120);
+        
+        ds.vals.forEach(function(v, i){
+            var a = (2*Math.PI*i/n) - Math.PI/2;
+            var r = maxR*v/10;
+            var dot = document.createElementNS(NS, 'circle');
+            dot.setAttribute('cx', (cx + r*Math.cos(a)).toFixed(1));
+            dot.setAttribute('cy', (cy + r*Math.sin(a)).toFixed(1));
+            dot.setAttribute('r', '4.5'); dot.setAttribute('fill', ds.color);
+            dot.setAttribute('stroke', 'rgba(10,12,16,0.8)'); dot.setAttribute('stroke-width', '1.5');
+            svg.appendChild(dot);
+        });
+    });
+}
+
+// ---- BAR CHART ANIMATION ----
+function animateBars(){
+    var fills = document.querySelectorAll('#barChart .bar-fill');
+    fills.forEach(function(f, i){
+        f.style.width = '0%';
+        var val = parseInt(f.getAttribute('data-val')) || 0;
+        void f.offsetHeight;
+        setTimeout(function(){ f.style.width = val + '%'; }, i * 60 + 50);
+    });
+}
+
+// ---- SETTINGS PANEL & SLIDER ----
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsPanel = document.getElementById('slideshowSettingsPanel');
+const settingsCloseBtn = document.getElementById('settingsCloseBtn');
+const durationSlider = document.getElementById('durationSlider');
+const durationDisplay = document.getElementById('durationDisplay');
+const settingsDurationLabel = document.getElementById('settingsDurationLabel');
+const presetBtns = document.querySelectorAll('.preset-btn');
+
+let presInterval = 10;
+
+function updateDuration(seconds) {
+    presInterval = parseInt(seconds);
+    durationSlider.value = presInterval;
+    durationDisplay.textContent = presInterval + 's';
+    settingsDurationLabel.textContent = presInterval + 's';
+    
+    presetBtns.forEach(btn => {
+        if (parseInt(btn.dataset.seconds) === presInterval) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    if (presMode) {
+        resetPresTimer();
+    }
+}
+
+settingsBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    settingsPanel.classList.toggle('visible');
+    settingsBtn.classList.toggle('is-open');
+});
+
+settingsCloseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    settingsPanel.classList.remove('visible');
+    settingsBtn.classList.remove('is-open');
+});
+
+document.addEventListener('click', (e) => {
+    if (settingsPanel.classList.contains('visible') && !settingsPanel.contains(e.target) && e.target !== settingsBtn) {
+        settingsPanel.classList.remove('visible');
+        settingsBtn.classList.remove('is-open');
+    }
+});
+
+durationSlider.addEventListener('input', function() {
+    updateDuration(this.value);
+});
+
+presetBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        updateDuration(this.dataset.seconds);
+    });
+});
+
+// ---- PRESENTATION MODE ----
+var presMode = false, presPaused = false;
+var presElapsed = 0, presRAF = null, presLastTick = 0;
+const playBtn = document.getElementById('playSlideshowBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+const playBtnLabel = document.getElementById('playBtnLabel');
+const closePresBtn = document.getElementById('cmpPresCloseBtn');
+
+function startPres(){
+    presMode = true; presPaused = false; presElapsed = 0;
+    document.body.classList.add('pres-active');
+    playBtn.classList.add('is-playing');
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = '';
+    playBtnLabel.textContent = 'Tạm dừng';
+    
+    settingsPanel.classList.remove('visible');
+    settingsBtn.classList.remove('is-open');
+    
+    try {
+        const el = document.documentElement;
+        if (el.requestFullscreen) {
+            el.requestFullscreen();
+        } else if (el.webkitRequestFullscreen) {
+            el.webkitRequestFullscreen();
+        }
+    } catch(e) {}
+    
+    presLastTick = performance.now();
+    tickTimer();
+}
+
+function stopPres(){
+    presMode = false; presPaused = false;
+    document.body.classList.remove('pres-active', 'pres-paused');
+    playBtn.classList.remove('is-playing');
+    playIcon.style.display = '';
+    pauseIcon.style.display = 'none';
+    playBtnLabel.textContent = 'Trình chiếu';
+    
+    document.getElementById('ptfill').style.width = '0%';
+    if(presRAF){ cancelAnimationFrame(presRAF); presRAF = null; }
+    
+    try {
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+            (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        }
+    } catch(e) {}
+}
+
+function togglePause(){
+    presPaused = !presPaused;
+    document.body.classList.toggle('pres-paused', presPaused);
+    if(presPaused) {
+        playBtnLabel.textContent = 'Tiếp tục';
+        playIcon.style.display = '';
+        pauseIcon.style.display = 'none';
+        if(presRAF){ cancelAnimationFrame(presRAF); presRAF = null; }
+    } else {
+        playBtnLabel.textContent = 'Tạm dừng';
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = '';
+        presLastTick = performance.now();
+        tickTimer();
+    }
+}
+
+function resetPresTimer(){ presElapsed = 0; presLastTick = performance.now(); }
+
+function tickTimer(){
+    if(!presMode || presPaused){ presRAF = null; return; }
+    var now = performance.now();
+    presElapsed += (now - presLastTick)/1000;
+    presLastTick = now;
+    var frac = Math.min(presElapsed/presInterval, 1);
+    document.getElementById('ptfill').style.width = (frac*100) + '%';
+    
+    if(frac >= 1){
+        presElapsed = 0;
+        if(cur === TOTAL - 1) {
+            stopPres();
+            goTo(0);
+            return;
+        } else {
+            goTo(cur+1);
+        }
+    }
+    presRAF = requestAnimationFrame(tickTimer);
+}
+
+playBtn.onclick = function(){ presMode ? togglePause() : startPres(); };
+closePresBtn.onclick = function(e){ e.stopPropagation(); stopPres(); };
+
+document.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && presMode) {
+        stopPres();
+    }
+});
+document.addEventListener('webkitfullscreenchange', function() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && presMode) {
+        stopPres();
+    }
+});
+
+(function(){
+    var ov = document.getElementById('pageEnterOverlay');
+    if(!ov) return;
+    requestAnimationFrame(function(){ setTimeout(function(){ ov.style.opacity = '0'; }, 50); });
+})();
+
+window.addEventListener('DOMContentLoaded', () => {
+    if(cur === 4) drawRadar();
+    if(cur === 5) { animateBars(); }
+    updateActiveMatrix();
+});
+</script>
+<script src="lang.js"></script>
+</body>
+</html>

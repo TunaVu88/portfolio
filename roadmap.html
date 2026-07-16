@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kế hoạch triển khai &amp; Thiết bị vật tư | TA_DCGE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-dark:      #0a0c10;
+    --neon-blue:    #00f0ff;
+    --neon-pink:    #ff007f;
+    --neon-green:   #00ff88;
+    --neon-amber:   #fbbf24;
+    --neon-purple:  #9d9dff;
+    --text-primary: rgba(255,255,255,0.92);
+    --text-muted:   rgba(255,255,255,0.45);
+    --border-color: rgba(255,255,255,0.08);
+    --font-body:    'Inter', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+    --transition:   all 0.3s cubic-bezier(0.4,0,0.2,1);
+    --glow-blue:    0 0 12px rgba(0, 240, 255, 0.35);
+    --glow-pink:    0 0 12px rgba(255, 0, 127, 0.35);
+}
+
+/* Language Switcher */
+.lang-switcher {
+    display: inline-flex;
+    gap: 0.2rem;
+    margin-left: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.22rem;
+    border-radius: 10px;
+    align-items: center;
+}
+.lang-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.22rem 0.45rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+.lang-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+.lang-btn.active {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--neon-blue);
+    text-shadow: var(--glow-blue);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--bg-dark); color: var(--text-primary); font-family: var(--font-body); }
+#pageEnterOverlay { position: fixed; inset: 0; z-index: 9999; background: #0a0c10; opacity: 1; pointer-events: none; transition: opacity 0.45s ease; }
+
+/* === PRESENTATION MODE TIMER BAR === */
+#ptbar { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 300; background: rgba(255, 255, 255, 0.08); opacity: 0; transition: opacity 0.3s; }
+#ptfill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink)); transition: width 0.1s linear; box-shadow: 0 0 8px var(--neon-blue); }
+.pres-active #ptbar { opacity: 1; }
+
+/* Pause banner */
+#ppause { position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 400; padding: 0.4rem 1.4rem; background: rgba(255,0,127,0.18); border: 1px solid rgba(255,0,127,0.4); border-radius: 0 0 14px 14px; font-family: var(--font-mono); font-size: 0.7rem; color: #ff007f; display: none; backdrop-filter: blur(10px); letter-spacing: 1px; }
+.pres-paused #ppause { display: block; }
+
+/* Header hide in pres */
+.pres-active header { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+
+/* Nút thoát trình chiếu góc trên bên phải */
+.cmp-pres-close-btn {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.2rem;
+    z-index: 350;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(10,12,16,0.65);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.2s;
+}
+.cmp-pres-close-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+    transform: scale(1.05);
+}
+.pres-active .cmp-pres-close-btn {
+    display: flex;
+}
+
+/* === HEADER === */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    background-color: rgba(10, 12, 16, 0.75);
+    transition: opacity 0.3s;
+}
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+.logo-img {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 0, 127, 0.22);
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.18);
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+.logo:hover .logo-img {
+    border-color: var(--neon-pink);
+    box-shadow: var(--glow-pink);
+    transform: rotate(5deg) scale(1.05);
+}
+.logo-text {
+    font-size: 1.25rem;
+    font-weight: 800;
+    border-bottom: 2px solid var(--neon-pink);
+    padding-bottom: 1px;
+}
+.logo-accent {
+    color: var(--neon-pink);
+    text-shadow: var(--glow-pink);
+}
+.hnav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: auto;
+}
+.bk {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.48rem 1.1rem 0.48rem 0.85rem;
+    text-decoration: none;
+    color: var(--neon-blue);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: rgba(0, 240, 255, 0.05);
+    border: 1px solid rgba(0, 240, 255, 0.28);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.08);
+    transition: all 0.28s ease;
+    white-space: nowrap;
+}
+.bk:hover {
+    background: rgba(0, 240, 255, 0.12);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.28), inset 0 0 12px rgba(0, 240, 255, 0.06);
+    color: #fff;
+    transform: translateX(-2px);
+}
+.bk svg { transition: transform 0.28s ease; }
+.bk:hover svg { transform: translateX(-3px); }
+
+.bk-compare {
+    color: var(--neon-blue);
+    background: rgba(0, 240, 255, 0.05);
+    border-color: rgba(0, 240, 255, 0.28);
+}
+
+/* === SLIDES === */
+.sw { position: fixed; inset: 0; }
+.sl { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 5.8rem 2rem 5.5rem; opacity: 0; pointer-events: none; transform: translateY(18px); transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2,0.8,0.2,1); }
+.sl.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+.si { position: relative; z-index: 1; max-height: calc(100vh - 10.5rem); overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(0, 240, 255, 0.2) transparent; width: 100%; display: flex; flex-direction: column; align-items: center; }
+.si::-webkit-scrollbar { width: 3px; }
+.si::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.25); border-radius: 3px; }
+
+/* === SLIDE BACKGROUNDS === */
+.slide-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.70;
+    filter: brightness(0.42) contrast(1.15);
+    transition: opacity 0.5s ease;
+}
+.sl-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at center, rgba(10,12,16,0.05) 0%, rgba(10,12,16,0.72) 100%);
+    pointer-events: none;
+}
+.sl-matrix {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.26;
+}
+
+/* === CARD === */
+.card { width: 100%; max-width: 980px; background: rgba(10,13,20,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.10); border-radius: 20px; padding: 2rem 2.6rem; box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+.tag { font-family: var(--font-mono); font-size: 0.63rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 0.55rem; }
+.ttl { font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 900; line-height: 1.2; margin-bottom: 0.5rem; }
+.sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.4rem; line-height: 1.6; }
+
+/* === PANEL MÔ TẢ THUẬN LỢI LỚN === */
+.rm-panel-large {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.6rem 2.2rem;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    transition: var(--transition);
+}
+.rm-panel-large:hover {
+    border-color: rgba(255, 0, 127, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 12px 40px rgba(255, 0, 127, 0.05);
+}
+.rm-panel-large-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.8rem;
+}
+.rm-panel-large-icon {
+    font-size: 1.5rem;
+}
+.rm-panel-large-title {
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--neon-pink);
+    letter-spacing: 0.5px;
+}
+.rm-panel-large-body {
+    font-size: 0.86rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.76);
+}
+.rm-panel-large-body p {
+    margin-bottom: 1.1rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+.rm-bullet-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.rm-bullet-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.8rem 1.1rem;
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    transition: var(--transition);
+}
+.rm-bullet-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(0, 240, 255, 0.15);
+}
+.rm-bullet-num {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: var(--neon-blue);
+    flex-shrink: 0;
+    min-width: 1.8rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    padding-right: 0.5rem;
+}
+.rm-bullet-text {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.78);
+    flex: 1;
+}
+.rm-bullet-text strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* Layout Grid Chia 2 */
+.layout-split { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: center; width: 100%; }
+.split-content { display: flex; flex-direction: column; gap: 0.8rem; }
+.split-media { width: 100%; display: flex; justify-content: center; position: relative; }
+
+/* === SLIDESHOW TỰ ĐỘNG CHUYỂN FADE MƯỢT === */
+.rm-slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    height: 300px;
+    background: #0d0f14;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,240,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rm-slideshow.slideshow-pink {
+    border-color: rgba(255, 0, 127, 0.22);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(255, 0, 127, 0.06);
+}
+
+.rm-slide-img, .rm-slide-img-other {
+    position: absolute;
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    z-index: 1;
+}
+.rm-slide-img.active, .rm-slide-img-other.active {
+    opacity: 1;
+    z-index: 2;
+}
+.rm-slideshow-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(13,15,20,0.95) 0%, rgba(13,15,20,0.72) 75%, transparent 100%);
+    padding: 1.2rem 1rem 0.8rem;
+    text-align: center;
+    z-index: 5;
+    border-top: 1px solid rgba(255,255,255,0.02);
+}
+
+/* === LIST BOX ROADMAP === */
+.rm-list { display: flex; flex-direction: column; gap: 0.65rem; list-style: none; }
+.rm-item { display: flex; gap: 0.8rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 0.8rem 1.1rem; transition: var(--transition); cursor: pointer; position: relative; }
+.rm-item:hover { border-color: rgba(0,240,255,0.3); background: rgba(255,255,255,0.06); box-shadow: 0 4px 12px rgba(0,240,255,0.08); }
+.rm-item::after {
+    content: '➔';
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%) translateX(0px);
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+.rm-item:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(4px);
+}
+.rm-icon { font-size: 1.3rem; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0; }
+.rm-details { display: flex; flex-direction: column; gap: 0.2rem; padding-right: 1.5rem; }
+.rm-title { font-weight: 700; font-size: 0.88rem; color: rgba(255,255,255,0.92); }
+.rm-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Table style for pricing */
+.pricing-table-wrap { border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; margin-top: 0.5rem; }
+.pricing-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.pricing-table th { padding: 0.6rem 0.8rem; background: rgba(255,255,255,0.04); font-family: var(--font-mono); font-size: 0.65rem; color: var(--neon-pink); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.pricing-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.04); text-align: left; }
+.pricing-table td.price-num { font-family: var(--font-mono); color: var(--neon-blue); font-weight: 700; text-align: right; }
+.pricing-table tr.clickable-row { cursor: pointer; transition: var(--transition); }
+.pricing-table tr.clickable-row:hover { background: rgba(255,255,255,0.04); border-color: rgba(255, 0, 127, 0.3); }
+.pricing-table tr.clickable-row:hover td { color: #fff; }
+.pricing-table tr:last-child td { border-bottom: none; }
+.pricing-table .total-row { background: rgba(0, 240, 255, 0.04); font-weight: 700; }
+.pricing-table .total-row td { color: #fff; }
+.pricing-table .total-row td.price-num { color: var(--neon-pink); }
+
+/* === INTERACTIVE POPUP MODAL === */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(10, 12, 16, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+.modal-card {
+    background: rgba(13, 15, 20, 0.98);
+    border: 1px solid rgba(0, 240, 255, 0.28);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 720px;
+    padding: 2.2rem 2rem;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.15), 0 20px 50px rgba(0,0,0,0.8);
+    position: relative;
+    transform: translateY(20px) scale(0.96);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.modal-overlay.active .modal-card {
+    transform: translateY(0) scale(1);
+}
+.modal-close-btn {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.modal-close-btn:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+}
+.modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+    align-items: center;
+}
+.modal-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0d0f14;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    height: 250px;
+    box-shadow: inset 0 0 15px rgba(0,240,255,0.08);
+}
+.modal-left img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: screen;
+}
+.modal-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.modal-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--neon-pink);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.modal-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+}
+.modal-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.76);
+    line-height: 1.6;
+}
+.modal-meta {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+.meta-label {
+    color: var(--text-muted);
+}
+.meta-val {
+    color: var(--neon-blue);
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+/* === CONTROLS WRAPPER === */
+.ctrl-wrapper { position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%); z-index: 150; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; width: min(480px, 85vw); }
+
+/* POPUP SETTINGS */
+.slideshow-settings-panel {
+    display: none;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem 1.1rem;
+    background: rgba(10, 12, 16, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 0, 127, 0.22);
+    border-radius: 16px;
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(255, 0, 127, 0.08);
+    width: 100%;
+    animation: panelSlideUp 0.25s cubic-bezier(0.2,0.8,0.2,1);
+}
+.slideshow-settings-panel.visible { display: flex; }
+
+@keyframes panelSlideUp {
+    from { opacity: 0; transform: translateY(8px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.settings-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--neon-pink);
+    letter-spacing: 0.5px;
+}
+.settings-close-btn { background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 0.85rem; padding: 0 0.2rem; transition: color 0.2s; }
+.settings-close-btn:hover { color: #fff; }
+
+.settings-presets { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.preset-btn {
+    padding: 0.3rem 0.65rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    color: rgba(255,255,255,0.6);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.preset-btn:hover { background: rgba(255, 0, 127, 0.1); border-color: rgba(255, 0, 127, 0.4); color: var(--neon-pink); }
+.preset-btn.active {
+    background: rgba(255, 0, 127, 0.15);
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
+}
+
+.settings-slider-row { display: flex; align-items: center; gap: 0.6rem; }
+.settings-slider-label { font-family: var(--font-mono); font-size: 0.68rem; color: rgba(255,255,255,0.4); white-space: nowrap; flex-shrink: 0; }
+.settings-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 3px; background: rgba(255,255,255,0.12); border-radius: 3px; outline: none; cursor: pointer; }
+.settings-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--neon-pink); box-shadow: 0 0 8px rgba(255, 0, 127, 0.5); cursor: pointer; transition: transform 0.15s; }
+.settings-slider::-webkit-slider-thumb:hover { transform: scale(1.3); }
+.settings-slider-value { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--neon-pink); min-width: 2.5rem; text-align: right; }
+
+.bottom-action-row { display: flex; align-items: center; gap: 0.45rem; width: 100%; justify-content: center; }
+
+/* NUT SETTINGS */
+.slideshow-settings-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.38rem 0.75rem;
+    background: rgba(10, 12, 16, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.slideshow-settings-btn:hover { border-color: rgba(255, 0, 127, 0.35); color: var(--neon-pink); box-shadow: 0 0 14px rgba(255, 0, 127, 0.18), 0 4px 14px rgba(0,0,0,0.45); }
+.slideshow-settings-btn.is-open { border-color: var(--neon-pink); color: var(--neon-pink); box-shadow: 0 0 16px rgba(255, 0, 127, 0.28); }
+
+/* NUT NAVIGATION PREV/NEXT */
+.nav-circle-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.16); background: rgba(10,12,16,0.75); backdrop-filter: blur(8px); color: rgba(255,255,255,0.6); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); flex-shrink: 0; }
+.nav-circle-btn:hover { border-color: var(--neon-pink); color: var(--neon-pink); box-shadow: 0 0 12px rgba(255, 0, 127, 0.2); }
+
+/* BỘ ĐẾM VÀ DOTS */
+.dots-counter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(10,12,16,0.6);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 0.38rem 0.9rem;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.bottom-counter {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    border-right: 1px solid rgba(255,255,255,0.15);
+    padding-right: 0.75rem;
+    white-space: nowrap;
+}
+.bottom-counter span {
+    color: var(--neon-pink);
+    font-weight: 700;
+}
+.cmp-dots { display: flex; gap: 0.45rem; align-items: center; }
+.cmp-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.22); cursor: pointer; transition: all 0.3s; }
+.cmp-dot.active { background: #fff; transform: scale(1.4); box-shadow: 0 0 8px rgba(255,255,255,0.5); }
+
+/* NUT PLAY SLIDESHOW */
+.play-slideshow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.38rem 1.2rem;
+    background: rgba(10, 12, 16, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 0, 127, 0.32);
+    border-radius: 20px;
+    color: var(--neon-pink);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 14px rgba(255, 0, 127, 0.14), 0 4px 16px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    flex-grow: 1;
+}
+.play-slideshow-btn:hover { background: rgba(255, 0, 127, 0.09); border-color: var(--neon-pink); box-shadow: 0 0 24px rgba(255, 0, 127, 0.28), 0 4px 16px rgba(0,0,0,0.5); transform: scale(1.03); }
+.play-slideshow-btn.is-playing { border-color: var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 18px rgba(0, 240, 255, 0.28), 0 4px 16px rgba(0,0,0,0.5); animation: playBtnPulse 1.8s ease-in-out infinite; }
+.play-slideshow-btn.is-playing:hover { background: rgba(0, 240, 255, 0.08); transform: scale(1.03); }
+
+@keyframes playBtnPulse {
+    0%, 100% { box-shadow: 0 0 18px rgba(0, 240, 255, 0.28), 0 4px 16px rgba(0,0,0,0.5); }
+    50%       { box-shadow: 0 0 32px rgba(0, 240, 255, 0.52), 0 4px 16px rgba(0,0,0,0.5); }
+}
+
+.hint-bar { font-family: var(--font-mono); font-size: 0.56rem; color: rgba(255,255,255,0.18); text-align: center; }
+
+/* Slide Active Colors */
+.sl1 .card { border-color: rgba(255,0,127,0.2); }.sl1 .tag { color: var(--neon-pink); }.sl1 .ttl { background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sl2 .card { border-color: rgba(0,240,255,0.22); }.sl2 .tag { color: var(--neon-blue); }.sl2 .ttl { color: var(--neon-blue); }
+.sl3 .card { border-color: rgba(157,157,255,0.28); }.sl3 .tag { color: var(--neon-purple); }.sl3 .ttl { color: var(--neon-purple); }
+.sl4 .card { border-color: rgba(0,255,136,0.2); }.sl4 .tag { color: var(--neon-green); }.sl4 .ttl { color: var(--neon-green); }
+
+@media (max-width: 768px) {
+    .card { padding: 1.2rem 1rem; }
+    .layout-split { grid-template-columns: 1fr; }
+    .split-media img { max-width: 100%; }
+    .ttl { font-size: 1.3rem; }
+    .nav-container { padding: 0 1rem; height: 70px; }
+    .logo-text { font-size: 1.05rem; }
+    .logo-img { width: 30px; height: 30px; }
+    .bk { padding: 0.35rem 0.75rem; font-size: 0.7rem; }
+}
+</style>
+</head>
+<body>
+<div id="pageEnterOverlay"></div>
+<div id="ptbar"><div id="ptfill"></div></div>
+<div id="ppause">⏸ TẠM DỪNG — nhấn Space để tiếp tục | ESC để thoát</div>
+<button class="cmp-pres-close-btn" id="cmpPresCloseBtn" title="Thoát trình chiếu (Esc)">✕</button>
+
+<header>
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="assets/logo.jpg" alt="TuNa88VN Logo" class="logo-img">
+            <span class="logo-text"><span class="logo-accent">&lt;</span>TuNa88VN<span class="logo-accent"> /&gt;</span></span>
+        </a>
+        
+        <div class="hnav">
+            <a href="compare.html" class="bk bk-compare">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13" style="vertical-align:middle;margin-right:2px;"><path d="M15 19l-7-7 7-7"/></svg>
+                <span data-i18n="nav_compare">So Sánh</span>
+            </a>
+            <a href="story.html" class="bk" style="color:var(--neon-purple); border-color:rgba(157,157,255,0.28); background:rgba(157,157,255,0.05);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13" style="vertical-align:middle;margin-right:2px;"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                <span data-i18n="nav_story">Hành Trình</span>
+            </a>
+            <a href="index.html" class="bk" style="color:var(--text-muted); border-color:rgba(255,255,255,0.12); background:rgba(255,255,255,0.02);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" style="vertical-align:middle;margin-right:2px;"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                <span data-i18n="nav_home">Trang Chủ</span>
+            </a>
+            <div class="lang-switcher"></div>
+        </div>
+    </div>
+</header>
+
+<div class="sw">
+
+<!-- SLIDE 1: THUẬN LỢI HIỆN TẠI -->
+<div class="sl sl1 active" data-s="0">
+    <div class="slide-bg" style="background-image:url('assets/compare-future-substation.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="st3_title">// Giai đoạn hiện tại · Thuận lợi</div>
+        <div class="ttl" data-i18n="rm_main_title">Thuận Lợi &amp; Hạ Tầng Có Sẵn</div>
+        <p class="sub" data-i18n="rm_main_sub">Quá trình khởi chạy bước đầu gặp nhiều thuận lợi nhờ tận dụng và tối ưu hoá tối đa tài nguyên sẵn có tại Trạm biến áp 110kV.</p>
+        
+        <div class="rm-panel-large">
+            <div class="rm-panel-large-header">
+                <span class="rm-panel-large-icon">🏢</span>
+                <div class="rm-panel-large-title" data-i18n="rm_panel_title">Phân Tích Chi Tiết Các Lợi Thế Hạ Tầng Có Sẵn</div>
+            </div>
+            <div class="rm-panel-large-body">
+                <p data-i18n="rm_panel_intro">Việc triển khai xây dựng hệ thống <strong>Web Platform</strong> tại Trạm biến áp 110kV Deep C2 đang sở hữu những điều kiện thuận lợi và lợi thế cốt lõi về hạ tầng phần cứng tại chỗ:</p>
+                
+                <div class="rm-bullet-section">
+                    <div class="rm-bullet-row">
+                        <div class="rm-bullet-num">01</div>
+                        <div class="rm-bullet-text">
+                            <strong data-i18n="rm_b1_title">Tận dụng 01 máy chủ server vật lý cũ có sẵn:</strong> 
+                            <span data-i18n="rm_b1_desc">Trạm hiện đang có dư thừa 01 thiết bị máy chủ server không còn sử dụng nhưng cấu hình vẫn hoạt động ổn định và bền bỉ. Nhóm phát triển đã tận dụng ngay máy chủ này để cài đặt cơ sở dữ liệu và vận hành ứng dụng trực tiếp (On-premises). Việc này giúp hệ thống được vận hành thực tế ngay lập tức mà không cần tốn thời gian chờ đợi phê duyệt mua sắm phần cứng mới, đồng thời giảm thiểu chi phí đầu tư ban đầu về mức 0 đồng.</span>
+                        </div>
+                    </div>
+                    <div class="rm-bullet-row">
+                        <div class="rm-bullet-num">02</div>
+                        <div class="rm-bullet-text">
+                            <strong data-i18n="rm_b2_title">Hạ tầng cáp LAN nội bộ kết nối sẵn mượt mà:</strong> 
+                            <span data-i18n="rm_b2_desc">Máy chủ thử nghiệm được đặt trực tiếp và kết nối an toàn vào tủ mạng switch trung tâm của trạm biến áp. Nhờ vậy, tất cả các máy tính của kỹ sư trực ca và máy tính trưởng trạm đều dễ dàng truy cập cổng thông tin với tốc độ truyền tải cực cao (Gigabit LAN), ổn định tuyệt đối và hoàn toàn không phụ thuộc vào kết nối Internet ra bên ngoài.</span>
+                        </div>
+                    </div>
+                    <div class="rm-bullet-row">
+                        <div class="rm-bullet-num">03</div>
+                        <div class="rm-bullet-text">
+                            <strong data-i18n="rm_b3_title">Môi trường thực nghiệm và tương tác ca trực trực tiếp:</strong> 
+                            <span data-i18n="rm_b3_desc">Lợi thế lớn nhất là hệ thống đặt ngay tại phòng điều khiển trung tâm trạm. Nhóm phát triển (sự phối hợp chặt chẽ giữa Mr Quang và đội ngũ phát triển) có cơ hội làm việc và lấy phản hồi trực tiếp từ các kỹ sư vận hành trong suốt các ca trực 24/7. Điều này giúp nhanh chóng tinh chỉnh các form nhập liệu, logic tính hao hụt điện năng và cơ chế cảnh báo logic để bám sát 100% quy trình vận hành thực tế của trạm.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+</div>
+
+<!-- SLIDE 2: MUA SẮM VẬT TƯ GIAI ĐOẠN HIỆN TẠI -->
+<div class="sl sl2" data-s="1">
+    <div class="slide-bg" style="background-image:url('assets/compare-web-dashboard.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="rm_s2_tag">// Nhu cầu vật tư hiện tại</div>
+        <div class="ttl" data-i18n="rm_s2_title">Vật Tư Đề Xuất Mua Bổ Sung</div>
+        
+        <div class="layout-split">
+            <div class="split-content">
+                <p class="sub" style="margin-bottom:0.5rem;" data-i18n="rm_s2_sub"><strong style="color:var(--neon-pink);">Tương tác trực quan:</strong> Nhấn vào từng vật tư bên dưới để xem lý do kỹ thuật bắt buộc và mô phỏng 3D đối tượng:</p>
+                <div class="rm-list">
+                    <div class="rm-item" data-modal-id="ssd">
+                        <div class="rm-icon" style="background:rgba(251,191,36,0.1);color:var(--neon-amber);font-size:1.15rem;">💾</div>
+                        <div class="rm-details">
+                            <div class="rm-title" style="font-size:0.82rem;" data-i18n="rm_s2_i1_title">SSD Enterprise 1TB (x2 ổ đĩa)</div>
+                            <div class="rm-desc" style="font-size:0.75rem;" data-i18n="rm_s2_i1_desc">Thiết lập cấu hình RAID 1 chạy song song (Mirroring) đảm bảo an toàn dữ liệu 100% khi có sự cố vật lý.</div>
+                        </div>
+                    </div>
+                    <div class="rm-item" data-modal-id="switch">
+                        <div class="rm-icon" style="background:rgba(0,240,255,0.1);color:var(--neon-blue);font-size:1.15rem;">🔌</div>
+                        <div class="rm-details">
+                            <div class="rm-title" style="font-size:0.82rem;" data-i18n="rm_s2_i2_title">Switch mạng chuyên dụng</div>
+                            <div class="rm-desc" style="font-size:0.75rem;" data-i18n="rm_s2_i2_desc">Thiết lập phân đoạn mạng LAN riêng biệt, nâng cao độ bảo mật và độ trễ truyền dữ liệu vận hành.</div>
+                        </div>
+                    </div>
+                    <div class="rm-item" data-modal-id="email">
+                        <div class="rm-icon" style="background:rgba(157,157,255,0.1);color:var(--neon-purple);font-size:1.15rem;">📧</div>
+                        <div class="rm-details">
+                            <div class="rm-title" style="font-size:0.82rem;" data-i18n="rm_s2_i3_title">E-mail riêng cho nhóm phát triển</div>
+                            <div class="rm-desc" style="font-size:0.75rem;" data-i18n="rm_s2_i3_desc">Tự động hóa thông báo lỗi, gửi báo cáo và phê duyệt từ xa Lệnh Công Tác qua e-mail.</div>
+                        </div>
+                    </div>
+                    <div class="rm-item" data-modal-id="domain">
+                        <div class="rm-icon" style="background:rgba(255,0,127,0.1);color:var(--neon-pink);font-size:1.15rem;">🌐</div>
+                        <div class="rm-details">
+                            <div class="rm-title" style="font-size:0.82rem;" data-i18n="rm_s2_i4_title">Địa chỉ Domain riêng chuyên nghiệp</div>
+                            <div class="rm-desc" style="font-size:0.75rem;" data-i18n="rm_s2_i4_desc">Tên miền chính thức dự kiến <strong>dcgeportal.vn</strong> để định danh và chuyên nghiệp hóa hệ thống.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="split-media">
+                <div class="rm-slideshow" id="slideshowCurrent">
+                    <img class="rm-slide-img active" src="assets/ssd-solo.jpg" alt="SSD Enterprise">
+                    <img class="rm-slide-img" src="assets/switch-solo-v3.jpg" alt="Switch Gigabit">
+                    <img class="rm-slide-img" src="assets/email-solo.jpg" alt="Biểu tượng E-mail">
+                    <img class="rm-slide-img" src="assets/domain-solo.jpg" alt="Tên miền dcgeportal.vn">
+                    <div class="rm-slideshow-overlay">
+                        <div style="font-family:var(--font-mono);font-size:0.68rem;font-weight:700;color:var(--neon-blue);letter-spacing:1px;margin-bottom:0.2rem;" data-i18n="rm_s2_slide_hdr">VẬT TƯ ĐỀ XUẤT MUA SẮM</div>
+                        <div style="font-size:0.6rem;color:rgba(255,255,255,0.48);" data-i18n="rm_s2_slide_hint">Click các vật tư bên trái để xem lý do kỹ thuật chi tiết</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+</div>
+
+<!-- SLIDE 3: ĐỊNH HƯỚNG TƯƠNG LAI (MỞ RỘNG SERVER & UPS) -->
+<div class="sl sl3" data-s="2">
+    <div class="slide-bg" style="background-image:url('assets/roadmap-scaling.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="rm_scale_tag">// Định hướng tương lai · Hệ thống mở rộng</div>
+        <div class="ttl" data-i18n="rm_scale_title">Mở Rộng Mô Hình &amp; Scaling Server/UPS</div>
+        
+        <div class="layout-split">
+            <div class="split-content">
+                <p class="sub" style="margin-bottom:0.5rem;" data-i18n="rm_scale_sub"><strong style="color:var(--neon-purple);">Kiến trúc hạ tầng:</strong> Thiết kế nâng cao sử dụng máy chủ chuyên dụng Dell R260 kết hợp cùng bộ lưu điện an toàn Santak C3K:</p>
+                <div class="rm-list">
+                    <div class="rm-item" style="cursor:default;">
+                        <div class="rm-icon" style="background:rgba(0,240,255,0.1);color:var(--neon-blue);">🚀</div>
+                        <div class="rm-details">
+                            <div class="rm-title" data-i18n="rm_scale_i1_title">Hỗ trợ phân mảng dữ liệu (Data Partitioning)</div>
+                            <div class="rm-desc" style="display:block;" data-i18n="rm_scale_i1_desc">Sức mạnh xử lý của <strong>CPU Xeon E-2468 (8 nhân / 16 luồng)</strong> và <strong>64GB RAM DDR5 ECC</strong> hỗ trợ phân mảng cơ sở dữ liệu lớn (SCADA, lịch sử phụ tải trạm) theo thời gian trực ca, giúp tối ưu hóa bộ nhớ đệm cache và tăng tốc độ truy xuất báo cáo tức thì.</div>
+                        </div>
+                    </div>
+                    <div class="rm-item" style="cursor:default;">
+                        <div class="rm-icon" style="background:rgba(157,157,255,0.1);color:var(--neon-purple);">📦</div>
+                        <div class="rm-details">
+                            <div class="rm-title" data-i18n="rm_scale_i2_title">Hỗ trợ phân tách các Module vận hành độc lập</div>
+                            <div class="rm-desc" style="display:block;" data-i18n="rm_scale_i2_desc">Sẵn sàng chạy ảo hóa/Docker cô lập các module nghiệp vụ chuyên biệt: module SCADA quét cổng dữ liệu tự động, module giám sát IoT cảm biến nhiệt độ đầu cáp, và module số hóa Lệnh Công Tác. Hỗ trợ nâng cấp từng mảng mà không gây downtime toàn trạm.</div>
+                        </div>
+                    </div>
+                    <div class="rm-item" style="cursor:default;">
+                        <div class="rm-icon" style="background:rgba(0,255,136,0.1);color:var(--neon-green);">⚡</div>
+                        <div class="rm-details">
+                            <div class="rm-title" data-i18n="rm_scale_i3_title">Tối ưu hiệu năng Web &amp; Băng thông LAN</div>
+                            <div class="rm-desc" style="display:block;" data-i18n="rm_scale_i3_desc">Sự kết hợp giữa <strong>2 × 1TB Enterprise NVMe SSD (chạy RAID 1 cứng qua card PERC H355/H755)</strong> và <strong>băng thông Dual 1GbE LOM</strong> đảm bảo loại bỏ hoàn toàn hiện tượng nghẽn cổ chai đọc/ghi I/O, phản hồi giao diện web tức thì kể cả khi có hàng trăm yêu cầu cùng lúc.</div>
+                        </div>
+                    </div>
+                    <div class="rm-item" style="cursor:default;">
+                        <div class="rm-icon" style="background:rgba(255,0,127,0.1);color:var(--neon-pink);">🔋</div>
+                        <div class="rm-details">
+                            <div class="rm-title" data-i18n="rm_scale_i4_title">Đảm bảo nguồn điện sạch liên tục (UPS Santak C3K)</div>
+                            <div class="rm-desc" style="display:block;" data-i18n="rm_scale_i4_desc">Tích hợp bộ lưu điện <strong>Online 3000VA</strong> có ắc quy khô kín khí trong thân máy bảo vệ server Dell R260 khỏi các sự cố sốc điện, sụt áp hoặc mất điện tự dùng đột ngột của trạm 110kV. Công nghệ chuyển đổi kép tạo ra dòng điện hình sin chuẩn sạch, kéo dài tuổi thọ phần cứng máy chủ.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="split-media">
+                <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(157,157,255,0.2);border-radius:16px;padding:1.1rem;width:100%;box-shadow:0 8px 32px rgba(0,0,0,0.45);">
+                    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:0.4rem;">
+                        <span style="font-size:1.15rem;">🖥️</span>
+                        <div style="font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:var(--neon-purple);letter-spacing:0.5px;" data-i18n="rm_scale_tbl_title">CẤU HÌNH GÓI THIẾT BỊ MỞ RỘNG</div>
+                    </div>
+                    
+                    <div style="display:flex;justify-content:center;gap:0.5rem;margin-bottom:0.6rem;background:#0d0f14;border-radius:10px;padding:0.4rem;border:1px solid rgba(255,255,255,0.03);height:95px;">
+                        <img src="assets/server-solo.jpg" alt="Dell PowerEdge R260" style="max-height:100%;object-fit:contain;mix-blend-mode:screen;width:45%;">
+                        <img src="assets/ups-solo.jpg" alt="UPS Santak C3K" style="max-height:100%;object-fit:contain;mix-blend-mode:screen;width:45%;">
+                    </div>
+                    
+                    <div class="pricing-table-wrap" style="margin-top:0;">
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th style="font-size:0.55rem;padding:0.35rem 0.55rem;color:var(--neon-purple);" data-i18n="rm_scale_tbl_col1">Thiết bị mở rộng</th>
+                                    <th style="font-size:0.55rem;padding:0.35rem 0.55rem;color:var(--neon-purple);" data-i18n="rm_scale_tbl_col2">Thông số kỹ thuật khuyến nghị</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size:0.72rem;">
+                                <tr>
+                                    <td><strong data-i18n="rm_scale_tbl_server">1. Máy chủ chuyên dụng</strong></td>
+                                    <td data-i18n="rm_scale_tbl_server_spec">Dell PowerEdge R260 (CPU Xeon E-2468, 64GB DDR5 ECC, 2x1TB SSD Enterprise, card RAID PERC H355/H755, Dual 1GbE)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="rm_scale_tbl_ups">2. Bộ lưu điện UPS</strong></td>
+                                    <td data-i18n="rm_scale_tbl_ups_spec">Santak Castle C3K (3000VA / 2700W, Pin khô kín khí tích hợp sẵn trong máy)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="rm_scale_tbl_server_price">Giá tham khảo máy chủ</strong></td>
+                                    <td style="color:var(--neon-blue);font-weight:700;">~ 62.000.000đ <span style="font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;">* Giá tham khảo, có thể thay đổi</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="rm_scale_tbl_ups_price">Giá tham khảo UPS</strong></td>
+                                    <td style="color:var(--neon-blue);font-weight:700;">~ 17.000.000đ <span style="font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;">* Giá tham khảo, có thể thay đổi</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="rm_scale_tbl_total">Tổng gói (Server + UPS)</strong></td>
+                                    <td style="color:var(--neon-pink);font-weight:700;">~ 79.000.000đ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+</div>
+
+<!-- SLIDE 4: TRIỂN KHAI Ở ĐƠN VỊ KHÁC -->
+<div class="sl sl4" data-s="3">
+    <div class="slide-bg" style="background-image:url('assets/roadmap-deployment.jpg');"></div>
+    <div class="sl-overlay"></div>
+    <canvas class="sl-matrix"></canvas>
+    <div class="si"><div class="card">
+        <div class="tag" data-i18n="rm_rep_tag">// Triển khai diện rộng</div>
+        <div class="ttl" data-i18n="rm_rep_title">Nhân Rộng Mô Hình Cho Trạm Khác</div>
+        
+        <div class="layout-split">
+            <div class="split-content">
+                <p class="sub" style="margin-bottom:0.4rem;" data-i18n="rm_rep_sub"><strong style="color:var(--neon-blue);">Tương tác:</strong> Click vào các dòng thiết bị trong bảng dưới đây để xem lý do kỹ thuật chi tiết và hình ảnh solo trong suốt:</p>
+                <div class="pricing-table-wrap">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="rm_rep_tbl_col1">Thiết bị phần cứng chuyên dụng / Trạm</th>
+                                <th data-i18n="rm_rep_tbl_col2">Chi tiết kỹ thuật &amp; Phân kỳ giai đoạn triển khai</th>
+                                <th style="text-align:right;" data-i18n="rm_rep_tbl_col3">Chi phí tham khảo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="clickable-row" data-modal-id="server_phase1">
+                                <td><strong data-i18n="rm_rep_tbl_server_gd1">⚡ Máy chủ Dell PowerEdge R260 (GĐ 1)</strong></td>
+                                <td data-i18n="rm_rep_tbl_server_gd1_spec">GĐ 1: Trang bị 01 máy chủ độc lập chạy lõi hệ thống, 64GB RAM DDR5 ECC, 2x1TB SSD Enterprise (RAID 1)</td>
+                                <td class="price-num">~ 62.000.000đ</td>
+                            </tr>
+                            <tr class="clickable-row" data-modal-id="server_phase2">
+                                <td><strong data-i18n="rm_rep_tbl_server_gd2">⚡ Máy chủ Dell PowerEdge R260 (GĐ 2)</strong></td>
+                                <td data-i18n="rm_rep_tbl_server_gd2_spec">GĐ 2: Bổ sung 1 hoặc nhiều server tùy nhu cầu để nâng cấp lên dự phòng nóng Active/Standby HA</td>
+                                <td class="price-num">~ 62.000.000đ /máy</td>
+                            </tr>
+                            <tr class="clickable-row" data-modal-id="switch_other">
+                                <td><strong data-i18n="rm_rep_tbl_switch">⚡ 01 Switch mạng Gigabit</strong></td>
+                                <td data-i18n="rm_rep_tbl_switch_spec">Switch 16 cổng chuyên dụng lắp tủ rack máy chủ của trạm</td>
+                                <td class="price-num">~ 2.500.000đ</td>
+                            </tr>
+                            <tr class="clickable-row" data-modal-id="ups_other">
+                                <td><strong data-i18n="rm_rep_tbl_ups">⚡ 01 Bộ UPS Santak C3K (Pin trong)</strong></td>
+                                <td data-i18n="rm_rep_tbl_ups_spec">UPS Online 3000VA / 2700W với hệ thống ắc quy khô tích hợp sẵn</td>
+                                <td class="price-num">~ 17.000.000đ</td>
+                            </tr>
+                            <tr class="clickable-row" data-modal-id="cables_other">
+                                <td><strong data-i18n="rm_rep_tbl_cables">⚡ Vật tư cáp mạng, thi công</strong></td>
+                                <td data-i18n="rm_rep_tbl_cables_spec">Cáp mạng CAT6 bọc chống nhiễu, đầu bấm RJ45, gen luồn bảo vệ</td>
+                                <td class="price-num">~ 1.200.000đ</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong data-i18n="rm_rep_tbl_total_gd1">TỔNG DỰ TOÁN GIAI ĐOẠN 1</strong></td>
+                                <td data-i18n="rm_rep_tbl_total_gd1">Đồng bộ hạ tầng chạy 1 Server chính + Switch + UPS + Cáp</td>
+                                <td class="price-num" style="color:var(--neon-blue);">~ 82.700.000đ</td>
+                            </tr>
+                            <tr class="total-row" style="background:rgba(255, 0, 127, 0.04);">
+                                <td><strong data-i18n="rm_rep_tbl_total_gd2">DỰ KIẾN NÂNG CẤP GIAI ĐOẠN 2</strong></td>
+                                <td data-i18n="rm_rep_tbl_total_gd2">Bổ sung thêm Server HA (tùy yêu cầu phía chủ đầu tư)</td>
+                                <td class="price-num" style="color:var(--neon-pink);">+ từ ~ 62.000.000đ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="font-size:0.72rem;color:var(--text-muted);font-style:italic;margin-top:0.3rem;" data-i18n="rm_rep_tbl_desc">* Ghi chú: Việc chia nhỏ lộ trình đầu tư máy chủ chuyên dụng Dell PowerEdge R260 làm 2 giai đoạn giúp tối ưu hóa ngân sách đầu tư ban đầu của trạm biến áp mới, đồng thời sẵn sàng mở rộng năng lực xử lý (High Availability hoặc phân tải dữ liệu) bất cứ lúc nào.</p>
+            </div>
+            <div class="split-media">
+                <div class="rm-slideshow slideshow-pink" id="slideshowOther">
+                    <img class="rm-slide-img-other active" src="assets/server-solo.jpg" alt="Máy chủ Server PC">
+                    <img class="rm-slide-img-other" src="assets/switch-solo-v3.jpg" alt="Switch Gigabit">
+                    <img class="rm-slide-img-other" src="assets/ups-solo.jpg" alt="Thiết bị lưu điện UPS">
+                    <div class="rm-slideshow-overlay">
+                        <div style="font-family:var(--font-mono);font-size:0.68rem;font-weight:700;color:var(--neon-pink);letter-spacing:1px;margin-bottom:0.2rem;" data-i18n="rm_rep_slide_hdr">HẠ TẦNG TRẠM BIẾN ÁP MỚI</div>
+                        <div style="font-size:0.6rem;color:rgba(255,255,255,0.48);" data-i18n="rm_rep_slide_hint">Click các dòng thiết bị bên trái để xem lý do kỹ thuật chi tiết</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+</div>
+
+</div><!-- /.sw -->
+
+<!-- INTERACTIVE POPUP MODAL VẬT TƯ -->
+<div id="itemModal" class="modal-overlay">
+    <div class="modal-card">
+        <button class="modal-close-btn" id="modalCloseBtn">✕</button>
+        <div class="modal-body">
+            <div class="modal-left" id="modalLeftBg">
+                <img id="modalImg" src="" alt="Hình ảnh thiết bị">
+            </div>
+            <div class="modal-right">
+                <div class="modal-tag" id="modalTag">VẬT TƯ ĐỀ XUẤT</div>
+                <h3 class="modal-title" id="modalTitle">Tên thiết bị</h3>
+                <p class="modal-desc" id="modalDesc">Nội dung giải thích kỹ thuật và lý do bắt buộc cần mua...</p>
+                <div class="modal-meta" id="modalMeta">
+                    <span class="meta-label" id="modalMetaLabel">Chi phí dự kiến:</span>
+                    <span class="meta-val" id="modalMetaVal">0đ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTROLS CONTAINER -->
+<div class="ctrl-wrapper">
+    <div class="slideshow-settings-panel" id="slideshowSettingsPanel">
+        <div class="settings-panel-header">
+            <span>⏱ Thời gian mỗi slide</span>
+            <button class="settings-close-btn" id="settingsCloseBtn">✕</button>
+        </div>
+        <div class="settings-presets">
+            <button class="preset-btn" data-seconds="5">5s</button>
+            <button class="preset-btn" data-seconds="8">8s</button>
+            <button class="preset-btn active" data-seconds="10">10s</button>
+            <button class="preset-btn" data-seconds="15">15s</button>
+            <button class="preset-btn" data-seconds="20">20s</button>
+            <button class="preset-btn" data-seconds="30">30s</button>
+        </div>
+        <div class="settings-slider-row">
+            <span class="settings-slider-label">Tuỳ chỉnh:</span>
+            <input type="range" id="durationSlider" min="3" max="60" value="10" step="1" class="settings-slider">
+            <span id="durationDisplay" class="settings-slider-value">10s</span>
+        </div>
+    </div>
+
+    <div class="bottom-action-row">
+        <button id="settingsBtn" class="slideshow-settings-btn" title="Cài đặt thời gian">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            <span id="settingsDurationLabel">10s</span>
+        </button>
+
+        <button class="nav-circle-btn" id="pb" title="Slide trước (←)">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+
+        <div class="dots-counter-group">
+            <span class="bottom-counter">slide <span id="sn">1</span>/4</span>
+            <div class="cmp-dots" id="dots">
+                <div class="cmp-dot active" data-s="0"></div>
+                <div class="cmp-dot" data-s="1"></div>
+                <div class="cmp-dot" data-s="2"></div>
+                <div class="cmp-dot" data-s="3"></div>
+            </div>
+        </div>
+
+        <button class="nav-circle-btn" id="nb" title="Slide sau (→)">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+
+        <button id="playSlideshowBtn" class="play-slideshow-btn" title="Trình chiếu tự động (Phím Space)">
+            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="15" height="15" style="display:none">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+            <span id="playBtnLabel">Trình chiếu</span>
+        </button>
+    </div>
+    <div class="hint-bar">Phím ← → | 1-4 để nhảy slide | Space: Chạy/Tạm dừng | ESC: Thoát</div>
+</div>
+
+<script>
+const matrixEngine = (function(){
+    const ch = '01アイウエオカキクケコサシスセソ０１２３４５6７８９';
+    const fs = 14;
+    let cols = 0, drops = [], colPh = [];
+    let canvas = null, ctx = null, animId = null, lastT = 0;
+    
+    function init(c) {
+        if (!c) return;
+        stop();
+        canvas = c;
+        ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        cols = Math.floor(canvas.width / fs);
+        drops = Array.from({length: cols}, () => Math.random() * (canvas.height / fs));
+        colPh = Array.from({length: cols}, () => Math.random() * Math.PI * 2);
+        lastT = 0;
+        loop(0);
+    }
+    
+    function stop() {
+        if (animId) {
+            cancelAnimationFrame(animId);
+            animId = null;
+        }
+        if (ctx && canvas) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        canvas = null;
+        ctx = null;
+    }
+    
+    function loop(ts) {
+        if (!canvas || !ctx) return;
+        animId = requestAnimationFrame(loop);
+        if (ts - lastT < 55) return;
+        lastT = ts;
+        
+        ctx.fillStyle = 'rgba(10,12,16,0.14)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = fs + 'px JetBrains Mono, monospace';
+        
+        for (let i = 0; i < cols; i++) {
+            const char = ch[Math.floor(Math.random() * ch.length)];
+            const wave = (Math.sin(ts * 0.0008 + colPh[i]) + 1) / 2;
+            const fl = Math.random();
+            const br = wave * 0.5 + fl * 0.5;
+            
+            ctx.fillStyle = br > 0.88 ? `rgba(255,200,240,${0.65 + br * 0.35})`
+                          : br > 0.65 ? `rgba(255,0,127,${0.50 + br * 0.30})`
+                          : br > 0.38 ? `rgba(180,0,100,${0.30 + br * 0.22})`
+                                      : `rgba(110,0,60,${br * 0.28})`;
+                                      
+            ctx.fillText(char, i * fs, drops[i] * fs);
+            if (drops[i] * fs > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i] += (Math.random() * 0.18 + 0.08);
+        }
+    }
+    
+    window.addEventListener('resize', () => {
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            cols = Math.floor(canvas.width / fs);
+            drops = Array.from({length: cols}, () => Math.random() * (canvas.height / fs));
+            colPh = Array.from({length: cols}, () => Math.random() * Math.PI * 2);
+        }
+    });
+    
+    return { init: init, stop: stop };
+})();
+
+// Cập nhật canvas ma trận khi đổi slide
+function updateActiveMatrix() {
+    const activeSlide = document.querySelector('.sl.active');
+    if (activeSlide) {
+        const c = activeSlide.querySelector('.sl-matrix');
+        matrixEngine.init(c);
+    }
+}
+
+// ---- INTERACTIVE POPUP DATA ----
+const modalData = {
+    ssd: {
+        tag: 'Vật tư hiện tại · Ổ cứng lưu trữ',
+        title: 'SSD Enterprise 1TB (x2 ổ đĩa)',
+        desc: '<strong>Tại sao cần mua?</strong><br>Nhóm đề xuất trang bị 02 ổ đĩa SSD Enterprise 1TB để cấu hình chạy <strong>RAID 1 (Gương dữ liệu)</strong>.<br><br>Khi vận hành thực tế tại trạm, dữ liệu ca trực và chỉ số thiết bị phụ tải cực kỳ nhạy cảm và cần được ghi chép liên tục theo thời gian thực. Nếu chỉ sử dụng 1 ổ đĩa thông thường, rủi ro hỏng hóc phần cứng đột xuất dẫn đến mất sạch dữ liệu ca trực là rất lớn.<br><br>Cấu hình RAID 1 sẽ ghi dữ liệu song song đồng thời lên cả 2 ổ; nếu 1 ổ gặp sự cố hỏng hóc vật lý đột xuất, ổ đĩa còn lại lập tức gánh tải và bảo toàn nguyên vẹn 100% dữ liệu vận hành.',
+        img: 'assets/ssd-solo.jpg',
+        label: 'Số lượng mua:',
+        val: '02 ổ đĩa (Chạy RAID 1)'
+    },
+    switch: {
+        tag: 'Vật tư hiện tại · Switch mạng LAN',
+        title: 'Switch mạng Gigabit chuyên dụng',
+        desc: '<strong>Tại sao cần mua?</strong><br>Để đảm bảo hệ thống Web Platform hoạt động với băng thông ổn định và có tính bảo mật thông tin nội bộ tốt nhất, hệ thống cần được thiết lập trên một phân đoạn mạng LAN cô lập riêng biệt tại trạm biến áp.<br><br>Switch mạng Gigabit chuyên dụng giúp kết nối trực tiếp các máy tính vận hành ca trực của kỹ sư với máy chủ đặt tại tủ rack trung tâm, loại bỏ rủi ro xung đột IP và nhiễu mạng từ các thiết bị văn phòng/hành chính khác của trạm.',
+        img: 'assets/switch-solo-v3.jpg',
+        label: 'Số lượng mua:',
+        val: '01 bộ (Gigabit Switch)'
+    },
+    email: {
+        tag: 'Vật tư hiện tại · Dịch vụ thông báo',
+        title: 'E-mail riêng cho nhóm phát triển',
+        desc: '<strong>Tại sao cần mua?</strong><br>Đăng ký gói e-mail nội bộ chuyên dụng giúp nhóm cấu hình các tính năng tự động hóa nâng cao của Web Platform:<br><br>1. <strong>Gửi cảnh báo tự động:</strong> Gửi thông báo tức thời qua mail khi các chỉ số phụ tải, hao hụt điện năng vượt ngưỡng an toàn.<br>2. <strong>Phê duyệt trực tuyến:</strong> Kỹ sư có thể tạo Lệnh Công Tác và hệ thống sẽ tự động gửi email đính kèm mã OTP hoặc link xác nhận nhanh cho trưởng trạm duyệt trực tiếp qua mail.<br>3. <strong>Bảo mật thông tin:</strong> Tách biệt hòm thư kỹ thuật với hòm thư cá nhân để bảo mật tuyệt đối các báo cáo điện lực.',
+        img: 'assets/email-solo.jpg',
+        label: 'Tính năng:',
+        val: 'SMTP Alert &amp; OTP Authentication'
+    },
+    domain: {
+        tag: 'Vật tư hiện tại · Định danh hệ thống',
+        title: 'Địa chỉ Domain riêng chuyên nghiệp',
+        desc: '<strong>Tại sao cần mua?</strong><br>Tên miền chính thức dự kiến mua là: <strong style="color:var(--neon-pink);font-size:1rem;font-family:var(--font-mono);">dcgeportal.vn</strong><br><br>Việc đăng ký tên miền riêng mang lại giá trị thực tiễn rất cao:<br><br>1. <strong>Chuyên nghiệp hóa:</strong> Giúp định danh hệ thống cổng thông tin vận hành (DCGE Portal) chính thống của đơn vị.<br>2. <strong>UX mượt mà:</strong> Giúp các kỹ sư trực ca dễ dàng ghi nhớ và truy cập nhanh chóng từ bất kỳ máy tính nào trong trạm, thay vị phải ghi nhớ và gõ các dãy số địa chỉ IP thô sơ (ví dụ: http://192.168.1.150:8080).',
+        img: 'assets/domain-solo.jpg',
+        label: 'Tên miền đăng ký:',
+        val: 'dcgeportal.vn'
+    },
+    server_phase1: {
+        tag: 'Thiết bị nhân rộng · Giai đoạn 1',
+        title: '01 Máy chủ Dell PowerEdge R260 (Single)',
+        desc: '<strong>Tại sao cần mua ở Giai đoạn 1?</strong><br>Ở giai đoạn khởi chạy ban đầu cho trạm mới, đề xuất đầu tư trước <strong>01 Máy chủ vật lý chuyên dụng Dell PowerEdge R260</strong> để chạy độc lập toàn bộ lõi ứng dụng và cơ sở dữ liệu của trạm.<br><br>Cấu hình máy chủ Dell R260 bao gồm chip CPU Intel Xeon E-2468, 64GB RAM DDR5 ECC chống sửa lỗi và <strong>2x1TB SSD Enterprise</strong> cấu hình chạy RAID 1 vật lý qua card PERC.<br><br>Giải pháp này giúp trạm mới có một máy chủ hiệu năng cực cao, lưu dữ liệu tại chỗ, đảm bảo an toàn phần cứng ở mức tối đa mà vẫn giữ mức ngân sách đầu tư thiết bị ban đầu rất hợp lý (~62tr).',
+        img: 'assets/server-solo.jpg',
+        label: 'Định mức đầu tư GĐ 1:',
+        val: '01 Máy chủ Dell R260 | ~ 62.000.000đ'
+    },
+    server_phase2: {
+        tag: 'Thiết bị nhân rộng · Giai đoạn 2',
+        title: 'Bổ sung máy chủ Dell PowerEdge R260 (HA)',
+        desc: '<strong>Tại sao cần mua ở Giai đoạn 2?</strong><br>Dựa vào yêu cầu thực tế và định hướng phát triển của <strong>Chủ đầu tư</strong>, Giai đoạn 2 sẽ tiến hành mua bổ sung thêm <strong>01 máy chủ Dell PowerEdge R260 chuyên dụng</strong> hoặc nhiều hơn.<br><br>Việc bổ sung thêm server này giúp nâng cấp hệ thống trạm biến áp lên mô hình <strong>High Availability (Dự phòng nóng Active/Standby)</strong>:<br><br>1. <strong>Chuyển mạch tự động:</strong> Khi một máy chủ chính gặp sự cố vật lý hoặc lỗi hệ thống, máy chủ phụ sẽ ngay lập tức tiếp quản vận hành trong vài giây, đảm bảo ca trực không bao giờ bị gián đoạn.<br>2. <strong>Phân tải cơ sở dữ liệu:</strong> Hỗ trợ phân tách các module vận hành nặng (như SCADA log, IoT thu thập số liệu liên tục) sang các máy chủ khác nhau nhằm bảo toàn tài nguyên xử lý tối ưu.',
+        img: 'assets/server-solo.jpg',
+        label: 'Định mức đầu tư GĐ 2:',
+        val: 'Bổ sung thêm 01 hoặc nhiều server | ~ 62.000.000đ/máy'
+    },
+    switch_other: {
+        tag: 'Thiết bị trạm khác · Switch mạng',
+        title: 'Switch mạng Gigabit 16-Port',
+        desc: '<strong>Tại sao cần mua?</strong><br>Đóng vai trò là trung tâm kết nối LAN nội bộ của trạm mới, liên kết máy chủ Web/Database vật lý với các máy tính trực ca, các thiết bị đo lường phụ tải thông minh và hệ thống cảm biến nhiệt độ.<br><br>Độ bền cao, chạy ổn định 24/24 trong môi trường phòng máy biến áp có từ trường cao mà không bị suy hao tín hiệu.',
+        img: 'assets/switch-solo-v3.jpg',
+        label: 'Dự toán chi phí:',
+        val: '~ 2.500.000đ'
+    },
+    ups_other: {
+        tag: 'Thiết bị trạm khác · Nguồn dự phòng',
+        title: 'Bộ lưu điện UPS Santak C3K (Tích hợp pin khô)',
+        desc: '<strong>Tại sao cần mua?</strong><br>Để bảo vệ hệ thống server và switch mạng khỏi các sự cố mất điện AC tự dùng đột ngột tại trạm biến áp 110kV mới, đề xuất trang bị <strong>01 Bộ lưu điện UPS Santak Castle C3K (3000VA / 2700W)</strong>.<br><br><strong>Đặc điểm kỹ thuật:</strong><br>1. <strong>Pin khô tích hợp an toàn:</strong> Sử dụng hệ thống 6 bình ắc quy khô kín khí (VRLA AGM) tích hợp hoàn toàn bên trong thân máy. Đảm bảo an toàn phòng máy chủ, không rò rỉ hóa chất, không sinh khí ăn mòn và hoàn toàn không cần bảo trì định kỳ.<br>2. <strong>Công nghệ Online chuyển đổi kép:</strong> Lọc sạch nhiễu điện lưới, sụt áp hoặc quá áp đột ngột của trạm điện, cung cấp dòng điện sin chuẩn 220V ổn định cho server.<br>3. <strong>Thời gian lưu điện dự phòng:</strong> Đạt từ <strong>30 đến 45 phút</strong> khi mất điện hoàn toàn đối với tải Server + Switch. Đảm bảo thời gian an toàn tối đa để các tiến trình lưu dữ liệu hoàn tất và kỹ sư trực ca tắt máy chủ an toàn hoặc vận hành máy phát điện dự phòng.',
+        img: 'assets/ups-solo.jpg',
+        label: 'Chi phí tham khảo:',
+        val: '~ 17.000.000đ <span style="font-size:0.55rem;color:var(--text-muted);font-weight:400;display:block;">* Giá tham khảo trên mạng, có thể thay đổi</span>'
+    },
+    cables_other: {
+        tag: 'Thiết bị trạm khác · Vật tư thi công',
+        title: 'Vật tư cáp mạng CAT6 &amp; Thi công',
+        desc: '<strong>Tại sao cần mua?</strong><br>Hạ tầng cáp mạng chuẩn CAT6 chất lượng cao cùng các đầu bấm hạt mạng RJ45, ống gen luồn bảo vệ cơ học.<br><br>Đặc biệt cáp CAT6 có vỏ bọc chống nhiễu từ trường cao tại phòng điều khiển trung tâm trạm biến áp, đảm bảo tín hiệu truyền dẫn đạt tốc độ gigabit (1Gbps) ổn định lâu dài, không bị nhiễu sóng xung quanh thiết bị điện cao áp.',
+        img: 'assets/switch-solo-v3.jpg',
+        label: 'Dự toán chi phí:',
+        val: '~ 1.200.000đ'
+    }
+};
+
+const modalOverlay = document.getElementById('itemModal');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const modalImg = document.getElementById('modalImg');
+const modalTag = document.getElementById('modalTag');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalMetaLabel = document.getElementById('modalMetaLabel');
+const modalMetaVal = document.getElementById('modalMetaVal');
+const modalLeftBg = document.getElementById('modalLeftBg');
+
+function openModal(id) {
+    const data = modalData[id];
+    if (!data) return;
+    
+    if (presMode && !presPaused) {
+        togglePause();
+    }
+    
+    modalImg.src = data.img;
+    modalTag.textContent = data.tag;
+    modalTitle.textContent = data.title;
+    modalDesc.innerHTML = data.desc;
+    modalMetaLabel.textContent = data.label;
+    modalMetaVal.innerHTML = data.val;
+    
+    if (id.includes('other') || id.includes('phase')) {
+        modalLeftBg.style.boxShadow = 'inset 0 0 18px rgba(255,0,127,0.15)';
+        modalLeftBg.style.borderColor = 'rgba(255, 0, 127, 0.22)';
+        modalOverlay.querySelector('.modal-card').style.borderColor = 'rgba(255, 0, 127, 0.35)';
+    } else {
+        modalLeftBg.style.boxShadow = 'inset 0 0 18px rgba(0,240,255,0.15)';
+        modalLeftBg.style.borderColor = 'rgba(0, 240, 255, 0.22)';
+        modalOverlay.querySelector('.modal-card').style.borderColor = 'rgba(0, 240, 255, 0.35)';
+    }
+    
+    modalOverlay.style.display = 'flex';
+    void modalOverlay.offsetWidth;
+    modalOverlay.classList.add('active');
+}
+
+function closeModal() {
+    modalOverlay.classList.remove('active');
+    setTimeout(() => {
+        modalOverlay.style.display = 'none';
+        if (presMode && presPaused) {
+            togglePause();
+        }
+    }, 300);
+}
+
+document.querySelectorAll('.sl2 .rm-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const id = this.getAttribute('data-modal-id');
+        if (id) openModal(id);
+    });
+});
+
+document.querySelectorAll('.sl4 .clickable-row').forEach(row => {
+    row.addEventListener('click', function() {
+        const id = this.getAttribute('data-modal-id');
+        if (id) openModal(id);
+    });
+});
+
+modalCloseBtn.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', function(e) {
+    if (e.target === modalOverlay) closeModal();
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        e.stopPropagation();
+        closeModal();
+    }
+});
+
+// ---- SLIDE NAVIGATION ----
+const TOTAL = 4;
+let cur = 0;
+const sls = document.querySelectorAll('.sl');
+const dots = document.querySelectorAll('.cmp-dot');
+const sn = document.getElementById('sn');
+
+function goTo(n){
+    n = ((n % TOTAL) + TOTAL) % TOTAL;
+    sls[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = n;
+    sls[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    sn.textContent = cur + 1;
+    
+    updateActiveMatrix();
+    if(presMode) resetPresTimer();
+}
+
+document.getElementById('pb').onclick = () => goTo(cur-1);
+document.getElementById('nb').onclick = () => goTo(cur+1);
+dots.forEach(function(d){
+    d.addEventListener('click', function(){ goTo(parseInt(d.dataset.s)); });
+});
+
+document.addEventListener('keydown', function(e){
+    if (modalOverlay.classList.contains('active')) return;
+    if(e.code === 'ArrowRight' || e.code === 'ArrowDown'){ e.preventDefault(); goTo(cur+1); }
+    else if(e.code === 'ArrowLeft' || e.code === 'ArrowUp'){ e.preventDefault(); goTo(cur-1); }
+    else if(e.key >= '1' && e.key <= '4') goTo(parseInt(e.key)-1);
+    else if(e.code === 'Space'){ e.preventDefault(); presMode ? togglePause() : startPres(); }
+    else if(e.code === 'Escape'){ e.preventDefault(); if(presMode) stopPres(); }
+});
+
+let tx = 0;
+document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', function(e){
+    if (modalOverlay.classList.contains('active')) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    if(Math.abs(dx) > 50) goTo(dx < 0 ? cur+1 : cur-1);
+});
+
+// ---- SLIDESHOW VẬT TƯ ----
+(function(){
+    const imgsCurrent = document.querySelectorAll('#slideshowCurrent .rm-slide-img');
+    if(imgsCurrent.length > 0) {
+        let idxCurrent = 0;
+        setInterval(() => {
+            if (modalOverlay.classList.contains('active')) return;
+            imgsCurrent[idxCurrent].classList.remove('active');
+            idxCurrent = (idxCurrent + 1) % imgsCurrent.length;
+            imgsCurrent[idxCurrent].classList.add('active');
+        }, 3000);
+    }
+
+    const imgsOther = document.querySelectorAll('#slideshowOther .rm-slide-img-other');
+    if(imgsOther.length > 0) {
+        let idxOther = 0;
+        setInterval(() => {
+            if (modalOverlay.classList.contains('active')) return;
+            imgsOther[idxOther].classList.remove('active');
+            idxOther = (idxOther + 1) % imgsOther.length;
+            imgsOther[idxOther].classList.add('active');
+        }, 3000);
+    }
+})();
+
+// ---- PANEL CÀI ĐẶT THỜI GIAN ----
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsPanel = document.getElementById('slideshowSettingsPanel');
+const settingsCloseBtn = document.getElementById('settingsCloseBtn');
+const durationSlider = document.getElementById('durationSlider');
+const durationDisplay = document.getElementById('durationDisplay');
+const settingsDurationLabel = document.getElementById('settingsDurationLabel');
+const presetBtns = document.querySelectorAll('.preset-btn');
+
+let presInterval = 10;
+
+function updateDuration(seconds) {
+    presInterval = parseInt(seconds);
+    durationSlider.value = presInterval;
+    durationDisplay.textContent = presInterval + 's';
+    settingsDurationLabel.textContent = presInterval + 's';
+    
+    presetBtns.forEach(btn => {
+        if (parseInt(btn.dataset.seconds) === presInterval) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    if (presMode) {
+        resetPresTimer();
+    }
+}
+
+settingsBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    settingsPanel.classList.toggle('visible');
+    settingsBtn.classList.toggle('is-open');
+});
+
+settingsCloseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    settingsPanel.classList.remove('visible');
+    settingsBtn.classList.remove('is-open');
+});
+
+document.addEventListener('click', (e) => {
+    if (settingsPanel.classList.contains('visible') && !settingsPanel.contains(e.target) && e.target !== settingsBtn) {
+        settingsPanel.classList.remove('visible');
+        settingsBtn.classList.remove('is-open');
+    }
+});
+
+durationSlider.addEventListener('input', function() {
+    updateDuration(this.value);
+});
+
+presetBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        updateDuration(this.dataset.seconds);
+    });
+});
+
+// ---- PRESENTATION MODE ----
+var presMode = false, presPaused = false;
+var presElapsed = 0, presRAF = null, presLastTick = 0;
+const playBtn = document.getElementById('playSlideshowBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+const playBtnLabel = document.getElementById('playBtnLabel');
+const closePresBtn = document.getElementById('cmpPresCloseBtn');
+
+function startPres(){
+    presMode = true; presPaused = false; presElapsed = 0;
+    document.body.classList.add('pres-active');
+    playBtn.classList.add('is-playing');
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = '';
+    playBtnLabel.textContent = 'Tạm dừng';
+    
+    settingsPanel.classList.remove('visible');
+    settingsBtn.classList.remove('is-open');
+    
+    try {
+        const el = document.documentElement;
+        if (el.requestFullscreen) {
+            el.requestFullscreen();
+        } else if (el.webkitRequestFullscreen) {
+            el.webkitRequestFullscreen();
+        }
+    } catch(e) {}
+    
+    presLastTick = performance.now();
+    tickTimer();
+}
+
+function stopPres(){
+    presMode = false; presPaused = false;
+    document.body.classList.remove('pres-active', 'pres-paused');
+    playBtn.classList.remove('is-playing');
+    playIcon.style.display = '';
+    pauseIcon.style.display = 'none';
+    playBtnLabel.textContent = 'Trình chiếu';
+    
+    document.getElementById('ptfill').style.width = '0%';
+    if(presRAF){ cancelAnimationFrame(presRAF); presRAF = null; }
+    
+    try {
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+            (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        }
+    } catch(e) {}
+}
+
+function togglePause(){
+    presPaused = !presPaused;
+    document.body.classList.toggle('pres-paused', presPaused);
+    if(presPaused) {
+        playBtnLabel.textContent = 'Tiếp tục';
+        playIcon.style.display = '';
+        pauseIcon.style.display = 'none';
+        if(presRAF){ cancelAnimationFrame(presRAF); presRAF = null; }
+    } else {
+        playBtnLabel.textContent = 'Tạm dừng';
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = '';
+        presLastTick = performance.now();
+        tickTimer();
+    }
+}
+
+function resetPresTimer(){ presElapsed = 0; presLastTick = performance.now(); }
+
+function tickTimer(){
+    if(!presMode || presPaused){ presRAF = null; return; }
+    var now = performance.now();
+    presElapsed += (now - presLastTick)/1000;
+    presLastTick = now;
+    var frac = Math.min(presElapsed/presInterval, 1);
+    document.getElementById('ptfill').style.width = (frac*100) + '%';
+    
+    if(frac >= 1){
+        presElapsed = 0;
+        if(cur === TOTAL - 1) {
+            stopPres();
+            goTo(0);
+            return;
+        } else {
+            goTo(cur+1);
+        }
+    }
+    presRAF = requestAnimationFrame(tickTimer);
+}
+
+playBtn.onclick = function(){ presMode ? togglePause() : startPres(); };
+closePresBtn.onclick = function(e){ e.stopPropagation(); stopPres(); };
+
+document.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && presMode) {
+        stopPres();
+    }
+});
+document.addEventListener('webkitfullscreenchange', function() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && presMode) {
+        stopPres();
+    }
+});
+
+(function(){
+    var ov = document.getElementById('pageEnterOverlay');
+    if(!ov) return;
+    requestAnimationFrame(function(){ setTimeout(function(){ ov.style.opacity = '0'; }, 50); });
+})();
+
+window.addEventListener('DOMContentLoaded', () => {
+    updateActiveMatrix();
+});
+</script>
+<script src="lang.js"></script>
+</body>
+</html>

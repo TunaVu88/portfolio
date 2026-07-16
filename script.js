@@ -1,6 +1,154 @@
 // JavaScript xử lý các tương tác động trên website Portfolio TuNa88VN
 
+// Hàm khởi tạo canvas ma trận điện (dùng cho index.html - particle network)
+function initElectricMatrix(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    const particles = [];
+    const maxParticles = Math.min(50, Math.floor((width * height) / 25000));
+    const connectionDist = 135;
+
+    // Các màu sắc tương ứng theo stage
+    const colors = {
+        'default': { dot: 'rgba(0, 240, 255, 0.4)', line: 'rgba(0, 240, 255, 0.08)' },
+        'stage-0': { dot: 'rgba(239, 68, 68, 0.4)', line: 'rgba(239, 68, 68, 0.08)' },
+        'stage-1': { dot: 'rgba(168, 85, 247, 0.4)', line: 'rgba(168, 85, 247, 0.08)' },
+        'stage-2': { dot: 'rgba(6, 182, 212, 0.4)', line: 'rgba(6, 182, 212, 0.08)' },
+        'stage-3': { dot: 'rgba(34, 197, 94, 0.4)', line: 'rgba(34, 197, 94, 0.08)' },
+        'stage-4': { dot: 'rgba(244, 63, 94, 0.4)', line: 'rgba(244, 63, 94, 0.08)' }
+    };
+
+    // Hàm lấy màu sắc hiện tại dựa trên class trên body
+    function getCurrentColors() {
+        for (const stage in colors) {
+            if (stage !== 'default' && document.body.classList.contains(stage)) {
+                return colors[stage];
+            }
+        }
+        return colors['default'];
+    }
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 0.4;
+            this.vy = (Math.random() - 0.5) * 0.4;
+            this.radius = Math.random() * 2 + 1;
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.x < 0 || this.x > width) this.vx *= -1;
+            if (this.y < 0 || this.y > height) this.vy *= -1;
+        }
+
+        draw(color) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < maxParticles; i++) {
+        particles.push(new Particle());
+    }
+
+    let lightning = null;
+    function createLightning() {
+        if (particles.length < 2) return;
+        const p1 = particles[Math.floor(Math.random() * particles.length)];
+        const p2 = particles[Math.floor(Math.random() * particles.length)];
+        if (p1 !== p2 && Math.hypot(p1.x - p2.x, p1.y - p2.y) < 220) {
+            lightning = {
+                start: p1,
+                end: p2,
+                steps: [],
+                life: 12
+            };
+            
+            let curX = p1.x;
+            let curY = p1.y;
+            const segments = 4;
+            for (let i = 1; i < segments; i++) {
+                const ratio = i / segments;
+                const targetX = p1.x + (p2.x - p1.x) * ratio;
+                const targetY = p1.y + (p2.y - p1.y) * ratio;
+                curX = targetX + (Math.random() - 0.5) * 16;
+                curY = targetY + (Math.random() - 0.5) * 16;
+                lightning.steps.push({x: curX, y: curY});
+            }
+            lightning.steps.push({x: p2.x, y: p2.y});
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        const currentConfig = getCurrentColors();
+
+        particles.forEach(p => {
+            p.update();
+            p.draw(currentConfig.dot);
+        });
+
+        ctx.lineWidth = 0.8;
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                if (dist < connectionDist) {
+                    const alpha = (1 - dist / connectionDist) * 0.16;
+                    ctx.strokeStyle = currentConfig.line.replace('0.08', alpha.toFixed(2));
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        if (Math.random() < 0.012 && !lightning) {
+            createLightning();
+        }
+
+        if (lightning) {
+            ctx.beginPath();
+            ctx.moveTo(lightning.start.x, lightning.start.y);
+            ctx.lineWidth = Math.random() * 2 + 1;
+            ctx.strokeStyle = currentConfig.dot;
+            
+            lightning.steps.forEach(step => {
+                ctx.lineTo(step.x, step.y);
+            });
+            ctx.stroke();
+            
+            lightning.life--;
+            if (lightning.life <= 0) lightning = null;
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Khởi tạo ma trận điện
+    initElectricMatrix('electric-matrix');
+
     // Khởi tạo các icon từ Lucide CDN
     lucide.createIcons();
 

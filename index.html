@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=1.0.4">
+    <link rel="stylesheet" href="style.css?v=1.0.13">
     <!-- Favicon (Logo trên tab trình duyệt) -->
     <link rel="icon" href="assets/logo.jpg" type="image/jpeg">
     <link rel="shortcut icon" href="assets/logo.jpg" type="image/x-icon">
@@ -19,6 +19,7 @@
 <body>
     <!-- Background grid và glow effects -->
     <div class="cyber-grid"></div>
+    <canvas id="electric-matrix" class="electric-matrix-canvas"></canvas>
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
     <div class="glow-orb orb-3"></div>
@@ -63,8 +64,14 @@
                     <span class="hero-tag"><i data-lucide="gamepad-2"></i> Godot Developer</span>
                 </div>
                 <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary btn-neon-pink">Khám Phá Sáng Tạo</a>
-                    <a href="#contact" class="btn btn-secondary">Kết Nối Với Mình</a>
+                    <div class="cta-row">
+                        <a href="#projects" class="btn btn-primary btn-neon-pink">Khám Phá Sáng Tạo</a>
+                        <a href="story.html" class="btn btn-primary btn-neon-blue">Câu chuyện của hiện tại</a>
+                    </div>
+                    <div class="cta-row">
+                        <a href="#godot-lab" class="btn btn-primary btn-neon-purple">Dự án tương lai</a>
+                        <a href="#contact" class="btn btn-secondary">Kết Nối Với Mình</a>
+                    </div>
                 </div>
             </div>
             <div class="hero-visual">
@@ -79,6 +86,9 @@
             </div>
         </div>
     </section>
+
+    <!-- Cau noi gradient muot giua hero va section 01 -->
+    <div class="section-fade-bridge" aria-hidden="true"></div>
 
     <!-- About Section -->
     <section class="about-section section-padding" id="about">

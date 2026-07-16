@@ -55,6 +55,18 @@ body {
     pointer-events: none;
 }
 
+/* Canvas ma trận điện trung cao thế - animated background layer */
+.electric-matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 1;
+}
+
 .glow-orb {
     position: fixed;
     border-radius: 50%;
@@ -154,7 +166,7 @@ body {
 }
 
 /* Header & Nav */
-header {
+header, .navbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -229,6 +241,104 @@ header {
     text-shadow: var(--glow-blue);
 }
 
+/* Nút quay về trang chủ - phong cách neon glassmorphism */
+.btn-nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.48rem 1.1rem 0.48rem 0.85rem;
+    text-decoration: none;
+    color: var(--neon-blue);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: rgba(0, 240, 255, 0.05);
+    border: 1px solid rgba(0, 240, 255, 0.28);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.08);
+    transition: all 0.28s ease;
+    white-space: nowrap;
+}
+
+.btn-nav-back:hover {
+    background: rgba(0, 240, 255, 0.12);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.28), inset 0 0 12px rgba(0, 240, 255, 0.06);
+    color: #fff;
+    transform: translateX(-2px);
+}
+
+.btn-nav-back.btn-pink {
+    color: var(--neon-pink);
+    background: rgba(255, 0, 127, 0.05);
+    border-color: rgba(255, 0, 127, 0.28);
+    box-shadow: 0 0 12px rgba(255, 0, 127, 0.08);
+}
+
+.btn-nav-back.btn-pink:hover {
+    background: rgba(255, 0, 127, 0.12);
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.28), inset 0 0 12px rgba(255, 0, 127, 0.06);
+    color: #fff;
+}
+
+.btn-nav-back.btn-gray {
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+}
+
+.btn-nav-back.btn-gray:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+/* Language Switcher */
+.lang-switcher {
+    display: inline-flex;
+    gap: 0.2rem;
+    margin-left: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.22rem;
+    border-radius: 10px;
+    align-items: center;
+}
+.lang-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.22rem 0.45rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+.lang-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+.lang-btn.active {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--neon-blue);
+    text-shadow: var(--glow-blue);
+}
+
+.btn-nav-back svg, .btn-nav-back i {
+    transition: transform 0.28s ease;
+}
+
+.btn-nav-back:hover svg,
+.btn-nav-back:hover i {
+    transform: translateX(-3px);
+}
+
 .nav-link::after {
     content: '';
     position: absolute;
@@ -296,6 +406,18 @@ header {
     font-weight: 700;
 }
 
+.btn-neon-purple {
+    border: 2px solid var(--neon-purple);
+    box-shadow: inset 0 0 0 rgba(189, 0, 255, 0), 0 0 10px rgba(189, 0, 255, 0.3);
+    background: transparent;
+}
+
+.btn-neon-purple:hover {
+    background-color: var(--neon-purple);
+    box-shadow: 0 0 20px rgba(189, 0, 255, 0.6);
+    color: #fff;
+}
+
 .btn-secondary {
     border: 1px solid var(--border-color);
     background-color: rgba(255, 255, 255, 0.03);
@@ -313,19 +435,45 @@ header {
     justify-content: center;
 }
 
-/* Hero Section */
+/* Hero Section (index.html) */
 .hero-section {
     position: relative;
     min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
-    background-image: linear-gradient(180deg, rgba(10, 12, 16, 0.75) 0%, rgba(10, 12, 16, 0.95) 100%), url('assets/hero-bg.jpg');
+    /* Overlay nhe hon vi anh moi da co vignette toi tu nhien */
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(10, 12, 16, 0.30) 0%,
+            rgba(10, 12, 16, 0.45) 45%,
+            rgba(10, 12, 16, 0.75) 80%,
+            rgba(10, 12, 16, 1.00) 100%
+        ),
+        url('assets/hero-bg.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    padding: 8rem 0 4rem 0;
+    padding: 8rem 0 5rem 0;
     overflow: hidden;
+}
+
+/* Cau noi gradient: phu qua ranh gioi hero/about, khong bi clip */
+.section-fade-bridge {
+    width: 100%;
+    height: 200px;
+    margin-top: -200px;   /* keo len phu qua phan cuoi hero */
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(10, 12, 16, 0.55) 35%,
+        rgba(10, 12, 16, 0.88) 65%,
+        #0a0c10 100%
+    );
+    position: relative;
+    z-index: 5;           /* tren hero section va canvas */
+    pointer-events: none;
 }
 
 .hero-container {
@@ -403,7 +551,23 @@ header {
 
 .hero-cta {
     display: flex;
-    gap: 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 540px;
+}
+
+.cta-row {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.cta-row .btn {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .hero-visual {
@@ -488,7 +652,8 @@ header {
     100% { transform: scale(1.1); opacity: 1; }
 }
 
-/* About Section */
+
+
 .about-grid {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -1375,7 +1540,7 @@ footer {
     }
     
     .hero-cta {
-        justify-content: center;
+        align-items: center;
     }
     
     .about-grid, .godot-grid, .contact-grid {
@@ -1417,4 +1582,1187 @@ footer {
     .contact-form-container {
         padding: 2rem;
     }
+}
+
+/* ==========================================
+   Timeline & Storyline Morphing Background & Navigation
+   ========================================== */
+
+/* Trạng thái màu sắc glow biến đổi mượt mà theo từng giai đoạn */
+:root {
+    --stage-glow: rgba(0, 240, 255, 0.05);
+}
+
+body.stage-0 { --stage-glow: rgba(239, 68, 68, 0.1); }      /* Đỏ neon cảnh báo lỗi */
+body.stage-1 { --stage-glow: rgba(168, 85, 247, 0.08); }    /* Tím neon kế hoạch */
+body.stage-2 { --stage-glow: rgba(6, 182, 212, 0.1); }      /* Cyan v1.0 thử nghiệm */
+body.stage-3 { --stage-glow: rgba(34, 197, 94, 0.08); }     /* Lục v2.0 tự động hóa */
+body.stage-4 { --stage-glow: rgba(244, 63, 94, 0.1); }      /* Rose v3.0 hoàn thiện */
+
+/* Lớp phủ chuyển đổi màu nền morphing */
+.story-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.bg-stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-stage-0 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-slide-1 {
+    background-image: url('assets/stage0-bg.jpg');
+    animation: slideShow1 8s infinite alternate;
+}
+
+.bg-slide-2 {
+    background-image: url('assets/stage0-bg2.jpg');
+    animation: slideShow2 8s infinite alternate;
+}
+
+/* Lớp phủ đè bóng tối để chữ luôn nổi bật */
+.bg-stage-0::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(10, 12, 16, 0.65) 0%, rgba(10, 12, 16, 0.85) 100%);
+    z-index: 1;
+}
+
+@keyframes slideShow1 {
+    0%, 45% { opacity: 1; }
+    55%, 100% { opacity: 0; }
+}
+
+@keyframes slideShow2 {
+    0%, 45% { opacity: 0; }
+    55%, 100% { opacity: 1; }
+}
+
+.bg-stage-1 {
+    background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.12) 0%, transparent 80%);
+}
+
+.bg-stage-2 {
+    background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.12) 0%, transparent 80%);
+}
+
+.bg-stage-3 {
+    background: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.10) 0%, transparent 80%);
+}
+
+.bg-stage-4 {
+    background: radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.12) 0%, transparent 80%);
+}
+
+/* Ảnh nền bên trong bg-stage (stages 1-4) */
+.bg-stage-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.28;   /* Tăng từ 0.18 → 0.28 */
+    transition: opacity 0.8s ease;
+}
+
+/* Overlay tối trên ảnh nền để chữ luôn rõ */
+.bg-stage-1::after,
+.bg-stage-2::after,
+.bg-stage-3::after,
+.bg-stage-4::after,
+.bg-stage-5::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,12,16,0.75) 0%, rgba(10,12,16,0.88) 100%);
+    z-index: 1;
+}
+
+/* Opacity khi stage active (tăng lên để ảnh hiện rõ hơn) */
+body.stage-0 .bg-stage-0 { opacity: 0.55; }
+body.stage-1 .bg-stage-1 { opacity: 1; }
+body.stage-1 .bg-stage-1 .bg-stage-img { opacity: 0.42; }
+body.stage-2 .bg-stage-2 { opacity: 1; }
+body.stage-2 .bg-stage-2 .bg-stage-img { opacity: 0.38; }
+body.stage-3 .bg-stage-3 { opacity: 1; }
+body.stage-3 .bg-stage-3 .bg-stage-img { opacity: 0.40; }
+body.stage-4 .bg-stage-4 { opacity: 1; }
+body.stage-4 .bg-stage-4 .bg-stage-img { opacity: 0.38; }
+body.stage-5 .bg-stage-5 { opacity: 1; }
+body.stage-5 .bg-stage-5 .bg-stage-img { opacity: 0.38; }
+
+.story-section {
+    padding: 6rem 0 13rem 0; /* padding bot lớn để không bị che bởi bottom-nav-wrapper */
+    position: relative;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 1100px;   /* tang len de card rong hon */
+    margin: 4rem auto 0 auto;
+    padding: 0 1rem;
+}
+
+/* Đường chạy dọc trung tâm */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: var(--glow-blue);
+}
+
+.timeline-item {
+    position: relative;
+    width: 50%;
+    margin-bottom: 4rem;
+}
+
+/* Căn trái/phải xen kẽ */
+.timeline-item:nth-child(odd) {
+    left: 0;
+    padding-right: 2.5rem;
+    text-align: left;   /* can trai thay vi phai */
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    padding-left: 2.5rem;
+    text-align: left;
+}
+
+/* Các điểm nút (dot) trên đường chạy dọc */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    box-sizing: border-box;
+    right: -7px;
+    background-color: var(--bg-dark);
+    border: 3px solid var(--neon-blue);
+    box-shadow: var(--glow-blue);
+    border-radius: 50%;
+    top: 2rem;
+    z-index: 2;
+    transition: var(--transition-smooth);
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -7px;
+    right: auto;
+    box-sizing: border-box;
+    border-color: var(--neon-pink);
+    box-shadow: var(--glow-pink);
+}
+
+/* Thay đổi màu sắc nút active dựa trên stage body */
+body.stage-0 #stage-0::after { background-color: #ef4444; border-color: #ef4444; box-shadow: 0 0 15px #ef4444; transform: scale(1.3); }
+body.stage-1 #stage-1::after { background-color: #a855f7; border-color: #a855f7; box-shadow: 0 0 15px #a855f7; transform: scale(1.3); }
+body.stage-2 #stage-2::after { background-color: #06b2d2; border-color: #06b2d2; box-shadow: 0 0 15px #06b2d2; transform: scale(1.3); }
+body.stage-3 #stage-3::after { background-color: #22c55e; border-color: #22c55e; box-shadow: 0 0 15px #22c55e; transform: scale(1.3); }
+body.stage-4 #stage-4::after { background-color: #f43f5e; border-color: #f43f5e; box-shadow: 0 0 15px #f43f5e; transform: scale(1.3); }
+
+.timeline-item:hover::after {
+    transform: scale(1.3);
+    background-color: #fff;
+    box-shadow: 0 0 15px #fff;
+}
+
+/* Khối nội dung */
+.timeline-content {
+    padding: 2rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Hiệu ứng mờ dần (fade) khi người dùng nhảy mốc */
+.timeline-content.fade-effect {
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+.timeline-item:nth-child(odd) .timeline-content:hover {
+    border-color: var(--neon-blue);
+    box-shadow: 0 5px 25px rgba(0, 240, 255, 0.15);
+    transform: translateY(-5px);
+}
+
+.timeline-item:nth-child(even) .timeline-content:hover {
+    border-color: var(--neon-pink);
+    box-shadow: 0 5px 25px rgba(255, 0, 127, 0.15);
+    transform: translateY(-5px);
+}
+
+.timeline-date {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timeline-item:nth-child(even) .timeline-date {
+    color: var(--neon-pink);
+}
+
+.timeline-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-title {
+    justify-content: flex-start;  /* tieu de can trai */
+}
+
+.timeline-item:nth-child(even) .timeline-title {
+    justify-content: flex-start;
+}
+
+.timeline-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    text-align: justify;          /* can deu 2 mep chu */
+    text-align-last: left;        /* dong cuoi can trai tu nhien */
+    hyphens: auto;                /* tu dong ngat tu neu can */
+}
+
+.back-home-container {
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+}
+
+/* Nút so sánh giải pháp trong storyline */
+.btn-compare-story {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1.2rem;
+    background: rgba(0,240,255,0.06);
+    border: 1px solid rgba(0,240,255,0.30);
+    border-radius: 30px;
+    color: var(--neon-blue);
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 12px rgba(0,240,255,0.08);
+}
+
+.btn-compare-story:hover {
+    background: rgba(0,240,255,0.12);
+    border-color: rgba(0,240,255,0.6);
+    box-shadow: 0 0 22px rgba(0,240,255,0.22);
+    transform: translateY(-1px);
+}
+
+/* ================================================================
+   BOTTOM NAV WRAPPER - chua ca nav + nut play xep doc
+   ================================================================ */
+.bottom-nav-wrapper {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    z-index: 101;
+}
+
+/* ---- HANG NUT: Settings + Play (nam duoi bottom nav) ---- */
+.bottom-action-row {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    width: 100%;
+    justify-content: center;
+}
+
+/* NUT SETTINGS */
+.slideshow-settings-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.38rem 0.75rem;
+    background: rgba(10, 12, 16, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.slideshow-settings-btn:hover {
+    border-color: rgba(0, 240, 255, 0.35);
+    color: var(--neon-blue);
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.18), 0 4px 14px rgba(0,0,0,0.45);
+}
+
+.slideshow-settings-btn.is-open {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.28);
+}
+
+/* SETTINGS PANEL - popup phia tren hang nut */
+.slideshow-settings-panel {
+    display: none;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem 1.1rem;
+    background: rgba(10, 12, 16, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 240, 255, 0.22);
+    border-radius: 16px;
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(0,240,255,0.08);
+    min-width: 280px;
+    animation: panelSlideUp 0.25s cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.slideshow-settings-panel.visible {
+    display: flex;
+}
+
+@keyframes panelSlideUp {
+    from { opacity: 0; transform: translateY(8px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.settings-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    letter-spacing: 0.5px;
+}
+
+.settings-close-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0 0.2rem;
+    transition: color 0.2s;
+}
+.settings-close-btn:hover { color: #fff; }
+
+/* Preset buttons */
+.settings-presets {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.preset-btn {
+    padding: 0.3rem 0.65rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    color: rgba(255,255,255,0.6);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.preset-btn:hover {
+    background: rgba(0,240,255,0.1);
+    border-color: rgba(0,240,255,0.4);
+    color: var(--neon-blue);
+}
+
+.preset-btn.active {
+    background: rgba(0,240,255,0.15);
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0,240,255,0.2);
+}
+
+/* Slider row */
+.settings-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.settings-slider-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.4);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.settings-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.settings-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--neon-blue);
+    box-shadow: 0 0 8px rgba(0,240,255,0.5);
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+.settings-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+
+.settings-slider-value {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    min-width: 2.5rem;
+    text-align: right;
+}
+
+/* NUT PLAY: nam duoi, rong bang wrapper */
+.play-slideshow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.38rem 1.2rem;
+    background: rgba(10, 12, 16, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 240, 255, 0.32);
+    border-radius: 20px;
+    color: var(--neon-blue);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.14), 0 4px 16px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    width: 100%;
+}
+
+.play-slideshow-btn:hover {
+    background: rgba(0, 240, 255, 0.09);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.28), 0 4px 16px rgba(0,0,0,0.5);
+    transform: scale(1.04);
+}
+
+.play-slideshow-btn.is-playing {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 18px rgba(255, 0, 127, 0.28), 0 4px 16px rgba(0,0,0,0.5);
+    animation: playBtnPulse 1.8s ease-in-out infinite;
+}
+
+.play-slideshow-btn.is-playing:hover {
+    background: rgba(255, 0, 127, 0.08);
+    transform: scale(1.04);
+}
+
+@keyframes playBtnPulse {
+    0%, 100% { box-shadow: 0 0 18px rgba(255, 0, 127, 0.28), 0 4px 16px rgba(0,0,0,0.5); }
+    50%       { box-shadow: 0 0 32px rgba(255, 0, 127, 0.52), 0 4px 16px rgba(0,0,0,0.5); }
+}
+
+
+
+/* ================================================================
+   PRESENTATION OVERLAY - hien thi fullscreen 1 stage
+   ================================================================ */
+.presentation-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: #0a0c10;
+    overflow: hidden;
+}
+
+.presentation-overlay.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Anh nen cua stage - absolute fill */
+.pres-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.pres-bg.visible {
+    opacity: 1;
+}
+
+/* Lop overlay toi tren anh nen */
+.pres-bg-dim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 12, 16, 0.70) 0%,
+        rgba(10, 12, 16, 0.50) 50%,
+        rgba(10, 12, 16, 0.75) 100%
+    );
+    z-index: 1;
+}
+
+/* Card noi dung chinh */
+.pres-card {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    width: 90%;
+    padding: 3rem 3.5rem;
+    background: rgba(10, 12, 16, 0.55);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    text-align: center;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+                opacity 0.5s ease;
+}
+
+.pres-card.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.pres-date {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    opacity: 0.85;
+}
+
+.pres-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.pres-title svg, .pres-title i {
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+}
+
+.pres-desc {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.8;
+    color: rgba(255,255,255,0.82);
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: justify;
+    text-align-last: left;
+}
+
+/* Stage indicator dots trong overlay */
+.pres-dots {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.6rem;
+    z-index: 2;
+}
+
+.pres-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pres-dot.active {
+    background: #fff;
+    transform: scale(1.35);
+    box-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
+/* Keyboard hint */
+.pres-hint {
+    position: absolute;
+    bottom: 0.7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.22);
+    white-space: nowrap;
+    z-index: 2;
+    letter-spacing: 0.3px;
+}
+
+/* ---- CONTROLS BAR: Prev | Pause | Next ---- */
+.pres-controls {
+    position: absolute;
+    bottom: 4.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    z-index: 3;
+}
+
+.pres-ctrl-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(10,12,16,0.65);
+    backdrop-filter: blur(10px);
+    color: rgba(255,255,255,0.65);
+    cursor: pointer;
+    transition: all 0.22s ease;
+}
+
+.pres-ctrl-btn:hover {
+    background: rgba(0,240,255,0.15);
+    border-color: var(--neon-blue);
+    color: #fff;
+    box-shadow: 0 0 14px rgba(0,240,255,0.25);
+    transform: scale(1.1);
+}
+
+/* Nút pause trung tâm to hơn */
+.pres-pause-btn {
+    width: 48px;
+    height: 48px;
+    border-color: rgba(255,255,255,0.28);
+    color: #fff;
+    background: rgba(10,12,16,0.75);
+}
+
+.pres-pause-btn:hover {
+    transform: scale(1.12);
+}
+
+/* Khi đang paused: nút pause đổi màu hồng */
+.presentation-overlay.is-paused .pres-pause-btn {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 18px rgba(255,0,127,0.35);
+    animation: pauseBtnPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pauseBtnPulse {
+    0%, 100% { box-shadow: 0 0 14px rgba(255,0,127,0.3); }
+    50%       { box-shadow: 0 0 28px rgba(255,0,127,0.55); }
+}
+
+/* ---- PROGRESS BAR WRAP ---- */
+.pres-progress-wrap {
+    position: absolute;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(500px, 78vw);
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    z-index: 2;
+    transition: opacity 0.3s;
+}
+
+.pres-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00f0ff, #ff007f);
+    border-radius: 2px;
+    box-shadow: 0 0 6px #00f0ff;
+    transition: none;
+}
+
+/* Khi pause: progress bar mờ đi */
+.presentation-overlay.is-paused .pres-progress-wrap {
+    opacity: 0.35;
+}
+
+/* ---- BADGE "TẠM DỪNG" ---- */
+.pres-paused-badge {
+    position: absolute;
+    top: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: rgba(10,12,16,0.88);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--neon-pink);
+    border-radius: 10px;
+    padding: 0.4rem 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--neon-pink);
+    letter-spacing: 1px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 18px rgba(255,0,127,0.25);
+    white-space: nowrap;
+}
+
+.pres-paused-badge.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Stage-specific border color on card */
+.pres-stage-0 .pres-card { border-color: rgba(239, 68, 68, 0.4); }
+.pres-stage-1 .pres-card { border-color: rgba(168, 85, 247, 0.4); }
+.pres-stage-2 .pres-card { border-color: rgba(6, 182, 212, 0.4); }
+.pres-stage-3 .pres-card { border-color: rgba(34, 197, 94, 0.4); }
+.pres-stage-4 .pres-card { border-color: rgba(244, 63, 94, 0.4); }
+.pres-stage-5 .pres-card { border-color: rgba(251, 191, 36, 0.4); }
+
+.pres-stage-0 .pres-date { color: #ef4444; }
+.pres-stage-1 .pres-date { color: #a855f7; }
+.pres-stage-2 .pres-date { color: #06b6d4; }
+.pres-stage-3 .pres-date { color: #22c55e; }
+.pres-stage-4 .pres-date { color: #f43f5e; }
+.pres-stage-5 .pres-date { color: #fbbf24; }
+
+/* bg-stage-5 cho chế độ xem thường */
+.bg-stage-5 .bg-stage-img {
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+.bg-stage-5.active .bg-stage-img { opacity: 0.18; }
+
+/* Bottom Navigation - trong wrapper, khong can position fixed */
+.bottom-timeline-nav {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.35rem 0.4rem;
+    background-color: rgba(10, 12, 16, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    overflow-x: auto;
+}
+
+.bottom-timeline-nav::-webkit-scrollbar {
+    display: none; /* ẩn scrollbar của nav */
+}
+
+.nav-thumb {
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+    min-width: 80px;
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Thêm các ảnh nền mờ cho các Thumbnail */
+.nav-thumb[data-target="0"] { background-image: linear-gradient(to bottom, rgba(10, 12, 16, 0.80) 0%, rgba(10, 12, 16, 0.88) 100%), url('assets/stage0-bg.jpg'); }
+.nav-thumb[data-target="1"] { background-image: linear-gradient(to bottom, rgba(10, 12, 16, 0.84) 0%, rgba(10, 12, 16, 0.90) 100%), url('assets/stage1-bg.jpg'); }
+.nav-thumb[data-target="2"] { background-image: linear-gradient(to bottom, rgba(10, 12, 16, 0.84) 0%, rgba(10, 12, 16, 0.90) 100%), url('assets/stage0-bg2.jpg'); }
+.nav-thumb[data-target="3"] { background-image: linear-gradient(to bottom, rgba(10, 12, 16, 0.84) 0%, rgba(10, 12, 16, 0.90) 100%), url('assets/stage3-bg.jpg'); }
+.nav-thumb[data-target="4"] { background-image: linear-gradient(to bottom, rgba(10, 12, 16, 0.84) 0%, rgba(10, 12, 16, 0.90) 100%), url('assets/stage4-bg.jpg'); }
+.nav-thumb[data-target="5"] { background-image: linear-gradient(to bottom, rgba(10, 12, 16, 0.84) 0%, rgba(10, 12, 16, 0.90) 100%), url('assets/stage4-bg.jpg'); }
+
+.nav-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.thumb-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    transition: var(--transition-smooth);
+}
+
+.thumb-desc {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+/* Cập nhật active thumbnail động dựa trên class stage trên body */
+body.stage-0 .nav-thumb[data-target="0"] { border-color: #ef4444; box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
+body.stage-0 .nav-thumb[data-target="0"] .thumb-label { color: #ef4444; }
+
+body.stage-1 .nav-thumb[data-target="1"] { border-color: #a855f7; box-shadow: 0 0 10px rgba(168, 85, 247, 0.4); }
+body.stage-1 .nav-thumb[data-target="1"] .thumb-label { color: #a855f7; }
+
+body.stage-2 .nav-thumb[data-target="2"] { border-color: #06b2d2; box-shadow: 0 0 10px rgba(6, 182, 212, 0.4); }
+body.stage-2 .nav-thumb[data-target="2"] .thumb-label { color: #06b2d2; }
+
+body.stage-3 .nav-thumb[data-target="3"] { border-color: #22c55e; box-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
+body.stage-3 .nav-thumb[data-target="3"] .thumb-label { color: #22c55e; }
+
+body.stage-4 .nav-thumb[data-target="4"] { border-color: #f43f5e; box-shadow: 0 0 10px rgba(244, 63, 94, 0.4); }
+body.stage-4 .nav-thumb[data-target="4"] .thumb-label { color: #f43f5e; }
+
+
+/* Responsive cho thiết bị di động */
+@media (max-width: 768px) {
+    .timeline-container::after {
+        left: 20px;
+        transform: none;
+    }
+    
+    .timeline-item {
+        width: 100% !important;
+        left: 0 !important;
+        padding-left: 2.5rem !important;
+        padding-right: 0 !important;
+        text-align: left !important;
+        margin-bottom: 3rem;
+    }
+    
+    .timeline-item::after {
+        left: 14px !important;
+        right: auto !important;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-title {
+        justify-content: flex-start;
+    }
+    
+    .bottom-timeline-nav {
+        width: 95%;
+        justify-content: flex-start;
+    }
+    
+    .nav-thumb {
+        min-width: 85px;
+        padding: 0.5rem 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .cta-row {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .hero-cta {
+        max-width: 100%;
+    }
+}
+
+/* ================================================================
+   SLIDE NAVIGATOR PANEL (góc dưới phải overlay trình chiếu)
+   ================================================================ */
+
+.pres-nav-toggle-btn {
+    position: absolute;
+    bottom: 1.4rem;
+    right: 1.4rem;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(10,12,16,0.72);
+    backdrop-filter: blur(12px);
+    color: rgba(255,255,255,0.55);
+    cursor: pointer;
+    transition: all 0.22s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+.pres-nav-toggle-btn:hover {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    background: rgba(0,240,255,0.08);
+    box-shadow: 0 0 16px rgba(0,240,255,0.22), 0 4px 16px rgba(0,0,0,0.5);
+}
+
+.pres-nav-toggle-btn.is-open {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    background: rgba(0,240,255,0.12);
+    box-shadow: 0 0 20px rgba(0,240,255,0.3);
+}
+
+.pres-nav-panel {
+    position: absolute;
+    bottom: 4.8rem;
+    right: 1.4rem;
+    z-index: 5;
+    width: 320px;
+    background: rgba(8,10,14,0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0,240,255,0.22);
+    border-radius: 14px;
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.7), 0 0 20px rgba(0,240,255,0.06);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px) scale(0.97);
+    transform-origin: bottom right;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.pres-nav-panel.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.pres-nav-panel-header {
+    padding: 0.7rem 1rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.pres-nav-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0.35rem 0;
+    max-height: 296px;   /* ~5 items × ~59px mỗi item */
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+
+    /* Custom scrollbar - Webkit */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 240, 255, 0.35) rgba(255,255,255,0.04);
+}
+
+/* Webkit scrollbar track */
+.pres-nav-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.pres-nav-list::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    margin: 4px 0;
+}
+
+.pres-nav-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.35);
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.pres-nav-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 240, 255, 0.65);
+    box-shadow: 0 0 6px rgba(0, 240, 255, 0.5);
+}
+
+.pres-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    background: none;
+    border: none;
+    border-left: 2px solid transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.pres-nav-item:hover {
+    background: rgba(0,240,255,0.06);
+    border-left-color: rgba(0,240,255,0.4);
+}
+
+.pres-nav-item.active {
+    background: rgba(0,240,255,0.10);
+    border-left-color: var(--neon-blue);
+}
+
+.pres-nav-num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: rgba(0,240,255,0.45);
+    min-width: 1.8rem;
+    flex-shrink: 0;
+    transition: color 0.18s;
+}
+
+.pres-nav-item.active .pres-nav-num,
+.pres-nav-item:hover .pres-nav-num {
+    color: var(--neon-blue);
+}
+
+.pres-nav-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.pres-nav-date {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pres-nav-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.72);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.18s;
+}
+
+.pres-nav-item.active .pres-nav-title,
+.pres-nav-item:hover .pres-nav-title {
+    color: #fff;
+}
+
+.pres-nav-arrow {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.18);
+    flex-shrink: 0;
+    transition: color 0.18s, transform 0.18s;
+    line-height: 1;
+}
+
+.pres-nav-item:hover .pres-nav-arrow,
+.pres-nav-item.active .pres-nav-arrow {
+    color: var(--neon-blue);
+    transform: translateX(3px);
 }
